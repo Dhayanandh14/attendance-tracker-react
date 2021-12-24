@@ -36,7 +36,6 @@ const SignUpComponent=()=>{
   }
 
   const signUp =(event)=>{
-    count = count +1
     event.preventDefault()
     var CryptoJS = require("crypto-js");
     var encryptedPassword = CryptoJS.AES.encrypt(password, 'secret key 123');
@@ -50,18 +49,19 @@ const SignUpComponent=()=>{
     // console.log(emailFinder)
     let nameFinder = gettableObject[0].map(l=>l.user_name)
 
-    if( nameFinder.includes(username)){
+    if( nameFinder.includes(username) || emailFinder.includes(username)){
       alert("Sorry Your Email or Name Is already Exists")
     }else{
        let users = {user_name: username,user_email:useremail,password:encryptedPasswordString}
         UserService.createUsers(users).then((res=>{
           console.log(res)
         }));
+
      setCookie("user", `naHQH1tyeG%2ByD%2B0Nnfx40qLD6X5lQ32dQ4l9WZyzW%2BqosdPtyHs1qwJNz1RHwrDjMmrWDAr1iIvmH533yyHHQpix0RCbbSbOaSL%2Bo43uMjp%2BcC5NaYuOjrfxgN9J6PHMin1RA2l0en%2Fswmm858solXOSgq0IPVngIiorln3o6ysrrrpUqWXoC6PAgKGeWRKxsQE0mJQBaBJ8rWzK%2BVomMrt6Dn1lxIZG7uM1Jj%2Bn0IQNIWDnf77HD2tzr52%2BmA7mff7jkwYslfvsw1aUvwi4Z83urPoUFLruCPCbnj2B5bVvIzyYX%2Fqb2TuTB95II%2FrZdcrV50WqZNmBsrOw0SQs6k8%3D--LKLs3rXIB7WKY4%2Bu--hkP9prmzWQcxeEovm%2BElyw%3D%3D`, {
         path: "/"
       });
     // history.push("/dashboard");
-    // window.location.replace("/dashboard")
+    window.location.replace("/dashboard")
     }
 
   }

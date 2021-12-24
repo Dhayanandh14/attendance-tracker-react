@@ -1,20 +1,12 @@
-import React, {useEffect,useState,useRef } from 'react'
+import React, {useEffect,useState,useRef,useContext } from 'react'
 import UserService from '../Services/UserService';
-import { useHistory } from "react-router-dom";
+import { useHistory,useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import './SignInComponent.css'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
-
-
-// setInterval(() => {
-//   UserService.getUsers().then((res) => {
-//         users.push(res.data);
-//       });
-// }, 1000);
-// console.log(users)
-let count = 0;
 const SignInComponent=()=>{
+
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   // const [email, setEmail] = useState("")
@@ -31,60 +23,46 @@ const SignInComponent=()=>{
       });
   });
 
-  // const changeEmailHandler=(event)=>{
-  //   setEmail(event.target.value)
-  // }
-
-
-  // const changePasswordHandler = (event)=>{
-  //   setPassword(event.target.value)
-  // }
-  // const effect=()=>{
-  //   gettableObject = users.map(i => i)
-  //   console.log("getable",gettableObject)
-  //  emailFinder = gettableObject[0].map(l=>
-  //    l.user_email+" "+l.password
-  //   )
-
-  // }
-
-
   const signIn= (event) =>{
-  let emailAndPasswordArray=[];
-  const enteredEmail = emailInputRef.current.value;
-    const enteredPassword = passwordInputRef.current.value;
-    event.preventDefault()
-    console.log(users)
-    // history.push("/dashboard");
-     gettableObject = users.map(i => i)
-     emailFinder = gettableObject[0].map(l=>
-       l.user_email+" "+l.password
-      )
-    for (let i in emailFinder){
-      emailAndPasswordArray.push(emailFinder[i].split(" "))
-    }
-
-    for (let j in emailAndPasswordArray){
-      if(emailAndPasswordArray[j][0] === enteredEmail &&  emailAndPasswordArray[j][1] === enteredPassword){
-        found = true;
-      }
-    }
-    // console.log(foundEmail, foundPassword)
-    if(found){
+    var CryptoJS = require("crypto-js");
+    var decryptedPassword,decryptedPasswordString;
+    let emailAndPasswordArray=[];
+    const enteredEmail = emailInputRef.current.value;
+      const enteredPassword = passwordInputRef.current.value;
+      event.preventDefault()
+      console.log(users)
       // history.push("/dashboard");
+      gettableObject = users.map(i => i)
+      emailFinder = gettableObject[0].map(l=>
+        l.user_email+" "+l.password
+        )
+      for (let i in emailFinder){
+
+        emailAndPasswordArray.push(emailFinder[i].split(" "))
+      }
+
+      for (let j in emailAndPasswordArray){
+        decryptedPassword = CryptoJS.AES.decrypt(emailAndPasswordArray[j][1], "secret key 123");
+        decryptedPasswordString= decryptedPassword.toString(CryptoJS.enc.Utf8);
+        if(emailAndPasswordArray[j][0] === enteredEmail &&   decryptedPasswordString === enteredPassword){
+          found = true;
+        }
+    }
+    if(found){
+
+      // localStorage.setItem("user_cookie", `naHQH1tyeG%2ByD%2B0Nnfx40qLD6X5lQ32dQ4l9WZyzW%2BqosdPtyHs1qwJNz1RHwrDjMmrWDAr1iIvmH533yyHHQpix0RCbbSbOaSL%2Bo43uMjp%2BcC5NaYuOjrfxgN9J6PHMin1RA2l0en%2Fswmm858solXOSgq0IPVngIiorln3o6ysrrrpUqWXoC6PAgKGeWRKxsQE0mJQBaBJ8rWzK%2BVomMrt6Dn1lxIZG7uM1Jj%2Bn0IQNIWDnf77HD2tzr52%2BmA7mff7jkwYslfvsw1aUvwi4Z83urPoUFLruCPCbnj2B5bVvIzyYX%2Fqb2TuTB95II%2FrZdcrV50WqZNmBsrOw0SQs6k8%3D--LKLs3rXIB7WKY4%2Bu--hkP9prmzWQcxeEovm%2BElyw%3D%3D`)
       setCookie("user", `naHQH1tyeG%2ByD%2B0Nnfx40qLD6X5lQ32dQ4l9WZyzW%2BqosdPtyHs1qwJNz1RHwrDjMmrWDAr1iIvmH533yyHHQpix0RCbbSbOaSL%2Bo43uMjp%2BcC5NaYuOjrfxgN9J6PHMin1RA2l0en%2Fswmm858solXOSgq0IPVngIiorln3o6ysrrrpUqWXoC6PAgKGeWRKxsQE0mJQBaBJ8rWzK%2BVomMrt6Dn1lxIZG7uM1Jj%2Bn0IQNIWDnf77HD2tzr52%2BmA7mff7jkwYslfvsw1aUvwi4Z83urPoUFLruCPCbnj2B5bVvIzyYX%2Fqb2TuTB95II%2FrZdcrV50WqZNmBsrOw0SQs6k8%3D--LKLs3rXIB7WKY4%2Bu--hkP9prmzWQcxeEovm%2BElyw%3D%3D`, {
         path: "/"
       });
-      // window.location.replace("/dashboard")
+      // window.location.replace(false);
+      history.replace("/dashboard");
+      window.location.replace("/dashboard")
     }else{
       alert("Please enter a valid email or password")
     }
 
 
   }
-
-
-
   return (
     <div className="container" >
     <form className="form-group" id="signin-form" onSubmit={signIn}>

@@ -1,8 +1,17 @@
-import React from "react";
-// const AuthApi = React.createContext();
-const AuthContext = React.createContext({
-  isLoggedIn: "false"
-});
+import React from 'react'
+import UserService from '../Services/UserService'
 
-export default AuthContext;
-// export default AuthApi;
+function AuthApi() {
+  let userList = []
+  UserService.getUsers().then((res) => {
+    // console.log(res.data)
+    userList.push(res.data)
+  });
+  return (
+    <div>
+
+    </div>
+  )
+}
+
+export default AuthApi
