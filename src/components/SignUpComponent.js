@@ -37,11 +37,7 @@ const SignUpComponent=()=>{
       }
     });
     function authentication(user){
-        var CryptoJS = require("crypto-js");
         let usernameWithCapitalize = username[0].toUpperCase() + username.slice(1)
-        // var encryptedPassword = CryptoJS.AES.encrypt(password, 'secret key 123');
-        // let encryptedPasswordString = encryptedPassword.toString()
-        // console.log("encrypted text", encryptedPassword.toString());
         let users = {user_name: usernameWithCapitalize,user_email:useremail,password:password}
         UserService.createUsers(users).then((res=>{
           console.log(res)

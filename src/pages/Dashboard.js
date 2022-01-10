@@ -11,6 +11,11 @@ export default function Dashboard() {
     <div className="App">
       <h1>Welcome to dashboard</h1>
       <Link to="/students">Students</Link>
+      <br/>
+      <Link to="/coaches">Coaches</Link>
+      <br/>
+      <Link to="/attendance">Attendance</Link>
+
       <br />
       <button className="btn btn-danger" onClick={logoutHandler}>log out</button>
     </div>

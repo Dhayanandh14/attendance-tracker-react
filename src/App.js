@@ -10,6 +10,8 @@ import { useEffect } from 'react';
 import NotFound from './pages/NotFound';
 import Coaches from './pages/Coaches';
 import Studentinfo from './pages/StudentInfo';
+import Coachinfo from './pages/CoachInfo';
+import Attendance from './pages/Attendance';
 
 
 
@@ -75,6 +77,8 @@ function App() {
         { <Route path="/signup" component={SignUpComponent}></Route>}
       {  <Route path="/signin" component={SignInComponent}></Route>}
       {<Route path="/student_info" component={Studentinfo}></Route>}
+      {<Route path="/coach_info" component={Coachinfo}></Route>}
+      {<Route path="/attendance" component={Attendance}></Route>}
 
       // <Route path="*">
       //     <Redirect to="/notfound" />
