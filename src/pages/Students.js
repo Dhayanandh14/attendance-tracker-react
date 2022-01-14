@@ -5,6 +5,7 @@ import './Students.css'
 import React, { Component, useEffect, useRef, useState } from 'react';
 import StudentService from '../Services/StudentService';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import AttendanceService from '../Services/AttendanceService';
 
 
 const Students = () => {
@@ -63,7 +64,10 @@ const fetch = ()=>{
         grade:gradeInputRef.current.value,
         user_id:userId
       }
-
+      // let attendance={userId:userId,attendance_date:0,attendacnce_status:""}
+      // AttendanceService.createAttendance(attendance).then((res) => {
+      //   console.log(res.data);
+      // })
       console.log(student_details)
 
       StudentService.createStudentDetails(student_details).then((res) => {
