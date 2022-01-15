@@ -33,7 +33,7 @@ const CoachEditInfo = (props) => {
     setUserId(data[0]["id"])
     setCoachId(data[0]["coach_id"])
     setNameInput(data[0]["username"])
-    setEmailInput("demo")
+    setEmailInput(data[0]["useremail"])
     setAccess_idInput(data[0]["access_id"])
     setAgeInput(data[0]["age"])
     setContact_numberInput(data[0]["phone_number"])

@@ -164,7 +164,6 @@ const Studentinfo = (props) => {
     StudentService.getStudentInfoById(props.location.state).then((res) => {
       setStudentInfo(res.data)
       console.log(res.data)
-      alert("hi")
       // setInformationToInput(res.data)
     });
   }
@@ -222,8 +221,11 @@ const Studentinfo = (props) => {
           <th scope="row">{user.squad_name}</th>
         </tr>
         <tr>
+
           <td>Date of Join</td>
-          <th scope="row">{user.date_of_Join.split("-").reverse().join("-")}</th>
+          {user.date_of_Join?<th scope="row">{user.date_of_Join.split("-").reverse().join("-")}</th>:
+          <th scope="row">-</th>}
+
         </tr>
         <tr>
           <td>Education</td>

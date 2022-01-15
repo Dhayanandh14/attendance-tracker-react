@@ -12,6 +12,7 @@ import Coaches from './pages/Coaches';
 import Studentinfo from './pages/StudentInfo';
 import Coachinfo from './pages/CoachInfo';
 import Attendance from './pages/Attendance';
+import Reports from './pages/Reports';
 
 
 
@@ -79,6 +80,7 @@ function App() {
       {<Route path="/student_info" component={Studentinfo}></Route>}
       {<Route path="/coach_info" component={Coachinfo}></Route>}
       {<Route path="/attendance" component={Attendance}></Route>}
+      {<Route path="/reports" component={Reports}></Route>}
 
       // <Route path="*">
       //     <Redirect to="/notfound" />

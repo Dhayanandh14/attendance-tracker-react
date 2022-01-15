@@ -15,6 +15,8 @@ export default function Dashboard() {
       <Link to="/coaches">Coaches</Link>
       <br/>
       <Link to="/attendance">Attendance</Link>
+      <br/>
+      <Link to="/reports">Reports</Link>
 
       <br />
       <button className="btn btn-danger" onClick={logoutHandler}>log out</button>

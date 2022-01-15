@@ -73,6 +73,7 @@ const Editinfo = (props) => {
 
   const emailInputChangeHandler = (event)=>{
     setEmailInput(event.target.value)
+
   }
 
   const access_idInputChangeHandler = (event)=>{
@@ -160,8 +161,8 @@ const Editinfo = (props) => {
     console.log(updateStudentInfo)
     StudentService.editStudentDetails(userId,updateStudentInfo).then(res => {
       console.log(res.data);
+      props.func()
     })
-    props.func()
   }
 
   return (
@@ -188,7 +189,7 @@ const Editinfo = (props) => {
 
           <div className="mb-3">
             <label htmlFor="exampleFormControlInput1" className="form-label">Email address</label>
-            <input type="email" className="form-control" onChange={emailInputChangeHandler} value={emailInput} id="exampleFormControlInput"placeholder="name@example.com"/>
+            <input type="email" className="form-control" onChange={emailInputChangeHandler} value={emailInput} id="exampleFormControlInput"placeholder="Enter Your Email"/>
           </div>
 
           <div className="row ">
@@ -326,7 +327,7 @@ const Editinfo = (props) => {
           </div>
           <div className="float-end">
             <button type="button" className="btn btn-secondary mx-2 text-light" data-bs-dismiss="offcanvas" >Cancel</button>
-            <button type="button" className="btn btn-success mx-2" onClick={saveInfo}>Save</button>
+            <button type="button" className="btn btn-success mx-2" data-bs-dismiss="offcanvas" onClick={saveInfo}>Save</button>
           </div>
         </React.Fragment>
 

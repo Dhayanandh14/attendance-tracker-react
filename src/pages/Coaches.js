@@ -21,6 +21,12 @@ const Coaches = () => {
       setCoach_details(res.data)
     })
   },[])
+
+  const fetch = ()=>{
+    CoachService.getAllCoachDetails().then((res) =>{
+      setCoach_details(res.data)
+    })
+  }
   const addCoach = () => {
     console.log(coachPasswordInputRef.current.value);
     let coach = {
@@ -41,6 +47,7 @@ const Coaches = () => {
       };
       CoachService.createCoachDetails(coach_details).then((res) => {
         console.log(res.data);
+        fetch()
       });
     };
   };
@@ -78,33 +85,39 @@ const Coaches = () => {
                 ></button>
               </div>
               <div class="modal-body">
-                <input
-                  type="text"
-                  ref={coachNameInputRef}
-                  placeholder="Enter Coach Name"
-                />
-                <input
-                  type="text"
-                  ref={coachEmailInputRef}
-                  placeholder="Enter Coach Email"
-                />
-                <input
-                  type="text"
-                  ref={coachPasswordInputRef}
-                  placeholder="Enter Password"
-                />
-                <input
-                  type="text"
-                  ref={coachAccessIdInputRef}
-                  placeholder="Enter Coach Access Id"
-                />
-                <input
-                  type="text"
-                  ref={profileJobInputRef}
-                  placeholder="Enter Profile Job"
-                />
 
-                <button onClick={addCoach}>Add</button>
+              <div class="mb-3">
+                <label for="coachNameFormControlInput" class="form-label">Coach Name</label>
+                <input type="text" class="form-control" ref={coachNameInputRef}
+                placeholder="Enter Coach Name" id="coachNameFormControlInput"/>
+              </div>
+
+              <div class="mb-3">
+                <label for="coachEmailFormControlInput" class="form-label">Coach Email</label>
+                <input type="email" class="form-control"  ref={coachEmailInputRef}
+                placeholder="Enter Coach Email" id="coachEmailFormControlInput"/>
+              </div>
+                <div class="mb-3">
+                    <label for="coachPasswordFormControlInput" class="form-label">Coach Email</label>
+                    <input type="text" class="form-control"  ref={coachPasswordInputRef}
+                    placeholder="Enter Password" id="coachPasswordFormControlInput"/>
+                </div>
+
+                <div class="mb-3">
+                    <label for="coachAccessIdFormControlInput" class="form-label">Coach Access Id</label>
+                    <input type="text" class="form-control"  ref={coachAccessIdInputRef}
+                    placeholder="Enter Coach Access Id" id="coachAccessIdFormControlInput"/>
+                </div>
+
+                <div class="mb-3">
+                    <label for="coachProfileJobFormControlInput" class="form-label">Profile Job</label>
+                    <input type="text" class="form-control" ref={profileJobInputRef}
+                    placeholder="Enter Profile Job" id="coachProfileJobFormControlInput"/>
+                </div>
+
+
+
+
               </div>
               <div class="modal-footer">
                 <button
@@ -114,8 +127,8 @@ const Coaches = () => {
                 >
                   Close
                 </button>
-                <button type="button" class="btn btn-primary">
-                  Save changes
+                <button type="button" data-bs-dismiss="modal" class="btn btn-primary" onClick={addCoach}>
+                  Add
                 </button>
               </div>
             </div>
