@@ -5,7 +5,11 @@ import React, { Component, useEffect, useRef, useState } from "react";
 import StudentService from "../Services/StudentService";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import AttendanceService from "../Services/AttendanceService";
+import Allstudentlistcomponent from "../components/AllStudentListComponent";
 
+let activeArray = [];
+let inactiveArray = [];
+let demo = true;
 const Students = () => {
   const [id, setid] = useState(0);
   const [studentDetails, setStudentDetails] = useState([]);
@@ -22,11 +26,22 @@ const Students = () => {
   const [gradeInput, setGradeInput] = useState();
   const [statusInput, setStatusInput] = useState();
   const [batchInput, setBatchInput] = useState();
+  const [displayStudentList, setDisplayStudentList] = useState("all");
+  const [selectionStatus, setSelectionStatus] = useState();
 
   const fetch = () => {
+    activeArray = [];
+    inactiveArray = [];
     StudentService.getAllStudentDetails().then((res) => {
       setStudentDetails(res.data);
       console.log(studentDetails);
+      for (let i = 0; i < res.data.length; i++) {
+        if (res.data[i]["status"] == "Active") {
+          activeArray.push(res.data[i]);
+        } else if (res.data[i]["status"] == "InActive") {
+          inactiveArray.push(res.data[i]);
+        }
+      }
     });
   };
 
@@ -41,8 +56,8 @@ const Students = () => {
     setStatusInput(event.target.value);
   };
   const batchInputChangeHandler = (event) => {
-    setBatchInput(event.target.value)
-  }
+    setBatchInput(event.target.value);
+  };
 
   const addStudents = () => {
     let user = {
@@ -65,7 +80,7 @@ const Students = () => {
         education: educationInputRef.current.value,
         interviewer_review: interviewerReviewInputRef.current.value,
         grade: gradeInput,
-        batch:batchInput,
+        batch: batchInput,
         user_id: userId,
       };
       console.log(student_details);
@@ -75,21 +90,34 @@ const Students = () => {
         setid(res.data.user_id);
         fetch();
       });
-      squadNameInputRef.current.value=""
-      interviewerInputRef.current.value=""
-      dateOfJoinInputRef.current.value=""
-      educationInputRef.current.value=""
-      setStatusInput("")
-      educationInputRef.current.value=""
-      interviewerReviewInputRef.current.value=""
-      setGradeInput("")
+      squadNameInputRef.current.value = "";
+      interviewerInputRef.current.value = "";
+      dateOfJoinInputRef.current.value = "";
+      educationInputRef.current.value = "";
+      setStatusInput("");
+      educationInputRef.current.value = "";
+      interviewerReviewInputRef.current.value = "";
+      setGradeInput("");
     }
-    studentNameInputRef.current.value=""
-    studentEmailInputRef.current.value=""
-    studentPasswordInputRef.current.value=""
-    studentAccessIdInputRef.current.value=""
+    studentNameInputRef.current.value = "";
+    studentEmailInputRef.current.value = "";
+    studentPasswordInputRef.current.value = "";
+    studentAccessIdInputRef.current.value = "";
   };
-
+  const selectionStatusHandler = (event) => {
+    console.log(event.target.value);
+    setSelectionStatus(event.target.value);
+  };
+  const selectStatus = () => {
+    console.log(selectionStatus);
+    if (selectionStatus == 1) {
+      setDisplayStudentList("all");
+    } else if (selectionStatus == 2) {
+      setDisplayStudentList("active");
+    } else {
+      setDisplayStudentList("inactive");
+    }
+  };
 
   return (
     <div className="App">
@@ -101,6 +129,28 @@ const Students = () => {
       >
         Add Students
       </button>
+
+      <div className="row col-md-2">
+        <div className="input-group ">
+          <select
+            className="form-select"
+            onChange={selectionStatusHandler}
+            id="inputGroupSelect04"
+            aria-label="Example select with button addon"
+          >
+            <option value="1">All Students</option>
+            <option value="2">Active Student</option>
+            <option value="3">Inactive Student</option>
+          </select>
+          <button
+            className="btn btn-outline-secondary"
+            type="button"
+            onClick={selectStatus}
+          >
+            Select
+          </button>
+        </div>
+      </div>
 
       <div
         className="modal fade"
@@ -123,61 +173,62 @@ const Students = () => {
               ></button>
             </div>
             <div className="modal-body">
-              <div class="mb-3">
+              <div className="mb-3">
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   ref={studentNameInputRef}
                   placeholder="Enter Student Name"
                 />
               </div>
 
-              <div class="mb-3">
+              <div className="mb-3">
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   ref={studentAccessIdInputRef}
                   placeholder="Enter Student Access Id"
                   id="studentAccessIdFormControlInput"
                 />
               </div>
 
-              <div class="mb-3">
+              <div className="mb-3">
                 <input
                   type="email"
-                  class="form-control"
+                  className="form-control"
                   ref={studentEmailInputRef}
                   placeholder="Enter Student Email"
                   id="studentEmailFormControlInput"
                 />
               </div>
 
-              <div class="mb-3">
+              <div className="mb-3">
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   ref={studentPasswordInputRef}
                   placeholder="Enter Student password"
                   id="studentEmailFormControlInput"
                 />
               </div>
 
-
               <div className=" mb-3 ">
-              <select
-                className="form-select"
-                aria-label="Default select example" value={batchInput}
-                onChange={batchInputChangeHandler}
-                id="add-student-status">
-                <option value="DEFAULT">Select Batch</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-              </select>
-            </div>
-              <div class="mb-3">
+                <select
+                  className="form-select"
+                  aria-label="Default select example"
+                  value={batchInput}
+                  onChange={batchInputChangeHandler}
+                  id="add-student-status"
+                >
+                  <option value="DEFAULT">Select Batch</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                </select>
+              </div>
+              <div className="mb-3">
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   ref={squadNameInputRef}
                   placeholder="Enter Student Squad Name"
                   id="studentSquadNameFormControlInput"
@@ -194,14 +245,15 @@ const Students = () => {
                 />
               </div>
 
-
               <div className="row ">
-                  <div className="col-md-6 mb-3 ">
+                <div className="col-md-6 mb-3 ">
                   <select
                     className="form-select"
-                    aria-label="Default select example" value={statusInput}
+                    aria-label="Default select example"
+                    value={statusInput}
                     onChange={statusInputChangeHandler}
-                    id="add-student-status">
+                    id="add-student-status"
+                  >
                     <option value="DEFAULT">Select Student Status</option>
                     <option value="Active">Active</option>
                     <option value="InActive">Inactive</option>
@@ -223,33 +275,31 @@ const Students = () => {
                     <option value="D">E</option>
                   </select>
                 </div>
-          </div>
-              <div class="mb-3">
+              </div>
+              <div className="mb-3">
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   ref={educationInputRef}
                   placeholder="Enter Student education"
                   id="studentEducationFormControlInput"
                 />
               </div>
 
-
-
-              <div class="mb-3">
+              <div className="mb-3">
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   ref={interviewerInputRef}
                   placeholder="Enter Student Interviewer Name"
                   id="studentInterviewerFormControlInput"
                 />
               </div>
 
-              <div class="mb-3">
+              <div className="mb-3">
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   ref={interviewerReviewInputRef}
                   placeholder="Enter Student Interviewer Review"
                   id="studentInterviewerReviewFormControlInput"
@@ -264,7 +314,12 @@ const Students = () => {
               >
                 Close
               </button>
-              <button type="button" data-bs-dismiss="modal" onClick={addStudents} className="btn btn-primary">
+              <button
+                type="button"
+                data-bs-dismiss="modal"
+                onClick={addStudents}
+                className="btn btn-primary"
+              >
                 Add
               </button>
             </div>
@@ -289,29 +344,16 @@ const Students = () => {
           </tr>
         </thead>
         <tbody>
-          {studentDetails.map((user) => (
-            <tr key={user.id}>
-              <React.Fragment>
-                <td>
-                  <Link
-                    to={{ pathname: `/student_info/`, state: user.user_id }}
-                  >
-                    {user.user_name}
-                  </Link>
-                </td>
-                <td> {user.access_id}</td>
-                <td> {user.user_email}</td>
-                <td> {user.batch}</td>
-                <td> {user.squad_name}</td>
-                <td> {user.interviewer}</td>
-                <td> {user.date_of_Join}</td>
-                <td> {user.status}</td>
-                <td> {user.education}</td>
-                <td> {user.interviewer_review}</td>
-                <td> {user.grade}</td>
-              </React.Fragment>
-            </tr>
-          ))}
+          {displayStudentList == "all" && (
+            <Allstudentlistcomponent inactiveArray={studentDetails} />
+          )}
+
+          {displayStudentList == "active" && (
+            <Allstudentlistcomponent inactiveArray={activeArray} />
+          )}
+          {displayStudentList == "inactive" && (
+            <Allstudentlistcomponent inactiveArray={inactiveArray} />
+          )}
         </tbody>
       </table>
     </div>

@@ -211,14 +211,14 @@ const Editinfo = (props) => {
 
           <div className="row mt-2">
           <div className="col-md-6">
-          <label htmlFor="student-gender" className="form-label">Gender</label>
-            <select className="form-select" aria-label="Default select example" id="student-gender"
-            value={genderInput} onChange={genderInputChangeHandler}>
-              <option value="DEFAULT">{genderInput? genderInput :"Select Gender"}</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Others">Others</option>
-            </select>
+            <label htmlFor="student-gender" className="form-label">Gender</label>
+              <select className="form-select" aria-label="Default select example" id="student-gender"
+              value={genderInput} onChange={genderInputChangeHandler}>
+                <option value="DEFAULT">{genderInput? genderInput :"Select Gender"}</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Others">Others</option>
+              </select>
           </div>
             <div className="col-md-6">
               <label htmlFor="student-blood-group" className="form-label"> Blood Group</label>
