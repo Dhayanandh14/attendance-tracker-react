@@ -13,6 +13,7 @@ const Coaches = () => {
   const coachEmailInputRef = useRef();
   const coachAccessIdInputRef = useRef();
   const coachPasswordInputRef = useRef();
+  const [coachStatus,setCoachStatus] = useState();
   // const userIdInputRef = useRef();
   const profileJobInputRef = useRef();
 
@@ -27,6 +28,9 @@ const Coaches = () => {
       setCoach_details(res.data)
     })
   }
+  const statusInputChangeHandler = (event)=>{
+    setCoachStatus(event.target.value);
+  }
   const addCoach = () => {
     console.log(coachPasswordInputRef.current.value);
     let coach = {
@@ -38,12 +42,13 @@ const Coaches = () => {
     };
     UserService.createUsers(coach).then((res) => {
       console.log(res.data);
-      addStudentDetails(res.data["user_id"]);
+      addCoachDetails(res.data["user_id"]);
     });
-    const addStudentDetails = (id) => {
+    const addCoachDetails = (id) => {
       let coach_details = {
         userId: id,
         profile_job: profileJobInputRef.current.value,
+        status: coachStatus
       };
       CoachService.createCoachDetails(coach_details).then((res) => {
         console.log(res.data);
@@ -115,6 +120,16 @@ const Coaches = () => {
                     placeholder="Enter Profile Job" id="coachProfileJobFormControlInput"/>
                 </div>
 
+                <select
+                  className="form-select"
+                  aria-label="Default select example"
+                  onChange={statusInputChangeHandler}
+                  id="add-student-status">
+                  <option value="DEFAULT">Select Coach Status</option>
+                  <option value="Active">Active</option>
+                  <option value="InActive">Inactive</option>
+                </select>
+
 
 
 
@@ -143,6 +158,7 @@ const Coaches = () => {
           <th scope="col">Access Id</th>
           <th scope="col">Email</th>
           <th scope="col">Profile Job</th>
+          <th scope="col">Status</th>
 
         </tr>
       </thead>
@@ -151,15 +167,16 @@ const Coaches = () => {
 
       <tr key={user.id}>
       <React.Fragment >
-      <td>
-        <Link to={{pathname:`/coach_info/`,state:user.id}}>
-           {user.user_name}
-         </Link></td>
+        <td>
+          <Link to={{pathname:`/coach_info/`,state:user.id}}>
+            {user.user_name}
+          </Link>
+        </td>
          <td> {user.user_email}</td>
          <td>{user.access_id}</td>
          <td>{user.profile_job}</td>
-
-        </React.Fragment>
+         <td>{user.status}</td>
+      </React.Fragment>
         </tr>
 
         )}

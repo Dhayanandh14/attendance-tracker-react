@@ -18,6 +18,7 @@ const CoachEditInfo = (props) => {
   const [emergency_contact_nameInput,setEmergency_contact_nameInput]= useState('')
   const [emergency_contact_numberInput,setEmergency_contact_numberInput]= useState('')
   const [CoachProfile_job,setCoachProfileJob]= useState('')
+  const [coachStatus,setCoachStatus] = useState()
   //dropdown state
   const [genderInput,setGenderInput]= useState('')
   const [blood_groupInput,setBlood_groupInput]= useState('')
@@ -48,6 +49,7 @@ const CoachEditInfo = (props) => {
     setGenderInput(data[0]["gender"])
     setBlood_groupInput(data[0]["blood_group"])
     setCoachProfileJob(data[0]["profile_job"])
+    setCoachStatus(data[0]["status"])
 
 
   }
@@ -110,11 +112,15 @@ const CoachEditInfo = (props) => {
     setCoachProfileJob(event.target.value)
   }
 
+  const statusInputChangeHandler=(event)=>{
+    setCoachStatus(event.target.value)
+  }
 
   const saveInfo=()=>{
+    console.log(coachStatus)
    let updateCoachInfo={user_id:userId, coach_id:coachId,user_name:nameInput, user_email:emailInput,access_id:access_idInput,role:"coach",
     age:ageInput,phone_number:contact_numberInput,
-    personal_email:personal_emailInput,
+    personal_email:personal_emailInput,status:coachStatus,
     aadhar_number:aadhar_numberInput,
     home_address:home_addressInput,communication_address:communication_addressInput,
     emergency_contact_name:emergency_contact_nameInput,emergency_contact_number:emergency_contact_numberInput, gender:genderInput, blood_group:blood_groupInput,
@@ -124,8 +130,8 @@ const CoachEditInfo = (props) => {
     console.log("updateCoachInfor",updateCoachInfo)
     CoachService.editCoachDetails(userId,updateCoachInfo).then(res => {
       console.log(res.data);
+      props.func()
     })
-    // props.func()
   }
   return (
     <div>
@@ -212,6 +218,17 @@ const CoachEditInfo = (props) => {
           </div>
 
 
+          <div className="mb-3 ">
+          <label htmlFor="student-status" className="form-label">Student Status</label>
+          <select className="form-select" value={coachStatus} aria-label="Default select example" onChange={statusInputChangeHandler} id="student-status" >
+            <option value="DEFAULT">{coachStatus? coachStatus :"Select Status"}</option>
+            <option value="Active">Active</option>
+            <option value="InActive">Inactive</option>
+          </select>
+        </div>
+
+
+
           <div className="mb-3">
             <label htmlFor="aadhar-number" className="form-label">Aadhar Number</label>
             <input type="text" className="form-control" onChange={aadhar_numberInputChangeHandler}
@@ -241,7 +258,7 @@ const CoachEditInfo = (props) => {
           </div>
           <div className="float-end">
             <button type="button" className="btn btn-secondary mx-2 text-light" data-bs-dismiss="offcanvas" >Cancel</button>
-            <button type="button" className="btn btn-success mx-2" onClick={saveInfo}>Save</button>
+            <button type="button" data-bs-dismiss="offcanvas" className="btn btn-success mx-2" onClick={saveInfo}>Save</button>
           </div>
         </React.Fragment>
 

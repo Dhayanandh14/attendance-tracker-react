@@ -6,12 +6,16 @@ const Coachinfo = (props) => {
   const [CoachInfo,setCoachInfo] = useState([])
   console.log(props.location.state)
   useEffect(() => {
+    fetch()
+  }, []);
+
+  const fetch=()=>{
     CoachService.getCoachInfoById(props.location.state).then((res) => {
       console.log(res.data)
       setCoachInfo(res.data)
       // setInformationToInput(res.data)
     });
-  }, []);
+  }
   return (
     <div>
       <CoachEditInfo id={props.location.state} func={fetch}/>
@@ -54,7 +58,11 @@ const Coachinfo = (props) => {
         <tr>
           <td>Personal Email</td>
           <th scope="row">{user.personal_email}</th>
-          </tr>
+        </tr>
+        <tr>
+          <td>Coach Status</td>
+          <th scope="row">{user.status}</th>
+        </tr>
         <tr>
           <td>Aadhar Number</td>
           <th scope="row">{user.aadhar_number}</th>
