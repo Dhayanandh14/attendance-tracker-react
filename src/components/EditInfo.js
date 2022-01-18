@@ -12,6 +12,7 @@ const Editinfo = (props) => {
   const [ageInput,setAgeInput]= useState('')
   const [contact_numberInput,setContact_numberInput]= useState('')
   const [personal_emailInput,setPersonal_emailInput]= useState('')
+  const [batchInput,setBatchInput]= useState('')
   const [squad_nameInput,setSquad_nameInput]= useState('')
   const [date_of_JoinInput,setDate_of_JoinInput]= useState('')
   const [educationInput,setEducationInput]= useState('')
@@ -62,6 +63,7 @@ const Editinfo = (props) => {
     setBlood_groupInput(data[0]["blood_group"])
     setStatusInput(data[0]["status"])
     setGradeInput(data[0]["grade"])
+    setBatchInput(data[0]["batch"])
 
   }
 
@@ -148,6 +150,9 @@ const Editinfo = (props) => {
     setGradeInput(event.target.value)
     console.log(event.target.value)
   }
+  const batchInputChangeHandler=(event)=>{
+    setBatchInput(event.target.value)
+  }
 
   const saveInfo=()=>{
    let updateStudentInfo={user_id:userId, student_id:studentId,user_name:nameInput, user_email:emailInput,access_id:access_idInput,role:"student",
@@ -157,7 +162,7 @@ const Editinfo = (props) => {
     education:educationInput,aadhar_number:aadhar_numberInput,
     home_address:home_addressInput,communication_address:communication_addressInput,
     interviewer:interviewerInput,interviewer_review:interviewer_reviewInput,
-    emergency_contact_name:emergency_contact_nameInput,emergency_contact_number:emergency_contact_numberInput, gender:genderInput, blood_group:blood_groupInput, status:statusInput,grade:gradeInput}
+    emergency_contact_name:emergency_contact_nameInput,emergency_contact_number:emergency_contact_numberInput, gender:genderInput, blood_group:blood_groupInput, status:statusInput,grade:gradeInput,batch:batchInput}
     console.log(updateStudentInfo)
     StudentService.editStudentDetails(userId,updateStudentInfo).then(res => {
       console.log(res.data);
@@ -243,6 +248,18 @@ const Editinfo = (props) => {
             <input type="email" className="form-control" onChange={personal_emailInputChangeHandler}
             value={personal_emailInput} id="student-personal-email"/>
           </div>
+
+          <div className="mb-3 ">
+            <label htmlFor="student-batch" className="form-label">Student Batch</label>
+            <select className="form-select" value={batchInput} aria-label="Default select example" onChange={batchInputChangeHandler} id="student-batch" >
+              <option value="DEFAULT">{batchInput? batchInput :"Select Batch"}</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+
 
           <div className="mb-3 ">
             <label htmlFor="student-status" className="form-label">Student Status</label>

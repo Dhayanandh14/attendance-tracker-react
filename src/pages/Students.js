@@ -21,6 +21,7 @@ const Students = () => {
   const interviewerReviewInputRef = useRef();
   const [gradeInput, setGradeInput] = useState();
   const [statusInput, setStatusInput] = useState();
+  const [batchInput, setBatchInput] = useState();
 
   const fetch = () => {
     StudentService.getAllStudentDetails().then((res) => {
@@ -39,6 +40,9 @@ const Students = () => {
   const statusInputChangeHandler = (event) => {
     setStatusInput(event.target.value);
   };
+  const batchInputChangeHandler = (event) => {
+    setBatchInput(event.target.value)
+  }
 
   const addStudents = () => {
     let user = {
@@ -61,6 +65,7 @@ const Students = () => {
         education: educationInputRef.current.value,
         interviewer_review: interviewerReviewInputRef.current.value,
         grade: gradeInput,
+        batch:batchInput,
         user_id: userId,
       };
       console.log(student_details);
@@ -157,6 +162,18 @@ const Students = () => {
                 />
               </div>
 
+
+              <div className=" mb-3 ">
+              <select
+                className="form-select"
+                aria-label="Default select example" value={batchInput}
+                onChange={batchInputChangeHandler}
+                id="add-student-status">
+                <option value="DEFAULT">Select Batch</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select>
+            </div>
               <div class="mb-3">
                 <input
                   type="text"
@@ -191,7 +208,7 @@ const Students = () => {
                   </select>
                 </div>
 
-                  <div className="col-md-6 mb-3">
+                <div className="col-md-6 mb-3">
                   <select
                     className="form-select"
                     aria-label="Default select example"
@@ -261,6 +278,7 @@ const Students = () => {
             <th scope="col">Name</th>
             <th scope="col">Access Id</th>
             <th scope="col">Email</th>
+            <th scope="col">Batch</th>
             <th scope="col">Squad Name</th>
             <th scope="col">Interviewer</th>
             <th scope="col">Date of Join</th>
@@ -283,6 +301,7 @@ const Students = () => {
                 </td>
                 <td> {user.access_id}</td>
                 <td> {user.user_email}</td>
+                <td> {user.batch}</td>
                 <td> {user.squad_name}</td>
                 <td> {user.interviewer}</td>
                 <td> {user.date_of_Join}</td>
