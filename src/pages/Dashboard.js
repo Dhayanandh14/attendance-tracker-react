@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+ import "./Dashboard.css"
 export default function Dashboard() {
     const logoutHandler = () => {
      document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -19,6 +20,8 @@ export default function Dashboard() {
       <Link to="/reports">Reports</Link>
 
       <br />
+
+
       <button className="btn btn-danger" onClick={logoutHandler}>log out</button>
     </div>
   )

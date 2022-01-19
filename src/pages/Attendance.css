@@ -6,17 +6,26 @@
 
 }
 
-/* input[type='radio'][name='buttonGroup'] { display:none; }
-label {
-  display:inline-block;
-  padding:3px;
-  border:1px solid #e0e0e0;
-  border-radius:3px;
-  background-color:#F0F0F0;
-  width:10em;
-  text-align:center;
-} */
-
-/* Clicking a label will select its corresponding hidden radio button
-   We can select that radio buttons sibling label and style it. */
-/* input[type='radio'][name='buttonGroup']:checked + label { background-color:#a0a0a0; } */
+.absentButton{
+  padding: 7px 15px 7px 15px;
+  /* border-color: #dbe1e8; */
+  color: #394263;
+  outline: 0;
+  border: 1px solid #dbe1e8;
+  border-radius: 5px;
+}
+.presentButton{
+  padding: 7px 15px 7px 15px;
+  /* border-color: #dbe1e8; */
+  color: #394263;
+  outline: 0;
+  border: 1px solid #dbe1e8;
+  margin-right: 15px;
+  border-radius: 5px;
+}
+.presentButton:hover{
+  border: 1px solid #a8acb1;
+}
+.absentButton:hover{
+  border: 1px solid #a8acb1;
+}

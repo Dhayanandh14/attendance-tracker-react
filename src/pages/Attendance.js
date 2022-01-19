@@ -4,7 +4,9 @@ import './Attendance.css'
 
 let eachStudentEntry=[];
 const date = new Date();
-
+const green = "#03a300"
+const red = "red"
+const grey = "#f1f3f6"
 let todayDate = date.toLocaleDateString('en-GB').split('/').reverse().join('-')
 const Attendance = () => {
   // const [hide,setHide]=useState("test")
@@ -41,11 +43,15 @@ const Attendance = () => {
   const AttendanceStatusChangeHandler = (attendanceId,id,status) => {
     console.log(id)
     if(status ===1){
-      document.getElementById("pb-"+id).style.background = "grey"
-      document.getElementById("ab-"+id).style.background = "red"
+      document.getElementById("pb-"+id).style.background = green
+      document.getElementById("pb-"+id).style.color = "white"
+      document.getElementById("ab-"+id).style.background = "#f1f3f6"
+      document.getElementById("ab-"+id).style.color = "black"
     }else{
-      document.getElementById("ab-"+id).style.backgroundColor = "grey"
-      document.getElementById("pb-"+id).style.backgroundColor = "green"
+      document.getElementById("ab-"+id).style.backgroundColor = "red"
+      document.getElementById("ab-"+id).style.color = "white"
+      document.getElementById("pb-"+id).style.backgroundColor = "#f1f3f6"
+      document.getElementById("pb-"+id).style.color = "black"
     }
     eachStudentEntry.push({id:attendanceId, userId:id,attendance_status:status,attendance_date:attendanceDate})
     console.log(eachStudentEntry)
@@ -61,15 +67,15 @@ const Attendance = () => {
   const setButtonStatus = (attendanceId,id,buttonStatus)=>{
     if(buttonStatus === true){
       return [
-        <button className="btn btn-success presentButton"style={{"backgroundColor":"grey"}}
+        <button className=" presentButton"style={{"backgroundColor":green,"color":"white"}}
       onClick={() =>{AttendanceStatusChangeHandler(attendanceId,id,1)}} id={"pb-"+id}>Present</button>,
-      <button className="btn btn-danger absentButton" style={{"backgroundColor":"red"}} id={"ab-"+id} onClick={() =>{AttendanceStatusChangeHandler(attendanceId,id,0)}}>Absent</button>
+      <button className="absentButton" style={{"backgroundColor":"#f1f3f6"}} id={"ab-"+id} onClick={() =>{AttendanceStatusChangeHandler(attendanceId,id,0)}}>Absent</button>
     ]
     }
     else if(buttonStatus === false){
-      return [<button className="btn btn-success presentButton"style={{"backgroundColor":"green"}}
+      return [<button className=" presentButton"style={{"backgroundColor":"#f1f3f6","color":"black"}}
       onClick={() =>{AttendanceStatusChangeHandler(attendanceId,id,1)}} id={"pb-"+id}>Present</button>,
-      <button className="btn btn-danger absentButton" style={{"backgroundColor":"grey"}} id={"ab-"+id} onClick={() =>{AttendanceStatusChangeHandler(attendanceId,id,0)}}>Absent</button>]
+      <button className=" absentButton" style={{"backgroundColor":"red","color":"white"}} id={"ab-"+id} onClick={() =>{AttendanceStatusChangeHandler(attendanceId,id,0)}}>Absent</button>]
 
     }
   }
@@ -81,37 +87,42 @@ const Attendance = () => {
   }
 
   const markAllPresent = ()=>{
+    console.log("present")
     fetchAllAttendances(1)
     let presentButton = document.getElementsByClassName("presentButton")
     let presentButtonLength = document.getElementsByClassName("presentButton").length
     console.log(presentButtonLength)
     let absentButton = document.getElementsByClassName("absentButton")
     for(let i=0; i<presentButtonLength; i++){
-      document.getElementsByClassName("presentButton")[i].style.backgroundColor="grey";
-      if(absentButton[i].style.backgroundColor == "grey" || absentButton[i].style.backgroundColor == "red"){
-      absentButton[i].style.backgroundColor="red"
-      document.getElementsByClassName("presentButton")[i].style.backgroundColor="grey"
+      if(absentButton[i].style.backgroundColor == "rgb(241, 243, 246)" || absentButton[i].style.backgroundColor == "red"){
+        absentButton[i].style.backgroundColor="#f1f3f6" //grey
+        document.getElementsByClassName("presentButton")[i].style.backgroundColor=green//green
+        document.getElementsByClassName("presentButton")[i].style.color="white"
+        document.getElementsByClassName("absentButton")[i].style.backgroundColor="#f1f3f6"//grey
+        document.getElementsByClassName("absentButton")[i].style.color="black"
       }
-       if(absentButton[i].style.backgroundColor == "red" || presentButton[i].style.backgroundColor == "grey" ){
-        absentButton[i].style.backgroundColor="red"
-          document.getElementsByClassName("presentButton")[i].style.backgroundColor="grey"
-      }
+      //  if(absentButton[i].style.backgroundColor == "red" || presentButton[i].style.backgroundColor == "#f1f3f6" ){
+      //    console.log("hi")
+      //     absentButton[i].style.backgroundColor="red"
+      // }
     }
   }
 
 
   const markAllAbsent = ()=>{
+
     fetchAllAttendances(0);
-    console.log(eachStudentEntry)
     let presentButton = document.getElementsByClassName("presentButton")
     let absentButtonLength = document.getElementsByClassName("absentButton").length
-
     for(let i=0; i<absentButtonLength; i++){
-      console.log(presentButton[i])
-      if(presentButton[i].style.backgroundColor=="grey" || presentButton[i].style.backgroundColor=="green"){
-        presentButton[i].style.backgroundColor="green"
-        document.getElementsByClassName("absentButton")[i].style.backgroundColor="grey"
-      }
+      console.log(presentButton[i].style.backgroundColor)
+        if(presentButton[i].style.backgroundColor === "rgb(241, 243, 246)" || presentButton[i].style.backgroundColor=="rgb(3, 163, 0)"){
+          console.log("tesst")
+          presentButton[i].style.backgroundColor=grey
+          presentButton[i].style.color="black"
+          document.getElementsByClassName("absentButton")[i].style.backgroundColor="red"
+          document.getElementsByClassName("absentButton")[i].style.color="white"
+        }
     }
   }
 
@@ -124,9 +135,9 @@ const Attendance = () => {
 
 
     if(status == null){
-      let present =  (<button style={{backgroundColor:"Green"}} id={"pb-"+id} className="presentButton btn btn-primary" onClick={() =>{AttendanceStatusChangeHandler(attendanceId,id,1)}}>Present</button>)
+      let present =  (<button style={{backgroundColor:grey}} id={"pb-"+id} className="presentButton " onClick={() =>{AttendanceStatusChangeHandler(attendanceId,id,1)}}>Present</button>)
 
-      let absent =  (<button style={{backgroundColor:"Red"}} id={"ab-"+id} className="absentButton btn btn-danger" onClick={() =>{AttendanceStatusChangeHandler(attendanceId,id,0)}}>Absent</button>)
+      let absent =  (<button style={{backgroundColor:grey}} id={"ab-"+id} className="absentButton" onClick={() =>{AttendanceStatusChangeHandler(attendanceId,id,0)}}>Absent</button>)
 
       return [present,absent];
     }else{
@@ -150,15 +161,6 @@ const Attendance = () => {
     <div>
 
       Take Attendance
-    <div  className="col-md-1">
-      <div class="input-group mb-3 col-md-3">
-        <select class="form-select" id="inputGroupSelect03" aria-label="Example select with button addon">
-          <option selected>Mark All As</option>
-          <option value="1">Present </option>
-          <option value="2">Absent</option>
-        </select>
-      </div>
-    </div>
 
     <div class="dropdown">
         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">

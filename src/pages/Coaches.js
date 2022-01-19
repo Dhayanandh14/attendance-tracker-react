@@ -80,7 +80,7 @@ const Coaches = () => {
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                  Modal title
+                  Add Coach
                 </h5>
                 <button
                   type="button"
@@ -120,6 +120,7 @@ const Coaches = () => {
                     placeholder="Enter Profile Job" id="coachProfileJobFormControlInput"/>
                 </div>
 
+                <label for="coachProfileJobFormControlInput" class="form-label">Coach Status</label>
                 <select
                   className="form-select"
                   aria-label="Default select example"
