@@ -17,6 +17,7 @@ import Reports from './pages/Reports';
 
 
 function App() {
+  // console.log("hi")
   // const [isLoggedIn, setisLoggedIn] = useState(false)
 //   let isLoggedIn = false;
 //  function readCookie(user) {
