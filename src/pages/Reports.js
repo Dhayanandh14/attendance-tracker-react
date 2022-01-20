@@ -1,5 +1,6 @@
 import React, { useRef,useEffect } from "react";
 import { useState } from "react";
+import SideBarComponent from "../components/SidebarComponent";
 import AttendanceService from "../Services/AttendanceService";
 import ReportService from "../Services/ReportService";
 import UserService from "../Services/UserService";
@@ -47,6 +48,7 @@ const Reports = () => {
   }
   return (
     <div>
+    <SideBarComponent/>
       Reports
       <button class="btn btn-primary">Monthly Report</button>
       <div className="row">
@@ -66,12 +68,6 @@ const Reports = () => {
           <button className="btn btn-primary" onClick={Generate}>Submit Date</button>
         </div>
       </div>
-
-
-
-
-
-
 
       <div className="col-md-6 mb-3">
       <select

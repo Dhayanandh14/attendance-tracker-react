@@ -1,4 +1,5 @@
 import React, { useState,useEffect } from 'react';
+import SideBarComponent from '../components/SidebarComponent';
 import CoachService from '../Services/CoachService';
 import CoachEditInfo from './CoachEditInfo';
 
@@ -17,6 +18,8 @@ const Coachinfo = (props) => {
     });
   }
   return (
+    <React.Fragment>
+      <SideBarComponent/>
     <div>
       <CoachEditInfo id={props.location.state} func={fetch}/>
     <table className="table table-bordered">
@@ -89,6 +92,7 @@ const Coachinfo = (props) => {
     </tbody>
   </table>
     </div>
+    </React.Fragment>
   );
 }
 

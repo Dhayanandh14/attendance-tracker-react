@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import SideBarComponent from "../components/SidebarComponent";
 import AttendanceService from "../Services/AttendanceService";
 import './Attendance.css'
 
@@ -158,8 +159,10 @@ const Attendance = () => {
 
 
   return (
-    <div>
+    <React.Fragment>
+      <SideBarComponent/>
 
+    <div className="App">
       Take Attendance
 
     <div class="dropdown">
@@ -201,6 +204,7 @@ const Attendance = () => {
         </tbody>
       </table>
     </div>
+    </React.Fragment>
   );
 };
 

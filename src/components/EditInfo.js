@@ -172,8 +172,7 @@ const Editinfo = (props) => {
 
   return (
     <div>
-    <div>
-    <h1 className="text-center">Student Details</h1>
+    <div id="student-edit-info-button">
     <div>
     <button className="btn btn-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Edit Info</button>
 

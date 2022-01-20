@@ -9,21 +9,21 @@ const Allstudentlistcomponent = (props) => {
       <tr key={user.user_id}>
       <React.Fragment>
         <td>
-          <Link
+          <Link style={{"vertical-align": "super","text-decoration":"none","font-weight": "bold"}}
             to={{ pathname: `/student_info/`, state: user.user_id }}
           >
             {user.user_name}
           </Link>
         </td>
-        <td> {user.access_id}</td>
+        <td  style={{ color:user.status == 'Active' ? 'green' : 'red' }}> <strong> {user.access_id}</strong></td>
         <td> {user.user_email}</td>
         <td> {user.batch}</td>
         <td> {user.squad_name}</td>
-        <td> {user.interviewer}</td>
+
         <td> {user.date_of_Join}</td>
-        <td style={{ color:user.status == 'Active' ? 'green' : 'red' }}> <strong>{user.status}</strong> </td>
+
         <td> {user.education}</td>
-        <td> {user.interviewer_review}</td>
+
         <td> {user.grade}</td>
       </React.Fragment>
       </tr>
@@ -33,3 +33,5 @@ const Allstudentlistcomponent = (props) => {
 }
 
 export default Allstudentlistcomponent;
+
+// <td style={{ color:user.status == 'Active' ? 'green' : 'red' }}> <strong>{user.status}</strong> </td>

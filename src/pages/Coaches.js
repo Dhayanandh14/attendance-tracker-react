@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useRef } from "react";
-
+import SideBarComponent from "../components/SidebarComponent";
+// import "./Students.css"
 const Coaches = () => {
   const [coaches, setCoaches] = useState([]);
   const [coach_details, setCoach_details] = useState([]);
@@ -59,6 +60,7 @@ const Coaches = () => {
 
   return (
     <div>
+    <SideBarComponent/>
       <div>
         <button
           type="button"

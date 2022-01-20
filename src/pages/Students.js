@@ -6,6 +6,7 @@ import StudentService from "../Services/StudentService";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import AttendanceService from "../Services/AttendanceService";
 import Allstudentlistcomponent from "../components/AllStudentListComponent";
+import SideBarComponent from "../components/SidebarComponent";
 
 let activeArray = [];
 let inactiveArray = [];
@@ -27,7 +28,6 @@ const Students = () => {
   const [statusInput, setStatusInput] = useState();
   const [batchInput, setBatchInput] = useState();
   const [displayStudentList, setDisplayStudentList] = useState("all");
-  const [selectionStatus, setSelectionStatus] = useState();
 
   const fetch = () => {
     activeArray = [];
@@ -105,53 +105,45 @@ const Students = () => {
     studentAccessIdInputRef.current.value = "";
   };
   const selectionStatusHandler = (event) => {
-    console.log(event.target.value);
-    setSelectionStatus(event.target.value);
-  };
-  const selectStatus = () => {
-    console.log(selectionStatus);
-    if (selectionStatus == 1) {
+    if (event.target.value == 1) {
       setDisplayStudentList("all");
-    } else if (selectionStatus == 2) {
+    } else if (event.target.value == 2) {
       setDisplayStudentList("active");
     } else {
       setDisplayStudentList("inactive");
     }
   };
+  // const selectStatus = () => {
+  //   console.log(selectionStatus);
+
+  // };
 
   return (
-    <div className="App">
+   <React.Fragment>
+    <SideBarComponent/>
+    <div className="add-student-and-students-status-div">
+    <div className="input-group" id="student-status-dropdown-div">
+
+        <select id="student-status-dropdown-div"
+          className="form-select"
+          onChange={selectionStatusHandler}
+          id="student-status-dropdown"
+          aria-label="Example select with button addon"
+        >
+          <option value="1">All Students</option>
+          <option value="2">Active Student</option>
+          <option value="3">Inactive Student</option>
+        </select>
+      </div>
+
       <button
         type="button"
         className="btn btn-warning"
         data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-      >
-        Add Students
+        data-bs-target="#exampleModal" id="add-student-button">
+        <box-icon name='plus' id="add-student-plus-icon"></box-icon>Add Students
       </button>
-
-      <div className="row col-md-2">
-        <div className="input-group ">
-          <select
-            className="form-select"
-            onChange={selectionStatusHandler}
-            id="inputGroupSelect04"
-            aria-label="Example select with button addon"
-          >
-            <option value="1">All Students</option>
-            <option value="2">Active Student</option>
-            <option value="3">Inactive Student</option>
-          </select>
-          <button
-            className="btn btn-outline-secondary"
-            type="button"
-            onClick={selectStatus}
-          >
-            Select
-          </button>
-        </div>
-      </div>
-
+    </div>
       <div
         className="modal fade"
         id="exampleModal"
@@ -327,20 +319,20 @@ const Students = () => {
         </div>
       </div>
 
-      <table className="table">
-        <thead>
+      <div className="display-all-student-list">
+      <div class="table-responsive">
+      <table className="table  display-all-student-list-table ">
+        <thead style={{"background": '#f5f7f9'}} className="display-all-student-heading-list">
           <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Access Id</th>
-            <th scope="col">Email</th>
-            <th scope="col">Batch</th>
-            <th scope="col">Squad Name</th>
-            <th scope="col">Interviewer</th>
-            <th scope="col">Date of Join</th>
-            <th scope="col">Status</th>
-            <th scope="col">Education</th>
-            <th scope="col">Interviewer Review</th>
-            <th scope="col">Grade</th>
+            <th scope="col" style={{"vertical-align": "middle"}} >Name</th>
+            <th scope="col" style={{"vertical-align": "middle"}}>Access Id</th>
+            <th scope="col" style={{"vertical-align": "middle"}}>Email</th>
+            <th scope="col" style={{"vertical-align": "middle"}}>Batch</th>
+            <th scope="col" style={{"vertical-align": "middle"}}>Squad Name</th>
+            <th scope="col" style={{"vertical-align": "middle"}}>Date of Join</th>
+
+            <th scope="col" style={{"vertical-align": "middle"}}>Education</th>
+            <th scope="col" style={{"vertical-align": "middle"}}>Grade</th>
           </tr>
         </thead>
         <tbody>
@@ -356,8 +348,12 @@ const Students = () => {
           )}
         </tbody>
       </table>
+      </div>
     </div>
+    </React.Fragment>
   );
 };
 
 export default Students;
+
+// <th scope="col" style={{"vertical-align": "middle"}}>Status</th>

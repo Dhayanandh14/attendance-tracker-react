@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import Editinfo from '../components/EditInfo';
+import SideBarComponent from '../components/SidebarComponent';
 import StudentService from '../Services/StudentService';
-
+import "./StudentInfo.css"
 const Studentinfo = (props) => {
   const [studentInfo,setStudentInfo] = useState([])
 
@@ -23,107 +24,101 @@ const Studentinfo = (props) => {
   }
 
   return (
-    <div>
-    <Editinfo id={props.location.state} func={fetch}/>
+    <React.Fragment >
+    <SideBarComponent/>
+    <Editinfo id={props.location.state}  func={fetch}/>
+    <div className="student-info-view">
+      {studentInfo.map((user) =>
+        <React.Fragment>
+        <React.Fragment>
+          <h1>{user.user_name}</h1>
+          <h5 style={{"margin-left": "6px"}}>{user.access_id}</h5>
+          <h6 style={{"margin-left": "6px"}}>{user.user_email}</h6>
+        </React.Fragment>
+        <hr style={{"margin-top": "61px","margin-bottom": "25px"}}/>
+        <table class="table student-info-table table-borderless">
 
-    <table className="table table-bordered">
-    <tbody>
-    {studentInfo.map((user) =>
-      <React.Fragment key={user.user_id}>
-        <tr>
-          <td>Name</td>
-          <th scope="row">{user.user_name}</th>
-        </tr>
-        <tr>
-          <td>Student Email</td>
-          <th scope="row">{user.user_email}</th>
-        </tr>
-        <tr>
-          <td>Access Id</td>
-          <th scope="row">{user.access_id}</th>
-        </tr>
-        <tr>
-          <td>Age</td>
-          <th scope="row">{user.age}</th>
-        </tr>
-        <tr>
-          <td>Gender</td>
-          <th scope="row">{user.gender}</th>
-        </tr>
-        <tr>
-          <td>Blood Group</td>
-          <th scope="row">{user.blood_group}</th>
-        </tr>
-        <tr>
-          <td>Contact No</td>
-          <th scope="row">{user.phone_number}</th>
-        </tr>
-        <tr>
-          <td>Personal Email</td>
-          <th scope="row">{user.personal_email}</th>
-        </tr>
-        <tr>
-          <td>Batch</td>
-          <th scope="row">Batch {user.batch}</th>
-        </tr>
-        <tr>
-          <td>Student Status</td>
-          <th scope="row">{user.status}</th>
-          </tr>
+        <tbody>
           <tr>
-            <td>Grade</td>
-            <th scope="row">{user.grade}</th>
+          <th className="left-side-student-info-table" scope="row">Phone Number</th>
+          <td className="left-side-student-info-table">{user.phone_number}</td>
+
+            <th  className="right-side-student-info-table info-title" scope="row">Squad Name</th>
+            <td className="right-side-student-info-table info-output" >{user.squad_name}</td>
+
+
           </tr>
-        <tr>
-          <td>Squad Name</td>
-          <th scope="row">{user.squad_name}</th>
-        </tr>
-        <tr>
 
-          <td>Date of Join</td>
-          {user.date_of_Join?<th scope="row">{user.date_of_Join.split("-").reverse().join("-")}</th>:
-          <th scope="row">-</th>}
+          <tr>
+          <th className="left-side-student-info-table" scope="row">Blood Group</th>
+          <td className="left-side-student-info-table" >{user.blood_group}</td>
 
-        </tr>
-        <tr>
-          <td>Education</td>
-          <th scope="row">{user.education}</th>
-        </tr>
-        <tr>
-          <td>Aadhar Number</td>
-          <th scope="row">{user.aadhar_number}</th>
-        </tr>
-        <tr>
-          <td>Home Address</td>
-          <th scope="row">{user.home_address}</th>
-        </tr>
-        <tr>
-          <td>Communication Address</td>
-          <th scope="row">{user.communication_address}</th>
-        </tr>
-        <tr>
-        <td>Interviewer Name</td>
-        <th scope="row">{user.interviewer}</th>
-        </tr>
-        <tr>
-        <td>Interviewer Review</td>
-        <th scope="row">{user.interviewer_review}</th>
-        </tr>
-        <tr>
-          <td>Emergency Contact Name</td>
-          <th scope="row">{user.emergency_contact_name}</th>
-        </tr>
-        <tr>
-          <td>Emergency Contact Number</td>
-          <th scope="row">{user.emergency_contact_number}</th>
-        </tr>
-      </React.Fragment>
-    )}
+          <th  className="right-side-student-info-table info-title" scope="row">Home Address</th>
+          <td className="right-side-student-info-table info-output" >{user.home_address}</td>
+            </tr>
 
-    </tbody>
-  </table>
+            <tr>
+            <th className="left-side-student-info-table"  scope="row">Age</th>
+            <td className="left-side-student-info-table " >{user.age}</td>
 
+            <th className="right-side-student-info-table info-title"  scope="row">Communication Address</th>
+            <td className="right-side-student-info-table info-output" >{user.communication_address}</td>
+            </tr>
+
+            <tr>
+            <th  className="left-side-student-info-table" scope="row">Gender</th>
+            <td className="left-side-student-info-table " >{user.gender}</td>
+
+            <th  className="right-side-student-info-table info-title" scope="row">Aadhar Number</th>
+            <td className="right-side-student-info-table info-output" >{user.aadhar_number}</td>
+            </tr>
+
+            <tr>
+            <th className="left-side-student-info-table"  scope="row">Personal Email</th>
+            <td className="left-side-student-info-table " >{user.personal_email}</td>
+
+            <th  className="right-side-student-info-table info-title" scope="row">Emergency Contact Name</th>
+            <td  className="right-side-student-info-table info-output" colspan="2">{user.emergency_contact_name}</td>
+
+            </tr>
+            <tr>
+            <th className="left-side-student-info-table"  scope="row">Education</th>
+            <td className="left-side-student-info-table " >{user.education}</td>
+
+            <th  className="right-side-student-info-table info-title" scope="row">Emergency Contact Number</th>
+            <td  className="right-side-student-info-table info-output" colspan="2">{user.emergency_contact_number}</td>
+
+            </tr>
+            <tr>
+            <th  className="left-side-student-info-table" scope="row">Date Of Join</th>
+            <td className="left-side-student-info-table " >{user.date_of_Join}</td>
+
+            <th className="right-side-student-info-table info-title"  scope="row">Interviewer Name</th>
+            <td className="right-side-student-info-table info-output" >{user.interviewer}</td>
+
+
+            </tr>
+            <tr>
+            <th className="left-side-student-info-table"  scope="row">Status</th>
+            <td className="left-side-student-info-table " >{user.status}</td>
+
+            <th  className="right-side-student-info-table info-title"  scope="row">Interviewer Review</th>
+            <td  className="right-side-student-info-table info-output" >{user.interviewer_review}</td>
+
+            </tr>
+            <tr>
+            <th  className="right-side-student-info-table"  scope="row">Batch </th>
+            <td  className="right-side-student-info-table " >{user.batch}</td>
+
+            <th  className="right-side-student-info-table info-title" scope="row">Grade</th>
+            <td className="right-side-student-info-table info-output" >{user.grade}</td>
+          </tr>
+        </tbody>
+      </table>
+          </React.Fragment>
+      )}
     </div>
+    </React.Fragment>
   )}
 
 export default Studentinfo;
