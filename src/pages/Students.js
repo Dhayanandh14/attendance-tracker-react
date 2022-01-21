@@ -10,7 +10,6 @@ import SideBarComponent from "../components/SidebarComponent";
 
 let activeArray = [];
 let inactiveArray = [];
-let demo = true;
 const Students = () => {
   const [id, setid] = useState(0);
   const [studentDetails, setStudentDetails] = useState([]);

@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const COACH_API_BASE_URL = "http://localhost:8080/api/v1/coach_details"
-const COACH_DTO_URL = "http://localhost:8080/api/v1/user-coaches";
+const COACH_API_BASE_URL = "https://attendance-tracker-springboot.herokuapp.com/api/v1/coach_details"
+const COACH_DTO_URL = "https://attendance-tracker-springboot.herokuapp.com/api/v1/user-coaches";
 
 class CoachService{
   getCoachDetails(){
@@ -14,10 +14,10 @@ class CoachService{
     return axios.get(COACH_DTO_URL)
   }
   getCoachInfoById(id){
-    return axios.get("http://localhost:8080/api/v1/coach-info"+"/"+id)
+    return axios.get("https://attendance-tracker-springboot.herokuapp.com/api/v1/coach-info"+"/"+id)
   }
   editCoachDetails(id,coachInfo){
-    return axios.patch("http://localhost:8080/api/v1/coach-info"+"/"+id,coachInfo)
+    return axios.patch("https://attendance-tracker-springboot.herokuapp.com/api/v1/coach-info"+"/"+id,coachInfo)
   }
 
 }

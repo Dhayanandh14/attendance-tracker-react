@@ -135,8 +135,7 @@ const CoachEditInfo = (props) => {
   }
   return (
     <div>
-    <div>
-    <h1 className="text-center">Coach Details</h1>
+    <div id="coach-edit-info-button">
     <div>
     <button className="btn btn-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Edit Info</button>
 

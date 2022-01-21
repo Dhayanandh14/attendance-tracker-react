@@ -1,5 +1,6 @@
 import CoachService from "../Services/CoachService";
 // import CoachService from '../Services/CoachService';
+import "./Coaches.css"
 import UserService from "../Services/UserService";
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import React, { useEffect } from "react";
@@ -59,18 +60,21 @@ const Coaches = () => {
   };
 
   return (
-    <div>
-    <SideBarComponent/>
-      <div>
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
-        >
-          Add coach
-        </button>
 
+    <div>
+      <SideBarComponent/>
+      <div>
+        <div>
+          <button
+            type="button"
+            class="btn btn-warning add-coach-button"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+          <box-icon name='plus' id="add-coach-plus-icon"></box-icon>
+            Add coach
+          </button>
+        </div>
         <div
           class="modal fade"
           id="exampleModal"
@@ -154,31 +158,36 @@ const Coaches = () => {
         </div>
       </div>
 
-      <table className="table">
-      <thead>
+
+
+      <div className="display-all-coach-list">
+      <div class="table-responsive">
+      <table className="table display-all-coach-list-table">
+      <thead style={{"background": '#f5f7f9'}}className="display-all-coach-heading-list">
         <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Access Id</th>
-          <th scope="col">Email</th>
-          <th scope="col">Profile Job</th>
-          <th scope="col">Status</th>
+          <th style={{"vertical-align": "middle"}}  scope="col">Name</th>
+          <th style={{"vertical-align": "middle"}}  scope="col">Access Id</th>
+          <th style={{"vertical-align": "middle"}}  scope="col">Email</th>
+          <th style={{"vertical-align": "middle"}}  scope="col">Profile Job</th>
+          <th style={{"vertical-align": "middle"}}  scope="col">Status</th>
 
         </tr>
       </thead>
       <tbody>
-      {coach_details.map((user) =>
+      {coach_details.map((coach) =>
 
-      <tr key={user.id}>
+      <tr key={coach.id}>
       <React.Fragment >
         <td>
-          <Link to={{pathname:`/coach_info/`,state:user.id}}>
-            {user.user_name}
+          <Link style={{"vertical-align": "super","text-decoration":"none","font-weight": "bold"}} to={{pathname:`/coach_info/`,state:coach.id}}>
+            {coach.user_name}
           </Link>
         </td>
-         <td> {user.user_email}</td>
-         <td>{user.access_id}</td>
-         <td>{user.profile_job}</td>
-         <td>{user.status}</td>
+        <td style={{ color:coach.status == 'Active' ? 'green' : 'red' }}><strong> {coach.access_id}</strong>
+        </td>
+         <td> {coach.user_email}</td>
+         <td>{coach.profile_job}</td>
+         <td>{coach.status}</td>
       </React.Fragment>
         </tr>
 
@@ -186,6 +195,8 @@ const Coaches = () => {
 
     </tbody>
     </table>
+    </div>
+    </div>
 
     </div>
   );

@@ -47,7 +47,7 @@ export default function SideBarComponent() {
                   <li class="nav-link">
 
                        <NavLink activeClassName={classes.active} to="/students">
-                            <i class='bx bxs-user-plus icon' ></i>
+                       <i class="fa fa-users icon" style={{"font-size": "14px"}} aria-hidden="true"></i>
                        </NavLink>
 
                   </li>

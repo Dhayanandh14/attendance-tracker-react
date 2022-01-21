@@ -172,8 +172,8 @@ const Editinfo = (props) => {
 
   return (
     <div>
+    <div style={{"float": "right"}}>
     <div id="student-edit-info-button">
-    <div>
     <button className="btn btn-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Edit Info</button>
 
     <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">

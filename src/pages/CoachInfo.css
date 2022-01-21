@@ -1,18 +1,18 @@
-.student-info-view{
+.coach-info-view{
   margin-left: 100px;
   margin-top: 110px;
 }
-.right-side-student-info-table{
+.right-side-coach-info-table{
   vertical-align: middle;
   padding: 1rem 0.5rem;
   /* width: 40% */
 }
-.left-side-student-info-table{
+.left-side-coach-info-table{
   vertical-align: middle;
   padding: 1rem 0.5rem;
   /* width: 40%; */
 }
-.student-info-table{
+.coach-info-table{
   font-size: 19px;
   padding: 1rem 0.5rem;
     max-width: 1593px;
@@ -26,16 +26,9 @@
 .info-title{
   width: 23%;
 }
-#student-edit-info-button{
+#coach-edit-info-button{
   float: right;
     position: relative;
     right: 45px;
     top: 50px;
-}
-#student-edit-info-button{
-  float: right;
-    position: relative;
-    right: 45px;
-    top: 50px;
-
 }

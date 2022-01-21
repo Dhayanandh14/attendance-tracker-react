@@ -29,3 +29,38 @@
 .absentButton:hover{
   border: 1px solid #a8acb1;
 }
+.date-and-status-dropdown{
+  display: flex;
+  justify-content: space-between;
+  margin-left: 99px;
+  margin-right: 32px;
+}
+.display-all-attendance-details-list-table{
+  border-collapse: separate;
+  border-spacing: 0 15px;
+  font-size:13px;
+  text-align: center;
+}
+.display-all-attendance-list{
+  margin-left: 57px;
+  margin-top: 15px;
+}
+.reset-and-save-button{
+  display: flex;
+  justify-content: space-between;
+  margin-left: 21px;
+  margin-right: 232px;
+}
+.display-all-attendance-heading-list{
+  background: rgb(245, 247, 249);
+  height: 55px;
+  vertical-align: middle;
+}
+#select-attendance-date-input{
+  width: 222px;
+  height: 39px;
+  margin-right: 10px;
+}
+.select-attendance-date-div{
+  display: flex;
+}

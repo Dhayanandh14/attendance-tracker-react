@@ -27,6 +27,7 @@ const Studentinfo = (props) => {
     <React.Fragment >
     <SideBarComponent/>
     <Editinfo id={props.location.state}  func={fetch}/>
+
     <div className="student-info-view">
       {studentInfo.map((user) =>
         <React.Fragment>

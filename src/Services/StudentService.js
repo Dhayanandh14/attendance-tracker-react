@@ -1,10 +1,12 @@
 import axios from "axios";
 
-const STUDENTS_API_BASE_URL = "http://localhost:8080/api/v1/student_details";
-const STUDENTS_URL = "http://localhost:8080/api/v1/students";
-const USERS_DETAILS_DTO = "http://localhost:8080/api/v1/user-students";
-const USER_ID_URL = "http://localhost:8080/api/v1/users_id";
-const STUDENT_INFO_URL = "http://localhost:8080/api/v1/student_info";
+const BASE_URL="https://attendance-tracker-springboot.herokuapp.com/api/v1/"
+
+const STUDENTS_API_BASE_URL = `${BASE_URL}student_details`;
+const STUDENTS_URL = `${BASE_URL}students`;
+const USERS_DETAILS_DTO = `${BASE_URL}user-students`;
+const USER_ID_URL = `${BASE_URL}users_id`;
+const STUDENT_INFO_URL = `${BASE_URL}student_info`;
 
 class StudentService {
   getStudentDetails() {
