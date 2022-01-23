@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-const BASE_URL = "https://attendance-tracker-springboot.herokuapp.com/api/v1/"
+// const BASE_URL = "https://attendance-tracker-springboot.herokuapp.com/api/v1/"
+
+
+
+const BASE_URL = "http://localhost:8080/api/v1/"
 
 const USERS_API_BASE_URL = `${BASE_URL}users`;
 const USERS_URL = `${BASE_URL}signin`;

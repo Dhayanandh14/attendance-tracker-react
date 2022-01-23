@@ -3,7 +3,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import SideBarComponent from "../components/SidebarComponent";
 import AttendanceService from "../Services/AttendanceService";
 import "./Attendance.css";
-
+import { useHistory } from "react-router-dom";
 let eachStudentEntry = [];
 const date = new Date();
 const green = "#03a300";
@@ -16,13 +16,20 @@ const Attendance = () => {
   const [attendanceDate, setAttendanceDate] = useState();
   const [allAttendances, setAllAttendances] = useState([]);
   const [reset, setReset] = useState(false);
-  const [rerender, setRerender] = useState(false);
+  const [rerender, setRerender] = useState('');
+  const [showButton,setShowButon] = useState(false);
+  const [loading,setLoading] = useState(true);
+  const [buttonLoading, setButtonLoading] = useState(false)
+  const [saveButtonLoading, setSaveButtonLoading] = useState(false)
   // fetch all students from database
+  const history = useHistory();
   useEffect(() => {
     setAttendanceDate(todayDate);
     AttendanceService.getAttendanceByDate(todayDate).then((attendance) => {
       console.log(attendance.data);
       setAllAttendances(attendance.data);
+      setShowButon(true)
+      setLoading(false)
     });
   }, []);
 
@@ -35,9 +42,11 @@ const Attendance = () => {
 
   // submit button for date selection
   const dateSubmit = () => {
+    setButtonLoading(true)
     AttendanceService.getAttendanceByDate(attendanceDate).then((attendance) => {
       console.log(attendance.data);
       setAllAttendances(attendance.data);
+      setButtonLoading(false)
     });
   };
 
@@ -64,16 +73,7 @@ const Attendance = () => {
     console.log(eachStudentEntry);
   };
 
-  // Reset button this is for reset the student attendance status
-  const resetAttendanceStatus = (attendanceId, id, status) => {
-    eachStudentEntry.push({
-      id: attendanceId,
-      userId: id,
-      attendance_status: status,
-      attendance_date: attendanceDate,
-    });
-    saveAttendance();
-  };
+
 
   const setButtonStatus = (attendanceId, id, buttonStatus) => {
     if (buttonStatus === true) {
@@ -126,14 +126,17 @@ const Attendance = () => {
   };
 
   const fetchAllAttendances = (status) => {
-    allAttendances.map((attendance) =>
+    allAttendances.map((attendance) =>{
       eachStudentEntry.push({
         id: attendance.id,
         userId: attendance.userId,
         attendance_status: status,
         attendance_date: attendance.attendance_date,
       })
-    );
+      setShowButon(true);
+      setLoading(false)
+      // setButtonLoading(true)
+    });
   };
 
   const markAllPresent = () => {
@@ -161,10 +164,6 @@ const Attendance = () => {
         document.getElementsByClassName("absentButton")[i].style.color =
           "black";
       }
-      //  if(absentButton[i].style.backgroundColor == "red" || presentButton[i].style.backgroundColor == "#f1f3f6" ){
-      //    console.log("hi")
-      //     absentButton[i].style.backgroundColor="red"
-      // }
     }
   };
 
@@ -194,7 +193,9 @@ const Attendance = () => {
   //check the attendance status is true or false based on condition it will return the present or absent button
   const attendanceStatusButton = (attendanceId, id, status) => {
     console.log(attendanceId);
-    if (reset == true) resetAttendanceStatus(attendanceId, id, null);
+    if (reset == true) {
+      resetAttendanceStatus(attendanceId, id, null);
+    }
 
     if (status == null) {
       let present = (
@@ -229,19 +230,40 @@ const Attendance = () => {
     }
   };
 
+  // Reset button this is for reset the student attendance status
+  const resetAttendanceStatus = (attendanceId, id, status) => {
+    eachStudentEntry.push({
+      id: attendanceId,
+      userId: id,
+      attendance_status: status,
+      attendance_date: attendanceDate,
+    });
+    console.log(eachStudentEntry)
+
+    window.location.reload(false);
+    // saveAttendance()
+
+  };
   //save the attendance
   const saveAttendance = () => {
+    setSaveButtonLoading(true)
     console.log(eachStudentEntry);
     AttendanceService.updateAttendance(eachStudentEntry).then((res) => {
       console.log(res.data);
       // dateSubmit()
+      setSaveButtonLoading(false)
     });
-    window.location.reload();
+    // setRerender()
+    // window.location.reload();
+    history.push("/attendance");
   };
+
 
   return (
     <React.Fragment>
+
       <SideBarComponent />
+      {!loading &&
       <div>
         <div className="date-and-status-dropdown">
           <div className="select-attendance-date-div">
@@ -253,9 +275,13 @@ const Attendance = () => {
               id="select-attendance-date-input"
             />
 
-            <button className="btn btn-dark" onClick={() => dateSubmit()}>
-              SUBMIT
-            </button>
+            {!buttonLoading &&<button className="btn btn-dark" onClick={() => dateSubmit()}>
+            SUBMIT
+          </button>}
+          {buttonLoading && <button className="btn btn-dark">
+          Loading...
+        </button>}
+
 
             </div>
 
@@ -287,32 +313,32 @@ const Attendance = () => {
 
 
         <div className="display-all-attendance-list">
-          <div class="table-responsive">
-            <table class="table display-all-attendance-details-list-table">
+          <div className="table-responsive">
+            <table className="table display-all-attendance-details-list-table">
               <thead style={{"background": '#f5f7f9'}}
               className="display-all-attendance-heading-list"
               >
                 <tr>
-                  <th style={{"vertical-align": "middle"}}>Name</th>
-                  <th style={{"vertical-align": "middle"}}>Email</th>
-                  <th style={{"vertical-align": "middle"}}>Attendance Status</th>
+                  <th style={{"verticalAlign": "middle"}}>Name</th>
+                  <th style={{"verticalAlign": "middle"}}>Email</th>
+                  <th style={{"verticalAlign": "middle"}}>Attendance Status</th>
                 </tr>
               </thead>
               <tbody>
                 {allAttendances.map((attendance) => (
-                  <React.Fragment key={attendance.userId}>
-                    <tr>
+                  <React.Fragment key={Math.random()}>
+                  {attendance.status == "Active" &&
+                    <tr key={Math.random()*19 }>
                       <td>
-                      <Link style={{"vertical-align": "super","text-decoration":"none","font-weight": "bold"}}
-                      to={{ pathname: `/student_info/`, state: attendance.userId }}
-                    >
-                      {attendance.user_name}
-                    </Link>
-
+                      <Link style={{"verticalAlign": "super","textDecoration":"none","fontWeight": "bold"}}
+                       to={{ pathname: `/student_info/`, state: attendance.userId }}
+                      >
+                        {attendance.user_name}
+                      </Link>
                       </td>
                       <td> {attendance.user_email}</td>
                       <td>
-                        <React.Fragment>
+                        <React.Fragment key={Math.random()*19 }>
                           {attendanceStatusButton(
                             attendance.id,
                             attendance.userId,
@@ -321,17 +347,24 @@ const Attendance = () => {
                         </React.Fragment>
                       </td>
                     </tr>
+                  }
                   </React.Fragment>
-                ))}
+                            ))}
                 </tbody>
                 </table>
+                {showButton &&
                 <div className="reset-and-save-button">
                   <button className="btn btn-dark " onClick={() => setReset(true)}>Delete Attendance</button>
-                  <button className="btn btn-warning" onClick={() => saveAttendance()}>Save</button>
-                </div>
+                 {!saveButtonLoading && <button className="btn btn-warning" onClick={() => saveAttendance()}>Save</button>}
+                 {saveButtonLoading && <button className="btn btn-warning" onClick={() => saveAttendance()}>loading</button>}
+                 {saveButtonLoading && window.location.reload()}
+
+
+                </div>}
           </div>
         </div>
-      </div>
+      </div>}
+      {loading && <h1 className="text-center">Fetching Attendance...</h1>}
     </React.Fragment>
   );
 };

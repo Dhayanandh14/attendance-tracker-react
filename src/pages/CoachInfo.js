@@ -3,28 +3,35 @@ import SideBarComponent from '../components/SidebarComponent';
 import CoachService from '../Services/CoachService';
 import "./CoachInfo.css"
 import CoachEditInfo from './CoachEditInfo';
-
+import {useParams} from "react-router-dom";
 const Coachinfo = (props) => {
+  const {id} = useParams()
   const [CoachInfo,setCoachInfo] = useState([])
   console.log(props.location.state)
+  const [showButton,setShowButton] = useState(true);
+  const [loading,setLoading] = useState(true);
+
   useEffect(() => {
     fetch()
+    setShowButton(true)
+    // setLoading(false)
   }, []);
 
   const fetch=()=>{
-    CoachService.getCoachInfoById(props.location.state).then((res) => {
+    CoachService.getCoachInfoById(id).then((res) => {
       console.log(res.data)
       setCoachInfo(res.data)
+      setShowButton(false)
+      setLoading(false)
       // setInformationToInput(res.data)
     });
   }
   return (
     <React.Fragment>
-      <SideBarComponent/>
+     <SideBarComponent/>
     <div>
-      <CoachEditInfo id={props.location.state} func={fetch}/>
-
-
+     {!showButton &&  <CoachEditInfo id={id} func={fetch}/>}
+    {!showButton &&
       <div className="coach-info-view">
 
       {CoachInfo.map((user) =>
@@ -98,7 +105,10 @@ const Coachinfo = (props) => {
       </React.Fragment>
       )}
       </div>
+      }
+      {showButton && <h1 className="text-center">loading..</h1>}
     </div>
+
     </React.Fragment>
   );
 }

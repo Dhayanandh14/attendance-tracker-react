@@ -9,9 +9,8 @@ const Allstudentlistcomponent = (props) => {
       <tr key={user.user_id}>
       <React.Fragment>
         <td>
-          <Link style={{"vertical-align": "super","text-decoration":"none","font-weight": "bold"}}
-            to={{ pathname: `/student_info/`, state: user.user_id }}
-          >
+          <Link style={{"vertical-align": "super","text-decoration":"none","fontWeight":"bold"}}
+            to={{ pathname: `students/student_info/${user.user_id}` }}>
             {user.user_name}
           </Link>
         </td>

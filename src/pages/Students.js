@@ -27,21 +27,22 @@ const Students = () => {
   const [statusInput, setStatusInput] = useState();
   const [batchInput, setBatchInput] = useState();
   const [displayStudentList, setDisplayStudentList] = useState("all");
-
+  const [loading,setLoading] = useState(true);
   const fetch = () => {
     activeArray = [];
     inactiveArray = [];
     StudentService.getAllStudentDetails().then((res) => {
-      setStudentDetails(res.data);
-      console.log(studentDetails);
-      for (let i = 0; i < res.data.length; i++) {
-        if (res.data[i]["status"] == "Active") {
-          activeArray.push(res.data[i]);
-        } else if (res.data[i]["status"] == "InActive") {
-          inactiveArray.push(res.data[i]);
+        setStudentDetails(res.data);
+        console.log(studentDetails);
+        for (let i = 0; i < res.data.length; i++) {
+          if (res.data[i]["status"] == "Active") {
+            activeArray.push(res.data[i]);
+          } else if (res.data[i]["status"] == "InActive") {
+            inactiveArray.push(res.data[i]);
+          }
         }
-      }
-    });
+        setLoading(false)
+    })
   };
 
   useEffect(() => {
@@ -120,6 +121,8 @@ const Students = () => {
   return (
    <React.Fragment>
     <SideBarComponent/>
+    {!loading &&
+    <React.Fragment>
     <div className="add-student-and-students-status-div">
     <div className="input-group" id="student-status-dropdown-div">
 
@@ -349,6 +352,8 @@ const Students = () => {
       </table>
       </div>
     </div>
+      </React.Fragment>}
+      {loading && <h1 className="text-center">Loading...</h1>}
     </React.Fragment>
   );
 };

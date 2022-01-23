@@ -4,21 +4,27 @@ import Editinfo from '../components/EditInfo';
 import SideBarComponent from '../components/SidebarComponent';
 import StudentService from '../Services/StudentService';
 import "./StudentInfo.css"
+import {useParams} from "react-router-dom";
 const Studentinfo = (props) => {
+  let { id } = useParams();
   const [studentInfo,setStudentInfo] = useState([])
-
+  const [showButton,setShowButon] = useState(false);
+  const [loading,setLoading] = useState(true);
   useEffect(() => {
-    StudentService.getStudentInfoById(props.location.state).then((res) => {
+    StudentService.getStudentInfoById(id).then((res) => {
       setStudentInfo(res.data)
       console.log(res.data)
+      setShowButon(true)
+      setLoading(false)
       // setInformationToInput(res.data)
     });
   }, []);
 
   const fetch =()=>{
-    StudentService.getStudentInfoById(props.location.state).then((res) => {
+    StudentService.getStudentInfoById(id).then((res) => {
       setStudentInfo(res.data)
       console.log(res.data)
+      setLoading(false)
       // setInformationToInput(res.data)
     });
   }
@@ -26,7 +32,9 @@ const Studentinfo = (props) => {
   return (
     <React.Fragment >
     <SideBarComponent/>
-    <Editinfo id={props.location.state}  func={fetch}/>
+    {!loading && <React.Fragment>
+      {showButton &&
+    <Editinfo id={id}  func={fetch}/>}
 
     <div className="student-info-view">
       {studentInfo.map((user) =>
@@ -119,6 +127,8 @@ const Studentinfo = (props) => {
           </React.Fragment>
       )}
     </div>
+    </React.Fragment>}
+    {loading && <h1 className="text-center">Loading...</h1>}
     </React.Fragment>
   )}
 

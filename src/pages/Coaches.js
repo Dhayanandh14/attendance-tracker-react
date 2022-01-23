@@ -2,13 +2,14 @@ import CoachService from "../Services/CoachService";
 // import CoachService from '../Services/CoachService';
 import "./Coaches.css"
 import UserService from "../Services/UserService";
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link,useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useRef } from "react";
 import SideBarComponent from "../components/SidebarComponent";
 // import "./Students.css"
 const Coaches = () => {
+
   const [coaches, setCoaches] = useState([]);
   const [coach_details, setCoach_details] = useState([]);
   const coachNameInputRef = useRef();
@@ -17,11 +18,14 @@ const Coaches = () => {
   const coachPasswordInputRef = useRef();
   const [coachStatus,setCoachStatus] = useState();
   // const userIdInputRef = useRef();
+
   const profileJobInputRef = useRef();
+  const [loading,setLoading] = useState(true);
 
   useEffect(() => {
     CoachService.getAllCoachDetails().then((res) =>{
       setCoach_details(res.data)
+      setLoading(false)
     })
   },[])
 
@@ -63,6 +67,8 @@ const Coaches = () => {
 
     <div>
       <SideBarComponent/>
+      {!loading &&
+        <React.Fragment>
       <div>
         <div>
           <button
@@ -179,7 +185,7 @@ const Coaches = () => {
       <tr key={coach.id}>
       <React.Fragment >
         <td>
-          <Link style={{"vertical-align": "super","text-decoration":"none","font-weight": "bold"}} to={{pathname:`/coach_info/`,state:coach.id}}>
+          <Link style={{"vertical-align": "super","text-decoration":"none","font-weight": "bold"}} to={{pathname:`coaches/coach_info/${coach.id}`,state:coach.id}}>
             {coach.user_name}
           </Link>
         </td>
@@ -197,7 +203,9 @@ const Coaches = () => {
     </table>
     </div>
     </div>
-
+    </React.Fragment>
+      }
+      {loading && <h1 className="text-center">Loading...</h1>}
     </div>
   );
 };
