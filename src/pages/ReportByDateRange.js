@@ -2,11 +2,8 @@ import React, { useRef,useEffect } from "react";
 import { useState } from "react";
 import SideBarComponent from "../components/SidebarComponent";
 import ReportService from "../Services/ReportService";
-const demoName=[]
-let demoStatus=[]
 const Reportbydaterange = () => {
   const fromDateInputRef =  useRef()
-  const [demoName,setDemoName] = useState([])
   const toDateInputRef = useRef()
   const [allReport,setAllReport] = useState([]);
 
