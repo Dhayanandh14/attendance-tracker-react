@@ -1,12 +1,8 @@
 import './App.css';
 import { BrowserRouter as Router, Route,Switch,Redirect } from "react-router-dom";
-import SignUpComponent from './components/SignUpComponent';
 import Home from './pages/NotFound';
-import SignInComponent from './components/SignInComponent';
 import Dashboard from './pages/Dashboard';
 import Students from './pages/Students';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import NotFound from './pages/NotFound';
 import Coaches from './pages/Coaches';
 import Studentinfo from './pages/StudentInfo';
@@ -15,6 +11,8 @@ import Attendance from './pages/Attendance';
 import Reports from './pages/Reports';
 import Reportbyname from './pages/ReportByName';
 import Reportbydaterange from './pages/ReportByDateRange';
+import SignInComponent from './pages/SignInComponent';
+import SignUpComponent from './pages/SignUpComponent';
 
 
 

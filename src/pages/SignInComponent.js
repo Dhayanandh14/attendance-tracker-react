@@ -2,24 +2,28 @@ import React, {useRef } from 'react'
 import UserService from '../Services/UserService';
 import { useHistory } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { useState } from 'react';
 import './SignInComponent.css'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import Forminput from '../components/FormInput';
 
 
 const SignInComponent=()=>{
 
-  const emailInputRef = useRef();
-  const passwordInputRef = useRef();
+ const [signInFormValues,setSigninFormValues] = useState({
+  email:"",
+  password:""
+ })
+ const formInputValuesHandler = (e) => {
+  setSigninFormValues({...signInFormValues, [e.target.name]: e.target.value })
+}
   const [cookies, setCookie] = useCookies(["user"]);
   const history = useHistory();
-
-  var CryptoJS = require("crypto-js");
   const signIn= (event) =>{
-    const enteredEmail = emailInputRef.current.value;
-    const enteredPassword = passwordInputRef.current.value;
+    // const enteredEmail = emailInputRef.current.value;
+    // const enteredPassword = passwordInputRef.current.value;
     event.preventDefault();
-    UserService.getUserByEmailandPassword(enteredEmail,enteredPassword).then((res) => {
-      // console.log(res.data)
+    UserService.getUserByEmailandPassword(signInFormValues.email,signInFormValues.password).then((res) => {
       if(res.data){
         authentication(res.data)
       }
@@ -29,6 +33,7 @@ const SignInComponent=()=>{
       }
     });
 
+
     function authentication(user) {
       console.log(typeof user);
       if(user){
@@ -37,17 +42,6 @@ const SignInComponent=()=>{
       else{
         alert("invalid credentials")
       }
-
-      // if (email === emailInputRef.current.value && passwordInputRef.current.value === decryptedPasswordString){
-      //   // setCookie("user", `naHQH1tyeG%2ByD%2B0Nnfx40qLD6X5lQ32dQ4l9WZyzW%2BqosdPtyHs1qwJNz1RHwrDjMmrWDAr1iIvmH533yyHHQpix0RCbbSbOaSL%2Bo43uMjp%2BcC5NaYuOjrfxgN9J6PHMin1RA2l0en%2Fswmm858solXOSgq0IPVngIiorln3o6ysrrrpUqWXoC6PAgKGeWRKxsQE0mJQBaBJ8rWzK%2BVomMrt6Dn1lxIZG7uM1Jj%2Bn0IQNIWDnf77HD2tzr52%2BmA7mff7jkwYslfvsw1aUvwi4Z83urPoUFLruCPCbnj2B5bVvIzyYX%2Fqb2TuTB95II%2FrZdcrV50WqZNmBsrOw0SQs6k8%3D--LKLs3rXIB7WKY4%2Bu--hkP9prmzWQcxeEovm%2BElyw%3D%3D`, {
-      //   //   path: "/"
-      //   // });
-      //   history.replace("/dashboard");
-      //   // window.location.replace("/dashboard")
-      // }
-      // else{
-      //   alert("Please enter a valid  password")
-      // }
     }
   }
   return (
@@ -56,14 +50,15 @@ const SignInComponent=()=>{
     <h1 style={{position:"relative",top:'159px',left:"103px",display:"inline-block",margin:"0px"}}>SIGN IN</h1>
     <div className="mb-3 " style={{marginTop:"13pc"}}>
     <label htmlFor="useremail" className="form-label">Email address</label>
-    <input type="email" className="form-control" id="useremail" aria-describedby="useremail-help" ref={emailInputRef} required/>
+   <Forminput type="email" id="useremail" name="email" onChange={formInputValuesHandler}/>
+
   </div>
   <div className="mb-3 ">
     <label htmlFor="password" className="form-label">Password</label>
-    <input type="password" className="form-control" id="password"  ref={passwordInputRef} required/>
+    <Forminput type="password" id="password" name="password" onChange={formInputValuesHandler}/>
   </div>
         <div className="mb-3 " >
-          <button type="submit" style={{width:"100%"}} className="btn btn-primary">SIGN IN</button>
+          <button type="submit" style={{width:"100%"}} className="btn btn-primary" onClick={signIn}>SIGN IN</button>
       </div>
     <span className="input-group-btn">
 

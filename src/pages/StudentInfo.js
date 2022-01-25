@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import Editinfo from '../components/EditInfo';
+import StudentEditinfo from './StudentEditInfo';
 import SideBarComponent from '../components/SidebarComponent';
 import StudentService from '../Services/StudentService';
 import "./StudentInfo.css"
@@ -34,7 +34,7 @@ const Studentinfo = (props) => {
     <SideBarComponent/>
     {!loading && <React.Fragment>
       {showButton &&
-    <Editinfo id={id}  func={fetch}/>}
+    <StudentEditinfo id={id}  func={fetch}/>}
 
     <div className="student-info-view">
       {studentInfo.map((user) =>
@@ -67,60 +67,52 @@ const Studentinfo = (props) => {
             </tr>
 
             <tr>
-            <th className="left-side-student-info-table"  scope="row">Age</th>
-            <td className="left-side-student-info-table " >{user.age}</td>
+              <th className="left-side-student-info-table"  scope="row">Age</th>
+              <td className="left-side-student-info-table " >{user.age}</td>
 
-            <th className="right-side-student-info-table info-title"  scope="row">Communication Address</th>
-            <td className="right-side-student-info-table info-output" >{user.communication_address}</td>
+              <th className="right-side-student-info-table info-title"  scope="row">Communication Address</th>
+              <td className="right-side-student-info-table info-output" >{user.communication_address}</td>
             </tr>
 
             <tr>
-            <th  className="left-side-student-info-table" scope="row">Gender</th>
-            <td className="left-side-student-info-table " >{user.gender}</td>
+              <th className="left-side-student-info-table" scope="row">Gender</th>
+              <td className="left-side-student-info-table " >{user.gender}</td>
 
-            <th  className="right-side-student-info-table info-title" scope="row">Aadhar Number</th>
-            <td className="right-side-student-info-table info-output" >{user.aadhar_number}</td>
+              <th className="right-side-student-info-table info-title" scope="row">Aadhar Number</th>
+              <td className="right-side-student-info-table info-output" >{user.aadhar_number}</td>
             </tr>
 
             <tr>
-            <th className="left-side-student-info-table"  scope="row">Personal Email</th>
-            <td className="left-side-student-info-table " >{user.personal_email}</td>
+              <th className="left-side-student-info-table"  scope="row">Personal Email</th>
+              <td className="left-side-student-info-table " >{user.personal_email}</td>
 
-            <th  className="right-side-student-info-table info-title" scope="row">Emergency Contact Name</th>
-            <td  className="right-side-student-info-table info-output" colspan="2">{user.emergency_contact_name}</td>
-
+              <th className="right-side-student-info-table info-title" scope="row">Emergency Contact Name</th>
+              <td className="right-side-student-info-table info-output" colspan="2">{user.emergency_contact_name}</td>
             </tr>
             <tr>
-            <th className="left-side-student-info-table"  scope="row">Education</th>
-            <td className="left-side-student-info-table " >{user.education}</td>
+              <th className="left-side-student-info-table"  scope="row">Education</th>
+              <td className="left-side-student-info-table " >{user.education}</td>
 
-            <th  className="right-side-student-info-table info-title" scope="row">Emergency Contact Number</th>
-            <td  className="right-side-student-info-table info-output" colspan="2">{user.emergency_contact_number}</td>
-
+              <th className="right-side-student-info-table info-title" scope="row">Emergency Contact Number</th>
+              <td className="right-side-student-info-table info-output" colspan="2">{user.emergency_contact_number}</td>
             </tr>
             <tr>
-            <th  className="left-side-student-info-table" scope="row">Date Of Join</th>
-            <td className="left-side-student-info-table " >{user.date_of_Join}</td>
+              <th className="left-side-student-info-table" scope="row">Date Of Join</th>
+              <td className="left-side-student-info-table " >{user.date_of_Join}</td>
 
-            <th className="right-side-student-info-table info-title"  scope="row">Interviewer Name</th>
-            <td className="right-side-student-info-table info-output" >{user.interviewer}</td>
-
-
+              <th className="right-side-student-info-table info-title"  scope="row">Interviewer Name</th>
+              <td className="right-side-student-info-table info-output" >{user.interviewer}</td>
             </tr>
             <tr>
-            <th className="left-side-student-info-table"  scope="row">Status</th>
-            <td className="left-side-student-info-table " >{user.status}</td>
+              <th className="left-side-student-info-table"  scope="row">Status</th>
+              <td className="left-side-student-info-table " >{user.status}</td>
 
-            <th  className="right-side-student-info-table info-title"  scope="row">Interviewer Review</th>
-            <td  className="right-side-student-info-table info-output" >{user.interviewer_review}</td>
-
+              <th className="right-side-student-info-table info-title"  scope="row">Interviewer Review</th>
+              <td className="right-side-student-info-table info-output" >{user.interviewer_review}</td>
             </tr>
             <tr>
-            <th  className="right-side-student-info-table"  scope="row">Batch </th>
-            <td  className="right-side-student-info-table " >{user.batch}</td>
-
-            <th  className="right-side-student-info-table info-title" scope="row">Grade</th>
-            <td className="right-side-student-info-table info-output" >{user.grade}</td>
+              <th className="right-side-student-info-table info-title" scope="row">Grade</th>
+              <td className="right-side-student-info-table info-output" >{user.grade}</td>
           </tr>
         </tbody>
       </table>

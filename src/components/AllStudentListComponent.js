@@ -5,7 +5,7 @@ const Allstudentlistcomponent = (props) => {
   return (
 <React.Fragment>
 
-    {props.inactiveArray.map((user) =>
+    {props.array.map((user) =>
       <tr key={user.user_id}>
       <React.Fragment>
         <td>
@@ -16,7 +16,6 @@ const Allstudentlistcomponent = (props) => {
         </td>
         <td  style={{ color:user.status == 'Active' ? 'green' : 'red' }}> <strong> {user.access_id}</strong></td>
         <td> {user.user_email}</td>
-        <td> {user.batch}</td>
         <td> {user.squad_name}</td>
 
         <td> {user.date_of_Join}</td>
