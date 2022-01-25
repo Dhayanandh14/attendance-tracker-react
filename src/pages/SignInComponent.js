@@ -1,11 +1,10 @@
-import React, {useRef } from 'react'
-import UserService from '../Services/UserService';
-import { useHistory } from "react-router-dom";
+import React, { useState } from 'react';
 import { useCookies } from "react-cookie";
-import { useState } from 'react';
-import './SignInComponent.css'
+import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import Forminput from '../components/FormInput';
+import UserService from '../Services/UserService';
+import './SignInComponent.css';
 
 
 const SignInComponent=()=>{

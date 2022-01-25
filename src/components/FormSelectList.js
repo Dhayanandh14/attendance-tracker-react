@@ -1,18 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
-
 const Formselectlist = (props) => {
-  console.log(props.options)
-  // const [formSelectValues, setFormSelectValues] = useState({
-  //   student_status_filter:"",
-  //   student_status:"",
-  //   batch:""
-  // })
-
-  // const onChangeformSelectValues = (e) => {
-  //   setFormSelectValues({...formSelectValues, [e.target.name]: e.target.value })
-  // }
-
   return (
     <div>
       <select id={props.id}

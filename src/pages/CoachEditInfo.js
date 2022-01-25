@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Editinfooffcanvas from '../components/EditInfoOffCanvas';
 import CoachService from '../Services/CoachService';
 const CoachEditInfo = (props) => {
-  const [coachInfo,setCoachInfo] = useState([])
   const [coachInfoFormValues,setCoachInfoFormValues] = useState({
     userId:"",
     coachId:"",

@@ -1,9 +1,8 @@
-import UserService from '../Services/UserService';
 import { useState } from 'react';
-import { useCookies } from "react-cookie";
-import './SignUpComponent.css'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import Forminput from '../components/FormInput';
+import UserService from '../Services/UserService';
+import './SignUpComponent.css';
 
 const SignUpComponent=()=>{
   const [signUpFormValues,setSignUpFormValues] = useState({

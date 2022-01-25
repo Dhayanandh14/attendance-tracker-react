@@ -3,8 +3,6 @@ import Forminput from './FormInput';
 import Formselectlist from './FormSelectList';
 
 const Modal = (props) => {
-
-  console.log(props);
   const onclick=()=>{
     props.onclick()
   }

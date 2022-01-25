@@ -1,10 +1,8 @@
 import React from 'react';
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 const Allstudentlistcomponent = (props) => {
-  console.log(props)
   return (
 <React.Fragment>
-
     {props.array.map((user) =>
       <tr key={user.user_id}>
       <React.Fragment>
@@ -31,5 +29,3 @@ const Allstudentlistcomponent = (props) => {
 }
 
 export default Allstudentlistcomponent;
-
-// <td style={{ color:user.status == 'Active' ? 'green' : 'red' }}> <strong>{user.status}</strong> </td>

@@ -1,28 +1,20 @@
-import React, { useRef,useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SideBarComponent from "../components/SidebarComponent";
-import AttendanceService from "../Services/AttendanceService";
 import ReportService from "../Services/ReportService";
-import UserService from "../Services/UserService";
-import "./Report.css"
+import "./Report.css";
 
 const Reportbyname = () => {
-    // const [fromDate,setFromDate] =useState()
-    const fromDateInputRef =  useRef()
-    const toDateInputRef = useRef()
     const [studentNames,setStudentNames] = useState([])
     const [studentId,setStudentId] = useState()
     const [studentReport,setStudentReport] = useState([])
     const [perStudentName,setPerStudentName] = useState()
     const [showName,setShowName] = useState(false)
-    const [allReport,setAllReport] = useState([]);
     useEffect(() => {
       ReportService.getAllNamesAndId().then((res) =>{
         console.log(res.data);
         setStudentNames(res.data)
       })
     }, []);
-
 
     const nameChangeHandler = (event)=>{
       let nameAndId = event.target.value.split(',')

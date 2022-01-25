@@ -14,16 +14,13 @@ const Reportbydaterange = () => {
     ReportService.getReportByDateWise(from,to).then((res) =>{
       console.log(res.data)
       setAllReport(res.data);
-      // ho(res.data)
     })
-    // console.log(allReport)
   }
 
 
   const reportDetails = ()=>{
     let head = [<th>Name</th>]
     let content = [];
-    // console.log( allReport["Karthick"])
    let keys  = Object.keys(allReport)
     if(keys.length > 0) {
       let dateArr = Object.keys(allReport[keys[0]]).sort()// take date because date common ah elarukum irukum so i will choose keys[0]
@@ -73,18 +70,12 @@ const Reportbydaterange = () => {
         <button className="btn btn-primary" onClick={Generate}>Submit Date</button>
       </div>
     </div>
-
-
     <table class="table">
-
-    <tbody>
-
-    {reportDetails()}
-
-    </tbody>
-  </table>
-
-    </div>
+      <tbody>
+        {reportDetails()}
+      </tbody>
+   </table>
+  </div>
   );
 }
 

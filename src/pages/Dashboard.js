@@ -7,8 +7,6 @@ export default function Dashboard() {
      document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
      window.location.replace("/")
     };
-
-    // localStorage.removeItem("user_cookie")
   return (
     <div className="App">
       <SideBarComponent/>

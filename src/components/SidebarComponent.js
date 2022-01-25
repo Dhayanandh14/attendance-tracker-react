@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
-import {Link, NavLink } from 'react-router-dom';
+import 'boxicons';
+import { NavLink } from 'react-router-dom';
+import "./NavBar.css";
 import classes from "./Navbar.module.css";
-import "./NavBar.css"
- import 'boxicons';
 
 export default function SideBarComponent() {
     const logoutHandler = () => {
@@ -10,7 +9,6 @@ export default function SideBarComponent() {
      window.location.replace("/")
     };
 
-    // localStorage.removeItem("user_cookie")
   return (
       <React.Fragment>
       <nav className="navbar fixed-top top-navbar navbar-light bg-light px-5" style={{"zIndex": "1"}}>

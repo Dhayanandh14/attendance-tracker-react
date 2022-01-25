@@ -1,18 +1,13 @@
-import CoachService from "../Services/CoachService";
-import "./Coaches.css"
-import UserService from "../Services/UserService";
+import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { useRef } from "react";
-import SideBarComponent from "../components/SidebarComponent";
-import Forminput from "../components/FormInput";
-import Formselectlist from "../components/FormSelectList";
 import Modal from "../components/Modal";
+import SideBarComponent from "../components/SidebarComponent";
+import CoachService from "../Services/CoachService";
+import UserService from "../Services/UserService";
+import "./Coaches.css";
 const Coaches = () => {
   const [coach_details, setCoach_details] = useState([]);
   const [loading,setLoading] = useState(true);
-
   const [coachFormValues,setCoachFormValues]=useState({
     name:"",
     email:"",
@@ -59,28 +54,22 @@ const Coaches = () => {
       });
     };
   };
-
   return (
-
     <div>
       <SideBarComponent/>
       {!loading &&
         <React.Fragment>
           <Modal onChange={formInputValuesHandler} formvalue={coachFormValues} onclick={addCoach} title="Add Coach"/>
-
-
-
-      <div className="display-all-coach-list">
+     <div className="display-all-coach-list">
       <div class="table-responsive">
       <table className="table display-all-coach-list-table">
       <thead style={{"background": '#f5f7f9'}}className="display-all-coach-heading-list">
         <tr>
-          <th style={{"vertical-align": "middle"}}  scope="col">Name</th>
-          <th style={{"vertical-align": "middle"}}  scope="col">Access Id</th>
-          <th style={{"vertical-align": "middle"}}  scope="col">Email</th>
-          <th style={{"vertical-align": "middle"}}  scope="col">Profile Job</th>
-          <th style={{"vertical-align": "middle"}}  scope="col">Status</th>
-
+          <th style={{"verticalAlign": "middle"}}  scope="col">Name</th>
+          <th style={{"verticalAlign": "middle"}}  scope="col">Access Id</th>
+          <th style={{"verticalAlign": "middle"}}  scope="col">Email</th>
+          <th style={{"verticalAlign": "middle"}}  scope="col">Profile Job</th>
+          <th style={{"verticalAlign": "middle"}}  scope="col">Status</th>
         </tr>
       </thead>
       <tbody>
@@ -89,21 +78,19 @@ const Coaches = () => {
       <tr key={coach.id}>
       <React.Fragment >
         <td>
-          <Link style={{"vertical-align": "super","text-decoration":"none","font-weight": "bold"}} to={{pathname:`coaches/coach_info/${coach.id}`,state:coach.id}}>
-            {coach.user_name}
-          </Link>
-        </td>
-        <td style={{ color:coach.status == 'Active' ? 'green' : 'red' }}><strong> {coach.access_id}</strong>
-        </td>
+            <Link style={{"vertical-align": "super","text-decoration":"none","font-weight": "bold"}} to={{pathname:`coaches/coach_info/${coach.id}`,state:coach.id}}>
+              {coach.user_name}
+            </Link>
+          </td>
+          <td style={{ color:coach.status == 'Active' ? 'green' : 'red' }}><strong> {coach.access_id}</strong>
+          </td>
          <td> {coach.user_email}</td>
          <td>{coach.profile_job}</td>
          <td>{coach.status}</td>
       </React.Fragment>
         </tr>
-
         )}
-
-    </tbody>
+      </tbody>
     </table>
     </div>
     </div>

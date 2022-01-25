@@ -362,21 +362,14 @@ body.dark .sidebar header .toggle{
 .sidebar li a{
     list-style: none;
     height: 100%;
-    /* width: 57px; */
-    /* background-color: transparent; */
     display: flex;
     align-items: center;
     height: 100%;
-    /* width: 100%; */
-    /* border-radius: 6px; */
     text-decoration: none;
     transition: var(--tran-03);
 }
 .menu-links{
     padding-left: 0px;
-    /* padding-right: 22px; */
-
-
 }
 .sidebar li a:hover{
     background-color: #597183;
