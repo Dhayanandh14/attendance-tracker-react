@@ -1,5 +1,5 @@
 import React from 'react';
-const Forminput = (props) => {
+const FormInput = (props) => {
 
   return (
     <div>
@@ -15,4 +15,4 @@ const Forminput = (props) => {
   );
 }
 
-export default Forminput;
+export default FormInput;

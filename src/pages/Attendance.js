@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import SideBarComponent from "../components/SidebarComponent";
 import AttendanceService from "../Services/AttendanceService";
@@ -11,48 +11,41 @@ const red = "red";
 const grey = "#f1f3f6";
 let todayDate = date.toLocaleDateString("en-GB").split("/").reverse().join("-");
 const Attendance = () => {
-  // const [hide,setHide]=useState("test")
-  // const [show,setShow]=useState("test")
   const [attendanceDate, setAttendanceDate] = useState();
   const [allAttendances, setAllAttendances] = useState([]);
   const [reset, setReset] = useState(false);
-  const [rerender, setRerender] = useState('');
-  const [showButton,setShowButon] = useState(false);
-  const [loading,setLoading] = useState(true);
-  const [buttonLoading, setButtonLoading] = useState(false)
-  const [saveButtonLoading, setSaveButtonLoading] = useState(false)
+  const [showButton, setShowButon] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [buttonLoading, setButtonLoading] = useState(false);
+  const [saveButtonLoading, setSaveButtonLoading] = useState(false);
   // fetch all students from database
   const history = useHistory();
   useEffect(() => {
     setAttendanceDate(todayDate);
     AttendanceService.getAttendanceByDate(todayDate).then((attendance) => {
-      console.log(attendance.data);
       setAllAttendances(attendance.data);
-      setShowButon(true)
-      setLoading(false)
+      setShowButon(true);
+      setLoading(false);
     });
   }, []);
 
   // select the date
   const dateChangeHandler = (event) => {
-    console.log(event.target.value);
     setAttendanceDate(event.target.value);
     // dateSubmit();
   };
 
   // submit button for date selection
   const dateSubmit = () => {
-    setButtonLoading(true)
+    setButtonLoading(true);
     AttendanceService.getAttendanceByDate(attendanceDate).then((attendance) => {
-      console.log(attendance.data);
       setAllAttendances(attendance.data);
-      setButtonLoading(false)
+      setButtonLoading(false);
     });
   };
 
   // Attendance status button function
   const AttendanceStatusChangeHandler = (attendanceId, id, status) => {
-    console.log(id);
     if (status === 1) {
       document.getElementById("pb-" + id).style.background = green;
       document.getElementById("pb-" + id).style.color = "white";
@@ -70,10 +63,7 @@ const Attendance = () => {
       attendance_status: status,
       attendance_date: attendanceDate,
     });
-    console.log(eachStudentEntry);
   };
-
-
 
   const setButtonStatus = (attendanceId, id, buttonStatus) => {
     if (buttonStatus === true) {
@@ -126,31 +116,29 @@ const Attendance = () => {
   };
 
   const fetchAllAttendances = (status) => {
-    allAttendances.map((attendance) =>{
+    allAttendances.map((attendance) => {
       eachStudentEntry.push({
         id: attendance.id,
         userId: attendance.userId,
         attendance_status: status,
         attendance_date: attendance.attendance_date,
-      })
+      });
       setShowButon(true);
-      setLoading(false)
+      setLoading(false);
       // setButtonLoading(true)
     });
   };
 
   const markAllPresent = () => {
-    console.log("present");
     fetchAllAttendances(1);
     let presentButton = document.getElementsByClassName("presentButton");
     let presentButtonLength =
       document.getElementsByClassName("presentButton").length;
-    console.log(presentButtonLength);
     let absentButton = document.getElementsByClassName("absentButton");
     for (let i = 0; i < presentButtonLength; i++) {
       if (
-        absentButton[i].style.backgroundColor == "rgb(241, 243, 246)" ||
-        absentButton[i].style.backgroundColor == "red"
+        absentButton[i].style.backgroundColor === "rgb(241, 243, 246)" ||
+        absentButton[i].style.backgroundColor === "red"
       ) {
         absentButton[i].style.backgroundColor = "#f1f3f6"; //grey
         document.getElementsByClassName("presentButton")[
@@ -173,12 +161,10 @@ const Attendance = () => {
     let absentButtonLength =
       document.getElementsByClassName("absentButton").length;
     for (let i = 0; i < absentButtonLength; i++) {
-      console.log(presentButton[i].style.backgroundColor);
       if (
         presentButton[i].style.backgroundColor === "rgb(241, 243, 246)" ||
-        presentButton[i].style.backgroundColor == "rgb(3, 163, 0)"
+        presentButton[i].style.backgroundColor === "rgb(3, 163, 0)"
       ) {
-        console.log("tesst");
         presentButton[i].style.backgroundColor = grey;
         presentButton[i].style.color = "black";
         document.getElementsByClassName("absentButton")[
@@ -192,12 +178,11 @@ const Attendance = () => {
 
   //check the attendance status is true or false based on condition it will return the present or absent button
   const attendanceStatusButton = (attendanceId, id, status) => {
-    console.log(attendanceId);
-    if (reset == true) {
+    if (reset === true) {
       resetAttendanceStatus(attendanceId, id, null);
     }
 
-    if (status == null) {
+    if (status === null) {
       let present = (
         <button
           style={{ backgroundColor: grey }}
@@ -238,132 +223,152 @@ const Attendance = () => {
       attendance_status: status,
       attendance_date: attendanceDate,
     });
-    console.log(eachStudentEntry)
-
     window.location.reload(false);
     // saveAttendance()
-
   };
   //save the attendance
   const saveAttendance = () => {
-    setSaveButtonLoading(true)
-    console.log(eachStudentEntry);
+    setSaveButtonLoading(true);
     AttendanceService.updateAttendance(eachStudentEntry).then((res) => {
-      console.log(res.data);
       // dateSubmit()
-      setSaveButtonLoading(false)
+      setSaveButtonLoading(false);
     });
     // setRerender()
     // window.location.reload();
     history.push("/attendance");
   };
 
-
   return (
     <React.Fragment>
-
       <SideBarComponent />
-      {!loading &&
-      <div>
-        <div className="date-and-status-dropdown">
-          <div className="select-attendance-date-div">
-            <input
-              type="date"
-              onChange={dateChangeHandler}
-              value={attendanceDate}
-              min="2022-01-12"
-              id="select-attendance-date-input"
-            />
+      {!loading && (
+        <div>
+          <div className="date-and-status-dropdown">
+            <div className="select-attendance-date-div">
+              <input
+                type="date"
+                onChange={dateChangeHandler}
+                value={attendanceDate}
+                min="2022-01-12"
+                id="select-attendance-date-input"
+              />
 
-            {!buttonLoading &&<button className="btn btn-dark" onClick={() => dateSubmit()}>
-            SUBMIT
-          </button>}
-          {buttonLoading && <button className="btn btn-dark">
-          Loading...
-        </button>}
-
-
+              {!buttonLoading && (
+                <button className="btn btn-dark" onClick={() => dateSubmit()}>
+                  SUBMIT
+                </button>
+              )}
+              {buttonLoading && (
+                <button className="btn btn-dark">Loading...</button>
+              )}
             </div>
 
-          <div className="dropdown">
-            <a
-              className="btn btn-dark dropdown-toggle"
-              href="#"
-              role="button"
-              id="dropdownMenuLink"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Mark All As
-            </a>
-            <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <li>
-                <a className="dropdown-item" onClick={markAllPresent}>
-                  Present
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" onClick={markAllAbsent}>
-                  Absent
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-
-        <div className="display-all-attendance-list">
-          <div className="table-responsive">
-            <table className="table display-all-attendance-details-list-table">
-              <thead style={{"background": '#f5f7f9'}}
-              className="display-all-attendance-heading-list"
+            <div className="dropdown">
+              <a
+                className="btn btn-dark dropdown-toggle"
+                role="button"
+                id="dropdownMenuLink"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
               >
-                <tr>
-                  <th style={{"verticalAlign": "middle"}}>Name</th>
-                  <th style={{"verticalAlign": "middle"}}>Email</th>
-                  <th style={{"verticalAlign": "middle"}}>Attendance Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {allAttendances.map((attendance) => (
-                  <React.Fragment key={Math.random()}>
-                  {attendance.status == "Active" &&
-                    <tr key={Math.random()*19 }>
-                      <td>
-                      <Link style={{"verticalAlign": "super","textDecoration":"none","fontWeight": "bold"}}
-                       to={{ pathname: `/student_info/`, state: attendance.userId }}
-                      >
-                        {attendance.user_name}
-                      </Link>
-                      </td>
-                      <td> {attendance.user_email}</td>
-                      <td>
-                        <React.Fragment key={Math.random()*19 }>
-                          {attendanceStatusButton(
-                            attendance.id,
-                            attendance.userId,
-                            attendance.attendance_status
-                          )}
-                        </React.Fragment>
-                      </td>
-                    </tr>
-                  }
-                  </React.Fragment>
-                            ))}
+                Mark All As
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li>
+                  <a className="dropdown-item" onClick={markAllPresent}>
+                    Present
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" onClick={markAllAbsent}>
+                    Absent
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="display-all-attendance-list">
+            <div className="table-responsive">
+              <table className="table display-all-attendance-details-list-table">
+                <thead
+                  style={{ background: "#f5f7f9" }}
+                  className="display-all-attendance-heading-list"
+                >
+                  <tr>
+                    <th style={{ verticalAlign: "middle" }}>Name</th>
+                    <th style={{ verticalAlign: "middle" }}>Email</th>
+                    <th style={{ verticalAlign: "middle" }}>
+                      Attendance Status
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {allAttendances.map((attendance) => (
+                    <React.Fragment key={Math.random()}>
+                      {attendance.status == "Active" && (
+                        <tr key={Math.random() * 19}>
+                          <td>
+                            <Link
+                              style={{
+                                verticalAlign: "super",
+                                textDecoration: "none",
+                                fontWeight: "bold",
+                              }}
+                              to={{
+                                pathname: `students/student_info/${attendance.userId}`,
+                              }}
+                            >
+                              {attendance.user_name}
+                            </Link>
+                          </td>
+                          <td> {attendance.user_email}</td>
+                          <td>
+                            <React.Fragment key={Math.random() * 19}>
+                              {attendanceStatusButton(
+                                attendance.id,
+                                attendance.userId,
+                                attendance.attendance_status
+                              )}
+                            </React.Fragment>
+                          </td>
+                        </tr>
+                      )}
+                    </React.Fragment>
+                  ))}
                 </tbody>
-                </table>
-                {showButton &&
+              </table>
+              {showButton && (
                 <div className="reset-and-save-button">
-                  <button className="btn btn-dark " onClick={() => setReset(true)}>Delete Attendance</button>
-                 {!saveButtonLoading && <button className="btn btn-warning" onClick={() => saveAttendance()}>Save</button>}
-                 {saveButtonLoading && <button className="btn btn-warning" onClick={() => saveAttendance()}>loading</button>}
-                 {saveButtonLoading && window.location.reload()}
-
-
-                </div>}
+                  <button
+                    className="btn btn-dark "
+                    onClick={() => setReset(true)}
+                  >
+                    Delete Attendance
+                  </button>
+                  {!saveButtonLoading && (
+                    <button
+                      className="btn btn-warning"
+                      onClick={() => saveAttendance()}
+                    >
+                      Save
+                    </button>
+                  )}
+                  {saveButtonLoading && (
+                    <button
+                      className="btn btn-warning"
+                      onClick={() => saveAttendance()}
+                    >
+                      loading
+                    </button>
+                  )}
+                  {saveButtonLoading && window.location.reload()}
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>}
+      )}
       {loading && <h1 className="text-center">Fetching Attendance...</h1>}
     </React.Fragment>
   );

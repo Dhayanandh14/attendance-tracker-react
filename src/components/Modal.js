@@ -1,6 +1,7 @@
 import React from 'react';
-import Forminput from './FormInput';
+import FormInput from './FormInput';
 import Formselectlist from './FormSelectList';
+import Label from './Label';
 
 const Modal = (props) => {
   const onclick=()=>{
@@ -12,7 +13,7 @@ const Modal = (props) => {
     <div>
       <button
         type="button"
-        class="btn btn-warning add-coach-button"
+        className="btn btn-warning add-coach-button"
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
       >
@@ -21,90 +22,90 @@ const Modal = (props) => {
       </button>
     </div>
     <div
-      class="modal fade"
+      className="modal fade"
       id="exampleModal"
-      tabindex="-1"
+      tabIndex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
+      <div className="modal-dialog">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title" id="exampleModalLabel">
               Add Coach
             </h5>
             <button
               type="button"
-              class="btn-close"
+              className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
+          <div className="modal-body">
 
-          <div class="mb-3">
-            <label for="coachNameFormControlInput" class="form-label">{props.title=="Add Student"?"Student Name":"Coach Name"}</label>
-            <Forminput type="text" name="name" onChange={props.onChange} id="coachNameFormControlInput" placeholder="Enter Coach Name" />
+          <div className="mb-3">
+            <Label className="form-label" htmlFor="coachNameFormControlInput" label = {props.title==="Add Student"?"Student Name":"Coach Name"}/>
+            <FormInput type="text" name="name" onChange={props.onChange} id="coachNameFormControlInput" placeholder="Enter Coach Name" />
           </div>
 
-          <div class="mb-3">
-            <label for="coachEmailFormControlInput" class="form-label">{props.title=="Add Student"?"Student Email":"Coach Email"}</label>
-            <Forminput type="email" name="email" onChange={props.onChange} placeholder="Enter Coach Email" id="coachEmailFormControlInput"/>
+          <div className="mb-3">
+            <Label className="form-label" htmlFor="coachEmailFormControl" label = {props.title==="Add Student"?"Student Email":"Coach Email"}/>
+            <FormInput type="email" name="email" onChange={props.onChange} placeholder="Enter Coach Email" id="coachEmailFormControlInput"/>
 
           </div>
-            <div class="mb-3">
-                <label for="coachPasswordFormControlInput" class="form-label">{props.title=="Add Student"?"Student Password":"Coach Password"}</label>
-                <Forminput type="password" name="password" onChange={props.onChange} placeholder="Enter Password" id="coachPasswordFormControlInput" />
+            <div className="mb-3">
+                <Label className="form-label" htmlFor="coachPasswordFormControl" label={props.title==="Add Student"?"Student Password":"Coach Password"}/>
+                <FormInput type="password" name="password" onChange={props.onChange} placeholder={props.title==="Add Student"?"Student Password":"Coach Password"} id="coachPasswordFormControlInput" />
             </div>
 
-            <div class="mb-3">
-                <label for="coachAccessIdFormControlInput" class="form-label">{props.title=="Add Student"?"Student Access Id":"Coach Access Id"}</label>
-                <Forminput type="text" name="access_id" onChange={props.onChange} placeholder="Enter Password" id="coachAccessIdFormControlInput" />
+            <div className="mb-3">
+                <Label htmlFor="coachAccessIdFormControlInput" className="form-label" label={props.title==="Add Student"?"Student Access Id":"Coach Access Id"}/>
+                <FormInput type="text" name="access_id" onChange={props.onChange} placeholder={props.title==="Add Student"?"Student Access Id":"Coach Access Id"} id="coachAccessIdFormControlInput" />
             </div>
 
           {props.title === "Add Student"?
           <React.Fragment>
             <div className="mb-3">
-            <label htmlFor="studentSquadNameFormControlInput">Squad Name</label>
-             <Forminput  type="text" name="squadName" placeholder="Enter Student Squad Name" id="studentSquadNameFormControlInput" onChange={props.onChange}/>
+            <Label htmlFor="studentSquadNameFormControlInput" label="Squad Name"/>
+             <FormInput  type="text" name="squadName" placeholder="Enter Student Squad Name" id="studentSquadNameFormControlInput" onChange={props.onChange}/>
            </div>
 
            <div className="mb-3">
-           <label htmlFor="add-date-of-join">Date of Join</label>
-             <Forminput type="date" name="dateOfJoin" placeholder="Enter Student Date of Join" id="add-date-of-join" onChange={props.onChange}/>
+            <Label htmlFor="add-date-of-join" label="Date of Join"/>
+             <FormInput type="date" name="dateOfJoin" placeholder="Enter Student Date of Join" id="add-date-of-join" onChange={props.onChange}/>
            </div>
 
 
 
            <div className="mb-3">
-           <label id="studentEducationFormControlInput">Education</label>
-             <Forminput  type="text" name="education" placeholder="Enter Student education" id="studentEducationFormControlInput" onChange={props.onChange}/>
+              <Label htmlFor="studentEducationFormControlInput" label="Education"/>
+             <FormInput  type="text" name="education" placeholder="Enter Student education" id="studentEducationFormControlInput" onChange={props.onChange}/>
            </div>
 
 
            <div className="mb-3">
-           <label id="studentInterviewerFormControlInput">Interviewer Name</label>
-            <Forminput type="text" name="interviewer_name" placeholder="Enter Student Interviewer Name"
+            <Label htmlFor="studentInterviewerFormControlInput" label="Interviewer Name"/>
+            <FormInput type="text" name="interviewer_name" placeholder="Enter Student Interviewer Name"
             id="studentInterviewerFormControlInput" onChange={props.onChange}/>
            </div>
 
 
            <div className="mb-3">
-            <label for="studentInterviewerReviewFormControlInput">Enter Student Interviewer Review</label>
-             <Forminput type="text" name="interviewer_review" placeholder="Enter Student Interviewer Review" id="studentInterviewerReviewFormControlInput" onChange={props.onChange}/>
+              <Label htmlFor="studentInterviewerReviewFormControlInput" label="Enter Student Interviewer Review"/>
+             <FormInput type="text" name="interviewer_review" placeholder="Enter Student Interviewer Review" id="studentInterviewerReviewFormControlInput" onChange={props.onChange}/>
            </div>
            </React.Fragment>
 
            :
 
 
-            <div class="mb-3">
-                <label for="coachProfileJobFormControlInput" class="form-label">Profile Job</label>
-                <Forminput type="text" name="profile_job" onChange={props.onChange}  placeholder="Enter Profile Job" id="coachProfileJobFormControlInput"/>
+            <div className="mb-3">
+                <Label forHtml="coachProfileJobFormControlInput" className="form-label" label="Profile Job"/>
+                <FormInput type="text" name="profile_job" onChange={props.onChange}  placeholder="Enter Profile Job" id="coachProfileJobFormControlInput"/>
             </div>
              }
 
-              <label for="coachProfileJobFormControlInput" class="form-label">{props.title=="Add Student"?"Student Status":"Coach Status"}</label>
+              <Label for="coachProfileJobFormControlInput" className="form-label" label={props.title==="Add Student"?"Student Status":"Coach Status"}/>
               <Formselectlist name="student_status" onChange={props.onChange} id="add-student-status" options={
                 [
                   {value:"DEFAULT",label:"Select Status"},
@@ -115,15 +116,15 @@ const Modal = (props) => {
 
 
             </div>
-          <div class="modal-footer">
+          <div className="modal-footer">
             <button
               type="button"
-              class="btn btn-secondary"
+              className="btn btn-secondary"
               data-bs-dismiss="modal"
             >
               Close
             </button>
-            <button type="button" data-bs-dismiss="modal" class="btn btn-primary" onClick={onclick}>
+            <button type="button" data-bs-dismiss="modal" className="btn btn-primary" onClick={onclick}>
               Add
             </button>
           </div>

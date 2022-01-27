@@ -1,55 +1,64 @@
-.coachList{
+.coachList {
   list-style-type: none;
   font-size: 20px;
 }
-#coach-status-dropdown-div{
+
+#coach-status-dropdown-div {
   max-width: 250px;
-    margin-left: -2px;
-    margin-bottom: 20px;
-    position: relative;
-    top: 12px;
+  margin-left: -2px;
+  margin-bottom: 20px;
+  position: relative;
+  top: 12px;
 }
-#coach-status-dropdown{
+
+#coach-status-dropdown {
   margin-left: 84px;
-    font-size: 12px;
-    text-align: center;
+  font-size: 12px;
+  text-align: center;
 }
-.display-all-coach-list{
+
+.display-all-coach-list {
   margin-left: 57px;
   margin-top: 135px;
 }
-.display-all-coach-list-table{
+
+.display-all-coach-list-table {
   border-collapse: separate;
   border-spacing: 0 15px;
-  font-size:13px;
+  font-size: 13px;
   text-align: center;
 }
-.display-all-coach-heading-list{
+
+.display-all-coach-heading-list {
   background: rgb(245, 247, 249);
-    height: 55px;
-    vertical-align: middle;
-}
-.add-coach-and-coach-status-div{
-  display: flex;
-    justify-content: space-between;
-    margin-top:20px;
-    align-items: center;
-}
-#add-coach-button{
-    height: 20%;
-    font-size: 13px;
-    margin-right: 20px;
-}
-#top-nav-profile-icon{
-  width: 54px;
-}
-#add-coach-plus-icon{
-  vertical-align: bottom;
-    width: 20px;
-    height: 21px;
+  height: 55px;
+  vertical-align: middle;
 }
 
-.add-coach-button{
+.add-coach-and-coach-status-div {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  align-items: center;
+}
+
+#add-coach-button {
+  height: 20%;
+  font-size: 13px;
+  margin-right: 20px;
+}
+
+#top-nav-profile-icon {
+  width: 54px;
+}
+
+#add-coach-plus-icon {
+  vertical-align: bottom;
+  width: 20px;
+  height: 21px;
+}
+
+.add-coach-button {
   position: absolute;
   top: 98px;
   right: 21px;

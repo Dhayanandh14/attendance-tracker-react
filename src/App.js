@@ -2,22 +2,20 @@ import "./App.css";
 import {
   BrowserRouter as Router,
   Route,
-  Switch,
-  Redirect,
+  Switch
 } from "react-router-dom";
-import Home from "./pages/NotFound";
 import Dashboard from "./pages/Dashboard";
 import Students from "./pages/Students";
-import NotFound from "./pages/NotFound";
+// import NotFound from "./pages/NotFound";
 import Coaches from "./pages/Coaches";
-import Studentinfo from "./pages/StudentInfo";
-import Coachinfo from "./pages/CoachInfo";
+import StudentInfo from "./pages/StudentInfo";
+import CoachInfo from "./pages/CoachInfo";
 import Attendance from "./pages/Attendance";
 import Reports from "./pages/Reports";
-import Reportbyname from "./pages/ReportByName";
-import Reportbydaterange from "./pages/ReportByDateRange";
-import SignInComponent from "./pages/SignInComponent";
-import SignUpComponent from "./pages/SignUpComponent";
+import ReportByName from "./pages/ReportByName";
+import ReportByDateRange from "./pages/ReportByDateRange";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
 function App() {
   return (
@@ -33,21 +31,21 @@ function App() {
           <Route path="/coaches" exact>
             <Coaches />
           </Route>
-          <Route path="/signup" component={SignUpComponent}></Route>
-          <Route path="/signin" component={SignInComponent}></Route>
+          <Route path="/signup" component={SignUp}></Route>
+          <Route path="/signin" component={SignIn}></Route>
           <Route path="/students/student_info/:id">
-            <Studentinfo />
+            <StudentInfo />
           </Route>
-          <Route path="/coaches/coach_info/:id" component={Coachinfo}></Route>
+          <Route path="/coaches/coach_info/:id" component={CoachInfo}></Route>
           <Route path="/attendance" component={Attendance}></Route>
           <Route path="/reports" component={Reports} exact></Route>
           <Route
             path="/reports/report_By_name/"
-            component={Reportbyname}
+            component={ReportByName}
           ></Route>
           <Route
             path="/reports/report_by_date/"
-            component={Reportbydaterange}
+            component={ReportByDateRange}
           ></Route>
         </Switch>
       </Router>

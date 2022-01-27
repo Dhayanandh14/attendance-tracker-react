@@ -9,7 +9,9 @@ const Formselectlist = (props) => {
       aria-label="Example select with button addon"
     >
     {props.options.map((option)=>
+      <React.Fragment key={option.value}>
       <option value={option.value}>{option.label}</option>
+      </React.Fragment>
       )}
     </select>
     </div>

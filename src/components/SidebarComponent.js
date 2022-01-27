@@ -1,7 +1,8 @@
-import 'boxicons';
-import { NavLink } from 'react-router-dom';
-import "./NavBar.css";
+import React from 'react';
+import {NavLink } from 'react-router-dom';
 import classes from "./Navbar.module.css";
+import "./NavBar.css"
+ import 'boxicons';
 
 export default function SideBarComponent() {
     const logoutHandler = () => {

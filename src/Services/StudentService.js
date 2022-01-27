@@ -1,14 +1,14 @@
 import axios from "axios";
+import URL from "../URL/urls"
 
 // const BASE_URL="https://attendance-tracker-springboot.herokuapp.com/api/v1/"
 
-const BASE_URL = "http://localhost:8080/api/v1/"
 
-const STUDENTS_API_BASE_URL = `${BASE_URL}student_details`;
-const STUDENTS_URL = `${BASE_URL}students`;
-const USERS_DETAILS_DTO = `${BASE_URL}user-students`;
-const USER_ID_URL = `${BASE_URL}users_id`;
-const STUDENT_INFO_URL = `${BASE_URL}student_info`;
+const STUDENTS_API_BASE_URL = URL.STUDENTS_API_BASE_URL()
+const STUDENTS_URL = URL.STUDENTS_URL()
+const USERS_DETAILS_DTO = URL.USERS_DETAILS_DTO()
+const STUDENT_INFO_URL = URL.STUDENT_INFO_URL()
+
 
 class StudentService {
   getStudentDetails() {
@@ -20,13 +20,9 @@ class StudentService {
   getAllStudentDetails() {
     return axios.get(USERS_DETAILS_DTO);
   }
-  // createStudents(students){
-  //   return axios.post(STUDENTS_URL,students);
-  // }
   createStudentDetails(details) {
     return axios.post(STUDENTS_API_BASE_URL, details);
   }
-
   //student info page
   getStudentInfo() {
     return axios.get(STUDENT_INFO_URL);
