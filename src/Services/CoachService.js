@@ -1,28 +1,25 @@
 import axios from "axios";
+import URL from "../URL/urls"
 
-// const COACH_API_BASE_URL = "https://attendance-tracker-springboot.herokuapp.com/api/v1/coach_details"
-
-const COACH_API_BASE_URL = "http://localhost:8080/api/v1/coach_details"
-
-// const COACH_DTO_URL = "https://attendance-tracker-springboot.herokuapp.com/api/v1/user-coaches";
-
-const COACH_DTO_URL = "http://localhost:8080/api/v1/user-coaches";
+const COACH_DETAILS_URL = URL.COACH_DETAILS_URL()
+const COACH_DTO_URL =URL.COACH_DTO_URL();
+const COACH_INFO_URL = URL.COACH_INFO_URL();
 
 class CoachService{
   getCoachDetails(){
-    return axios.get(COACH_API_BASE_URL);
+    return axios.get(COACH_DETAILS_URL);
   }
   createCoachDetails(details){
-    return axios.post(COACH_API_BASE_URL,details)
+    return axios.post(COACH_DETAILS_URL,details)
   }
   getAllCoachDetails(){
     return axios.get(COACH_DTO_URL)
   }
   getCoachInfoById(id){
-    return axios.get("http://localhost:8080/api/v1/coach-info"+"/"+id)
+    return axios.get(COACH_INFO_URL+"/"+id)
   }
   editCoachDetails(id,coachInfo){
-    return axios.patch("http://localhost:8080/api/v1/coach-info"+"/"+id,coachInfo)
+    return axios.patch(COACH_INFO_URL+"/"+id,coachInfo)
   }
 
 }

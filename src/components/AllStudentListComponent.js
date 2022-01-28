@@ -1,22 +1,19 @@
 import React from 'react';
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-const Allstudentlistcomponent = (props) => {
-  console.log(props)
+const AllStudentListComponent = (props) => {
   return (
 <React.Fragment>
-
-    {props.inactiveArray.map((user) =>
+    {props.array.map((user) =>
       <tr key={user.user_id}>
-      <React.Fragment>
+      <React.Fragment >
         <td>
-          <Link style={{"vertical-align": "super","text-decoration":"none","fontWeight":"bold"}}
+          <Link style={{"verticalAlign": "super","textDecoration":"none","fontWeight":"bold"}}
             to={{ pathname: `students/student_info/${user.user_id}` }}>
             {user.user_name}
           </Link>
         </td>
-        <td  style={{ color:user.status == 'Active' ? 'green' : 'red' }}> <strong> {user.access_id}</strong></td>
+        <td  style={{ color:user.status === 'Active' ? 'green' : 'red' }}> <strong> {user.access_id}</strong></td>
         <td> {user.user_email}</td>
-        <td> {user.batch}</td>
         <td> {user.squad_name}</td>
 
         <td> {user.date_of_Join}</td>
@@ -31,6 +28,4 @@ const Allstudentlistcomponent = (props) => {
   );
 }
 
-export default Allstudentlistcomponent;
-
-// <td style={{ color:user.status == 'Active' ? 'green' : 'red' }}> <strong>{user.status}</strong> </td>
+export default AllStudentListComponent;

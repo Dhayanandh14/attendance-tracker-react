@@ -1,25 +1,19 @@
 import axios from "axios";
+import URL from "../URL/urls"
 
-
-// const API_BASE_URL = "https://attendance-tracker-springboot.herokuapp.com/api/v1/"
-
-const API_BASE_URL = "http://localhost:8080/api/v1/"
-
-const ATTENDANCE_URL = `${API_BASE_URL}attendance` // http://localhost:8080/api/v1/attendance {data}
+const ATTENDANCE_URL = URL.ATTENDANCE_URL()
 
 class AttendanceService {
   getAttendance(){
     return axios.get(ATTENDANCE_URL);
   }
   createAttendance(attendance) {
-    console.log(ATTENDANCE_URL)
     return axios.post(ATTENDANCE_URL, attendance);
   }
   getAttendanceByDate(date){
     return axios.get(ATTENDANCE_URL+"/"+date)
   }
   updateAttendance(attendance){
-    console.log(ATTENDANCE_URL,attendance)
     return axios.patch(ATTENDANCE_URL+"/",attendance)
   }
 

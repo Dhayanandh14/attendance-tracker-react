@@ -1,15 +1,11 @@
 import axios from "axios";
+import URL from "../URL/urls"
 
+const REPORT_URL = URL.REPORT_URL() // http://localhost:8080/api/v1/attendance {data}
+const DATE_REPORT = URL.DATE_REPORT()
+const GET_ALL_NAME_AND_ID = URL.GET_ALL_NAME_AND_ID()
 
-// const API_BASE_URL = "https://attendance-tracker-springboot.herokuapp.com/api/v1/"
-
-const API_BASE_URL = "http://localhost:8080/api/v1/"
-
-const REPORT_URL = `${API_BASE_URL}report-by-name` // http://localhost:8080/api/v1/attendance {data}
-const DATE_REPORT = `${API_BASE_URL}report-date-range`
-const GET_ALL_NAME_AND_ID = `${API_BASE_URL}get-all-names-and-id`
-
-class AttendanceService {
+class ReportService {
   getReportByName(id){
     return axios.get(REPORT_URL+"/"+id);
   }
@@ -21,4 +17,4 @@ class AttendanceService {
   }
 
 }
-export default new AttendanceService();
+export default new ReportService();
