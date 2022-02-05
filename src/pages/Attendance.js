@@ -18,6 +18,7 @@ const Attendance = () => {
   const [loading, setLoading] = useState(true);
   const [buttonLoading, setButtonLoading] = useState(false);
   const [saveButtonLoading, setSaveButtonLoading] = useState(false);
+  const [currentDate,setCurrentDate] = useState(0);
   // fetch all students from database
   const history = useHistory();
   useEffect(() => {
@@ -27,6 +28,7 @@ const Attendance = () => {
       setShowButon(true);
       setLoading(false);
     });
+    setCurrentDate(new Date().getFullYear()+"-"+"0"+Number(date.getMonth()+1)+"-"+"0"+Number(date.getDate()))
   }, []);
 
   // select the date
@@ -226,6 +228,7 @@ const Attendance = () => {
     window.location.reload(false);
     // saveAttendance()
   };
+
   //save the attendance
   const saveAttendance = () => {
     setSaveButtonLoading(true);
@@ -238,6 +241,7 @@ const Attendance = () => {
     history.push("/attendance");
   };
 
+
   return (
     <React.Fragment>
       <SideBarComponent />
@@ -249,7 +253,8 @@ const Attendance = () => {
                 type="date"
                 onChange={dateChangeHandler}
                 value={attendanceDate}
-                min="2022-01-12"
+                min="2022-01-01"
+                max={currentDate}
                 id="select-attendance-date-input"
               />
 
@@ -339,10 +344,10 @@ const Attendance = () => {
                 </tbody>
               </table>
               {showButton && (
-                <div className="reset-and-save-button">
+                <div className="reset-and-save-button" >
                   <button
                     className="btn btn-dark "
-                    onClick={() => setReset(true)}
+                    onClick={() => setReset(true)} disabled
                   >
                     Delete Attendance
                   </button>

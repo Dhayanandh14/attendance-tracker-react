@@ -4,6 +4,7 @@ import URL from "../URL/urls"
 const COACH_DETAILS_URL = URL.COACH_DETAILS_URL()
 const COACH_DTO_URL =URL.COACH_DTO_URL();
 const COACH_INFO_URL = URL.COACH_INFO_URL();
+const COACH_COUNT = URL.COACH_COUNT()
 
 class CoachService{
   getCoachDetails(){
@@ -20,6 +21,9 @@ class CoachService{
   }
   editCoachDetails(id,coachInfo){
     return axios.patch(COACH_INFO_URL+"/"+id,coachInfo)
+  }
+  getCoachCount(){
+    return axios.get(COACH_COUNT)
   }
 
 }

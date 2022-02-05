@@ -1,0 +1,29 @@
+#welcome-text{
+  margin-left: 20px;
+  font-size:20px;
+}
+/* #dashboard-take-attendance{
+  width: 93%;
+  height: 90px;
+} */
+.dashboard-shortcutpage-button{
+  margin-top:20px;
+  width: 90%;
+  height: 75px;
+}
+.shortcut-button-row{
+  text-align: center;
+    margin-left: 48px;
+    margin: 24px -398px 10px 118px;
+}
+.dashboard-shortcut-icons{
+  font-size: 19px;
+  vertical-align: inherit;
+  margin-right: 3px;
+}
+.dashboard-darkarea-icon{
+  font-size: 30px;
+  position: relative;
+  right: 8px;
+  top: 2px;
+}

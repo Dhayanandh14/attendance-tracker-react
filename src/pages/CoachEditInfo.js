@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import EditInfoOffCanvas from "../components/EditInfoOffCanvas";
+import Offcanvas from "../components/OffCanvas";
 import CoachService from "../Services/CoachService";
 const CoachEditInfo = (props) => {
   const [coachInfoFormValues, setCoachInfoFormValues] = useState({
@@ -89,7 +89,7 @@ const CoachEditInfo = (props) => {
   return (
     <div>
       <div id="coach-edit-info-button">
-        <EditInfoOffCanvas
+        <Offcanvas
           infoFormValues={coachInfoFormValues}
           onChange={formInputValuesHandler}
           onclick={saveInfo}

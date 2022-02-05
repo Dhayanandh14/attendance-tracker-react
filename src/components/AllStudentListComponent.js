@@ -18,9 +18,7 @@ const AllStudentListComponent = (props) => {
 
         <td> {user.date_of_Join}</td>
 
-        <td> {user.education}</td>
 
-        <td> {user.grade}</td>
       </React.Fragment>
       </tr>
     )}

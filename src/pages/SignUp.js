@@ -89,6 +89,7 @@ const SignUpComponent = () => {
           <FormInput
             type="password"
             id="password"
+            name="password"
             onChange={formInputValuesHandler}
           />
         </div>

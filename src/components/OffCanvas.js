@@ -13,7 +13,7 @@ const EditInfoOffCanvas = (props) => {
     <div id="student-edit-info-button">
     <button className="btn btn-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Edit Info</button>
 
-    <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style={{    "width": "30%"}}>
       <div className="offcanvas-header">
         <h5 id="offcanvasRightLabel">Edit Info</h5>
         <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -37,7 +37,7 @@ const EditInfoOffCanvas = (props) => {
               <FormInput type="text" id="student-access-id" name="access_id"  value={infoFormValues.access_id} onChange={props.onChange}/>
             </div>
             <div className="col-md-4">
-              <Label htmlFor="student-age" className="form-label" lable="Age"/>
+              <Label htmlFor="student-age" className="form-label" label="Age"/>
               <FormInput type="text" id="student-age" name="age" value={infoFormValues.age}
               onChange={props.onChange}/>
             </div>
@@ -57,7 +57,7 @@ const EditInfoOffCanvas = (props) => {
             />
           </div>
             <div className="col-md-6">
-              <label htmlFor="student-blood-group" className="form-label" label="Blood Group"/>
+              <Label htmlFor="student-blood-group" className="form-label" label="Blood Group"/>
               <Formselectlist name="blood_group" onChange={props.onChange}  id="student-gender"
               value={infoFormValues.blood_group} options={[{value:"DEFAULT",label:infoFormValues.blood_group?infoFormValues.blood_group:"Select Blood Group"},
               {value:"A+",label:"A+"},{value:"A-",label:"B+"}
@@ -79,33 +79,44 @@ const EditInfoOffCanvas = (props) => {
 
 
           <div className="mb-3 ">
-            <Label htmlFor="student-status" className="form-label" label="Student Status"/>
+            <Label htmlFor="student-status" className="form-label" label= "Status"/>
 
             <Formselectlist name="status" value={infoFormValues.status} onChange={props.onChange} id="student-status" options={[
-              {value:"DEFAULT", label:infoFormValues.status?infoFormValues.status:"Defauld Select Example"},
+              {value:"DEFAULT", label:infoFormValues.status?infoFormValues.status:"Default Select Example"},
               {value:"Active",label:"Active"},{value:"Inactive", label:"Inactive"}
             ]}/>
           </div>
 
-          {infoFormValues.squad_name &&
+          {props.title == "students" &&
+          <React.Fragment>
           <div className="mb-3">
             <Label htmlFor="squad-name" className="form-label" label="Squad Name"/>
             <FormInput type="text" name="squad_name" onChange={props.onChange} value={infoFormValues.squad_name}
             id="squad-name"
             />
-          </div>}
+          </div>
 
-          {infoFormValues.date_of_Join &&
+
           <div className="mb-3">
             <Label htmlFor="date-of-join" className="form-label" label="Date of Join"/>
             <FormInput type="date" name="date_of_Join" onChange={props.onChange} value={infoFormValues.date_of_Join} id="date-of-join"/>
-        </div>}
-
-       {infoFormValues.education &&
-        <div className="mb-3">
-            <Label htmlFor="education" className="form-label" label="Education"/>
-            <FormInput type="text" name="education" onChange={props.onChange} value={infoFormValues.education} id="education"/>
           </div>
+
+
+          <div className="mb-3">
+            <Label htmlFor="education" className="form-label" label="Education"/>
+            <Formselectlist name="education" onChange={props.onChange} id="add-student-education" value={infoFormValues.education} options={
+             [
+               {value:"DEFAULT",label:"Select Education"},
+               {value:"High Secondary",label:"High Secondary"},
+               {value:"PG",label:"PG"},
+               {value:"UG",label:"UG"},
+               {value:"Diploma",label:"Diploma"}
+             ]
+           }/>
+
+          </div>
+        </React.Fragment>
         }
 
           <div className="mb-3">
@@ -123,17 +134,20 @@ const EditInfoOffCanvas = (props) => {
             <FormInput type="text" name="communication_address" id="communication-address" onChange={props.onChange} value={infoFormValues.communication_address}/>
           </div>
 
-          {infoFormValues.interviewer &&
+          {props.title == "students" &&
+          <React.Fragment>
           <div className="mb-3">
             <Label htmlFor="interviewer-name" className="form-label" label="Interviewer Name"/>
-            <FormInput type="text" name="interviewer_name" onChange={props.onChange} value={infoFormValues.interviewer} id="interviewer-name"/>
-          </div>}
+            <FormInput type="text" name="interviewer" onChange={props.onChange} value={infoFormValues.interviewer} id="interviewer-name"/>
+          </div>
 
-          {infoFormValues.interviewer_review &&
+
           <div className="mb-3">
             <Label htmlFor="interviewer-review" className="form-label" label="Interviewer Review"/>
             <FormInput type="text" name="interviewer_review" onChange={props.onChange} value={infoFormValues.interviewer_review} id="interviewer-review"/>
-          </div>}
+          </div>
+        </React.Fragment>
+        }
 
           <div className="mb-3">
             <Label htmlFor="emergency-contact-name" className="form-label" label="Emergency Contact Name"/>

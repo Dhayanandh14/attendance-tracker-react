@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink } from 'react-router-dom';
+import {Link, NavLink } from 'react-router-dom';
 import classes from "./Navbar.module.css";
 import "./NavBar.css"
  import 'boxicons';
@@ -7,7 +7,7 @@ import "./NavBar.css"
 export default function SideBarComponent() {
     const logoutHandler = () => {
      document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-     window.location.replace("/")
+     window.location.replace("/signin")
     };
 
   return (
@@ -23,7 +23,9 @@ export default function SideBarComponent() {
       <header>
           <div className="image-text">
               <span className="image">
-                  <img src="https://banner2.cleanpng.com/20180714/yxt/kisspng-computer-icons-clock-time-icon-design-environmental-protection-material-5b49ef02761925.2089835515315719704837.jpg" alt=""/>
+              <Link to="/dashboard">
+                  <img src="https://media.istockphoto.com/vectors/attendance-concept-vector-flat-design-vector-id1198430065?k=20&m=1198430065&s=612x612&w=0&h=ZaHjFo45qV_7AoEEQxsQumOEs31jU-ZrqmeM9Ki8UeI=" alt=""/>
+                  </Link>
               </span>
           </div>
 
@@ -40,7 +42,8 @@ export default function SideBarComponent() {
                   </li>
                   <li className="nav-link">
 
-                        <NavLink activeClassName={classes.active} to="/attendance"><i className='bx bx-spreadsheet icon'></i></NavLink>
+                        <NavLink activeClassName={classes.active} to="/attendance">
+                        <i className='bx bx-spreadsheet icon'></i></NavLink>
 
                   </li>
                   <li className="nav-link">
@@ -54,9 +57,10 @@ export default function SideBarComponent() {
 
                       <NavLink activeClassName={classes.active} to="/coaches">
                           <i className="fa fa-users icon" style={{"fontSize": "14px"}} aria-hidden="true"></i>
-                        </NavLink>
-
+                          </NavLink>
                   </li>
+
+
                   <li className="nav-link">
 
                       <NavLink activeClassName={classes.active} to="/reports">
@@ -67,6 +71,7 @@ export default function SideBarComponent() {
 
               </ul>
           </div>
+
 
           <div className="bottom-content">
               <li className="" style={{"position": "relative","left": "-11px"}}>

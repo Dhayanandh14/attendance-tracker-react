@@ -32,6 +32,7 @@ const StudentInfo = (props) => {
       <SideBarComponent />
       {!loading && (
         <React.Fragment>
+
           {showButton && <StudentEditinfo id={id} func={fetch} />}
 
           <div className="student-info-view">
@@ -200,12 +201,7 @@ const StudentInfo = (props) => {
                       </td>
                     </tr>
                     <tr>
-                      <th
-                        className="right-side-student-info-table info-title"
-                        scope="row"
-                      >
-                        Grade
-                      </th>
+
                       <td className="right-side-student-info-table info-output">
                         {user.grade}
                       </td>

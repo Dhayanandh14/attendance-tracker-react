@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import StudentService from "../Services/StudentService";
-import Editinfooffcanvas from "../components/EditInfoOffCanvas";
+import Offcanvas from "../components/OffCanvas";
 
 const Editinfo = (props) => {
   const [studentInfo, setStudentInfo] = useState([]);
@@ -111,10 +111,11 @@ const Editinfo = (props) => {
   return (
     <div>
       <div style={{ float: "right" }}>
-        <Editinfooffcanvas
+        <Offcanvas
           infoFormValues={studentInfoFormValues}
           onChange={formInputValuesHandler}
           onclick={saveInfo}
+          title="students"
         />
       </div>
     </div>

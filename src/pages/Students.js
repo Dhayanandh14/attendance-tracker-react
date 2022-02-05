@@ -43,7 +43,7 @@ const Students = (props) => {
       for (let i = 0; i < res.data.length; i++) {
         if (res.data[i]["status"] === "Active") {
           activeArray.push(res.data[i]);
-        } else if (res.data[i]["status"] === "InActive") {
+        } else if (res.data[i]["status"] === "Inactive") {
           inactiveArray.push(res.data[i]);
         }
       }
@@ -94,10 +94,14 @@ const Students = (props) => {
     },
   ];
   const selectionStatusHandler = (event) => {
-    if (event.target.value === 1) {
+    console.log(event.target.value);
+    if (event.target.value == 1) {
       setDisplayStudentList("active");
-    } else {
+    } else if (event.target.value == 2) {
       setDisplayStudentList("inactive");
+    }
+    else{
+      setDisplayStudentList("all");
     }
   };
 
@@ -114,15 +118,15 @@ const Students = (props) => {
                 onChange={selectionStatusHandler}
                 options={studentStatusFilter}
               />
-            </div>
-            <Modal
+              </div>
+              <Modal
               onChange={formInputValuesHandler}
               formValue={formValues}
               onclick={addStudents}
               title="Add Student"
-            />
-          </div>
-          <div className="display-all-student-list">
+              />
+              </div>
+              <div className="display-all-student-list">
             <div className="table-responsive">
               <table className="table  display-all-student-list-table ">
                 <thead
@@ -146,20 +150,15 @@ const Students = (props) => {
                       Date of Join
                     </th>
 
-                    <th scope="col" style={{ verticalAlign: "middle" }}>
-                      Education
-                    </th>
-                    <th scope="col" style={{ verticalAlign: "middle" }}>
-                      Grade
-                    </th>
+
+
                   </tr>
                 </thead>
                 <tbody>
-                  {displayStudentList === "all" && (
-                    <AllStudentListComponent array={studentDetails} />
-                  )}
-
-                  {displayStudentList === "active" && (
+                {displayStudentList === "all" && (
+                  <AllStudentListComponent array={studentDetails} />
+                )}
+                {displayStudentList === "active" && (
                     <AllStudentListComponent array={activeArray} />
                   )}
                   {displayStudentList === "inactive" && (
@@ -168,8 +167,9 @@ const Students = (props) => {
                 </tbody>
               </table>
             </div>
-          </div>
-        </React.Fragment>
+            </div>
+            </React.Fragment>
+
       )}
       {loading && <h1 className="text-center">Loading...</h1>}
     </React.Fragment>

@@ -12,6 +12,9 @@ import ReportByName from "./pages/ReportByName";
 import ReportByDateRange from "./pages/ReportByDateRange";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import Monthlyreport from "./pages/MonthlyReport";
+import Reportbynameanddaterange from "./pages/ReportByNameAndDateRange";
+import ReportByNameAndDateRange from "./pages/ReportByNameAndDateRange";
 
 function App() {
   return (
@@ -35,14 +38,18 @@ function App() {
           <Route path="/coaches/coach_info/:id" component={CoachInfo}></Route>
           <Route path="/attendance" component={Attendance}></Route>
           <Route path="/reports" component={Reports} exact></Route>
-          <Route
-            path="/reports/report_By_name/"
-            component={ReportByName}
-          ></Route>
+
           <Route
             path="/reports/report_by_date/"
             component={ReportByDateRange}
           ></Route>
+          <Route
+            path="/reports/monthly_report/"
+            component={Monthlyreport}
+          ></Route>
+          <Route path="/reports/student_reports"
+            component={ReportByNameAndDateRange}>
+          </Route>
         </Switch>
       </Router>
     </div>
