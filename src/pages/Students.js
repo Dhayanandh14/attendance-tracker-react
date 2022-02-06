@@ -64,7 +64,7 @@ const Students = (props) => {
       access_id: formValues.access_id,
       role: "student",
     };
-    UserService.createUsers(user).then((res) => {
+    UserService.createUsers(user,"yes").then((res) => {
       setUserId(res.data.user_id);
     });
     function setUserId(userId) {
@@ -72,7 +72,7 @@ const Students = (props) => {
         squad_name: formValues.squadName,
         interviewer: formValues.interviewer_name,
         date_of_Join: formValues.dateOfJoin,
-        status: formValues.student_status,
+        status: "Active",
         education: formValues.education,
         interviewer_review: formValues.interviewer_review,
         user_id: userId,

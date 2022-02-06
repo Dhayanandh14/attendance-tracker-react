@@ -41,14 +41,14 @@ const Coaches = () => {
       access_id: coachFormValues.access_id,
       role: "coach",
     };
-    UserService.createUsers(coach).then((res) => {
+    UserService.createUsers(coach,"yes").then((res) => {
       addCoachDetails(res.data["user_id"]);
     });
     const addCoachDetails = (id) => {
       let coach_details = {
         userId: id,
         profile_job: coachFormValues.profile_job,
-        status: coachFormValues.status,
+        status: "Active",
       };
       CoachService.createCoachDetails(coach_details).then((res) => {
         fetch();
@@ -106,7 +106,7 @@ const Coaches = () => {
                               "font-weight": "bold",
                             }}
                             to={{
-                              pathname: `coaches/coach_info/${coach.id}`,
+                              pathname: `coaches/${coach.id}`,
                               state: coach.id,
                             }}
                           >

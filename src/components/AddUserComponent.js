@@ -65,14 +65,7 @@ const AddUserComponent = (props) => {
     </div>
      }
 
-      <Label for="coachProfileJobFormControlInput" className="form-label" label={props.title==="Add Student"?"Student status":"Coach status"}/>
-      <Formselectlist name="student_status" onChange={props.onChange} id="add-student-status" options={
-        [
-          {value:"DEFAULT",label:"Select Status"},
-          {value:"Active",label:"Active"},
-          {value:"Inactive",label:"Inactive"}
-        ]
-      }/>
+
 
 
     </div>

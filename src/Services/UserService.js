@@ -26,8 +26,8 @@ class UserService{
   }
 
   // new users page or sign up page
-  createUsers(user){
-    return axios.post(USERS_API_BASE_URL,user)
+  createUsers(user,check){
+    return axios.post(USERS_API_BASE_URL+"/"+check,user)
   }
 
   // get students count

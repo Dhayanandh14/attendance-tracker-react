@@ -32,10 +32,10 @@ function App() {
           </Route>
           <Route path="/signup" component={SignUp}></Route>
           <Route path="/signin" component={SignIn}></Route>
-          <Route path="/students/student_info/:id">
+          <Route path="/students/:id">
             <StudentInfo />
           </Route>
-          <Route path="/coaches/coach_info/:id" component={CoachInfo}></Route>
+          <Route path="/coaches/:id" component={CoachInfo}></Route>
           <Route path="/attendance" component={Attendance}></Route>
           <Route path="/reports" component={Reports} exact></Route>
 

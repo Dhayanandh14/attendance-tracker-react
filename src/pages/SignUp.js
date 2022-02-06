@@ -37,7 +37,7 @@ const SignUpComponent = () => {
         user_email: useremail,
         password: password,
       };
-      UserService.createUsers(users).then((res) => {});
+      UserService.createUsers(users,"no").then((res) => {});
     }
   };
   return (

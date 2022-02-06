@@ -193,17 +193,11 @@ const EditInfoOffCanvas = (props) => {
       <button type="button" className="btn btn-secondary mx-2 text-light" data-bs-dismiss="offcanvas" >Cancel</button>
       <button type="button" className="btn btn-success mx-2" data-bs-dismiss="offcanvas" onClick={saveInfo}>
 
-      {props.title =="Add Student" && "Add Student"}
-      {props.title =="Add Coach" && "Add Coach"}
-      {(props.title !="Add Student" && props.title !="Add coach") && "Save"}
+      {props.title =="Add Student"? "Add Student": props.title =="Add Coach"?"Add Coach":"Save" }
+
       </button>
     </div>
       </div>
-
-
-
-
-
     </div>
   </div>
     </div>

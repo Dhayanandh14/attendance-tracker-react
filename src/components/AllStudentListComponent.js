@@ -8,7 +8,7 @@ const AllStudentListComponent = (props) => {
       <React.Fragment >
         <td>
           <Link style={{"verticalAlign": "super","textDecoration":"none","fontWeight":"bold"}}
-            to={{ pathname: `students/student_info/${user.user_id}` }}>
+            to={{ pathname: `students/${user.user_id}` }}>
             {user.user_name}
           </Link>
         </td>
