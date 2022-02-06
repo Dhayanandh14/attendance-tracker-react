@@ -93,6 +93,7 @@ const CoachEditInfo = (props) => {
           infoFormValues={coachInfoFormValues}
           onChange={formInputValuesHandler}
           onclick={saveInfo}
+          title="Coaches"
         />
       </div>
     </div>

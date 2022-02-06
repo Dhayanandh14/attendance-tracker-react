@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import Modal from "../components/Modal";
+import EditInfoOffCanvas from "../components/OffCanvas";
 import SideBarComponent from "../components/SidebarComponent";
 import CoachService from "../Services/CoachService";
 import UserService from "../Services/UserService";
@@ -59,12 +60,15 @@ const Coaches = () => {
       <SideBarComponent />
       {!loading && (
         <React.Fragment>
-          <Modal
+        <div >
+          fds
+          <EditInfoOffCanvas  infoFormValues={""}
             onChange={formInputValuesHandler}
             formvalue={coachFormValues}
             onclick={addCoach}
             title="Add Coach"
-          />
+            style={"-50px"}/>
+        </div>
           <div className="display-all-coach-list">
             <div className="table-responsive">
               <table className="table display-all-coach-list-table">

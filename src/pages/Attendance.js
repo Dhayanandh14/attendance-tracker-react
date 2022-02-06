@@ -231,14 +231,15 @@ const Attendance = () => {
 
   //save the attendance
   const saveAttendance = () => {
-    setSaveButtonLoading(true);
+    // setSaveButtonLoading(true); /// it will make reload the page so i commented this
     AttendanceService.updateAttendance(eachStudentEntry).then((res) => {
       // dateSubmit()
       setSaveButtonLoading(false);
     });
     // setRerender()
+    // dateSubmit()
     // window.location.reload();
-    history.push("/attendance");
+    // history.push("/attendance");
   };
 
 

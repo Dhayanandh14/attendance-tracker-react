@@ -6,6 +6,7 @@ import AllStudentListComponent from "../components/AllStudentListComponent";
 import SideBarComponent from "../components/SidebarComponent";
 import Formselectlist from "../components/FormSelectList";
 import Modal from "../components/Modal";
+import EditInfoOffCanvas from "../components/OffCanvas";
 
 let activeArray = [];
 let inactiveArray = [];
@@ -119,12 +120,11 @@ const Students = (props) => {
                 options={studentStatusFilter}
               />
               </div>
-              <Modal
+
+              <EditInfoOffCanvas  infoFormValues={""}
               onChange={formInputValuesHandler}
-              formValue={formValues}
               onclick={addStudents}
-              title="Add Student"
-              />
+              title="Add Student" style={"-70px"}/>
               </div>
               <div className="display-all-student-list">
             <div className="table-responsive">
