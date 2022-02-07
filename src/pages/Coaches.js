@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import Modal from "../components/Modal";
 import EditInfoOffCanvas from "../components/OffCanvas";
 import SideBarComponent from "../components/SidebarComponent";
 import CoachService from "../Services/CoachService";
 import UserService from "../Services/UserService";
+
 import "./Coaches.css";
 const Coaches = () => {
+
   const [coach_details, setCoach_details] = useState([]);
   const [loading, setLoading] = useState(true);
   const [coachFormValues, setCoachFormValues] = useState({
@@ -128,6 +129,7 @@ const Coaches = () => {
                   ))}
                 </tbody>
               </table>
+
             </div>
           </div>
         </React.Fragment>

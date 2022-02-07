@@ -3,7 +3,10 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import SideBarComponent from "../components/SidebarComponent";
 import AttendanceService from "../Services/AttendanceService";
 import "./Attendance.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from "react-router-dom";
+import ToastComponent from "../components/ToastComponent";
 let eachStudentEntry = [];
 const date = new Date();
 const green = "#03a300";
@@ -11,6 +14,15 @@ const red = "red";
 const grey = "#f1f3f6";
 let todayDate = date.toLocaleDateString("en-GB").split("/").reverse().join("-");
 const Attendance = () => {
+  const notify = () => toast.success('Attendance Saved', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    });
   const [attendanceDate, setAttendanceDate] = useState();
   const [allAttendances, setAllAttendances] = useState([]);
   const [reset, setReset] = useState(false);
@@ -235,7 +247,9 @@ const Attendance = () => {
     AttendanceService.updateAttendance(eachStudentEntry).then((res) => {
       // dateSubmit()
       setSaveButtonLoading(false);
+      notify()
     });
+
     // setRerender()
     // dateSubmit()
     // window.location.reload();
@@ -322,7 +336,7 @@ const Attendance = () => {
                                 fontWeight: "bold",
                               }}
                               to={{
-                                pathname: `students/student_info/${attendance.userId}`,
+                                pathname: `students/${attendance.userId}`,
                               }}
                             >
                               {attendance.user_name}
@@ -346,12 +360,8 @@ const Attendance = () => {
               </table>
               {showButton && (
                 <div className="reset-and-save-button" >
-                  <button
-                    className="btn btn-dark "
-                    onClick={() => setReset(true)} disabled
-                  >
-                    Delete Attendance
-                  </button>
+                <p></p>
+                <ToastContainer />
                   {!saveButtonLoading && (
                     <button
                       className="btn btn-warning"
@@ -374,8 +384,10 @@ const Attendance = () => {
             </div>
           </div>
         </div>
-      )}
+        )}
+
       {loading && <h1 className="text-center">Fetching Attendance...</h1>}
+
     </React.Fragment>
   );
 };
