@@ -81,7 +81,9 @@ function App() {
 
             </>
           )}
-
+          <Route path="/" exact>
+            <Redirect to="/signin" />
+         </Route>
           <Route path="/signup" component={SignUp}></Route>
           <Route path="/signin" component={SignIn}></Route>
 
