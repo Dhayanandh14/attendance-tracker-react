@@ -11,7 +11,7 @@ import PieChartComponent from "../components/PieChartComponent";
 export default function Dashboard() {
   const [studentCount,setStudentCount] = useState(0)
   const [coachCount,setCoachCount] = useState(0)
-
+  console.log(localStorage.getItem("role"))
   useEffect(() => {
     UserService.getStudentCount().then((res)=>{
       console.log(res.data);
@@ -60,8 +60,7 @@ export default function Dashboard() {
             </div>
 
             <div style={{"marginBottom": "40px"}}>
-              <h3 style={{"textAlign": "center","marginTop": "60px"}}>Everyday Attendance Count</h3>
-              <Doublechartbar2 />
+              <ChartLogicComponent width={1600} check="fullMonth" height={350}/>
             </div>
           </div>
 

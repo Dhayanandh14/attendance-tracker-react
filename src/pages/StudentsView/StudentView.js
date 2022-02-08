@@ -1,15 +1,21 @@
-import React from "react";
+import React from 'react';
 import { Link } from "react-router-dom";
-import ChartLogicComponent from "../components/ChartLogicComponent";
-import SideBarComponent from "../components/SidebarComponent";
-import ReactTooltip from 'react-tooltip';
-import "./Report.css";
-const Reports = () => {
+import "../Report.css";
+
+const StudentView = () => {
+  const logoutHandler = () => {
+    window.location.replace("/signin");
+    localStorage.removeItem("role");
+  }
   return (
     <div>
-      <SideBarComponent />
-
-      <div style={{ marginLeft: "90px","marginTop":"130px" }}>
+    <button className="btn btn-danger float-end" onClick={logoutHandler} style={{
+      "position": "relative",
+      "top": "-107px",
+      "right": "20px"
+  }}>Logout</button>
+    <div>
+      <div style={{ marginLeft: "10px","marginTop":"130px" }}>
     <table style={{"border-collapse": "separate",
       "border-spacing": "126px 0"}}>
       <tr>
@@ -44,6 +50,8 @@ const Reports = () => {
     </table>
       </div>
     </div>
+    </div>
   );
-};
-export default Reports;
+}
+
+export default StudentView;

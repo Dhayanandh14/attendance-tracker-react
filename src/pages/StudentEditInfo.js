@@ -4,6 +4,7 @@ import { useState } from "react";
 import StudentService from "../Services/StudentService";
 import Offcanvas from "../components/OffCanvas";
 
+let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const Editinfo = (props) => {
   const [studentInfo, setStudentInfo] = useState([]);
 
@@ -74,6 +75,7 @@ const Editinfo = (props) => {
   };
 
   const saveInfo = () => {
+
     let updateStudentInfo = {
       user_id: studentInfoFormValues.userId,
       student_id: studentInfoFormValues.studentId,
@@ -100,12 +102,18 @@ const Editinfo = (props) => {
       grade: studentInfoFormValues.grade,
       batch: studentInfoFormValues.batch,
     };
-    StudentService.editStudentDetails(
-      studentInfoFormValues.userId,
-      updateStudentInfo
-    ).then((res) => {
-      props.func();
-    });
+    if(studentInfoFormValues.name == ""){
+      alert("please enter name")
+    }else if(re.test(studentInfoFormValues.email)){
+      StudentService.editStudentDetails(
+        studentInfoFormValues.userId,
+        updateStudentInfo
+      ).then((res) => {
+        props.func();
+      });
+    }else{
+      alert("Please enter email")
+    }
   };
 
   return (

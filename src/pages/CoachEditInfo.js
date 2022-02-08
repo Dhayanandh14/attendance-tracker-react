@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Offcanvas from "../components/OffCanvas";
 import CoachService from "../Services/CoachService";
+let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const CoachEditInfo = (props) => {
   const [coachInfoFormValues, setCoachInfoFormValues] = useState({
     userId: "",
@@ -79,12 +80,18 @@ const CoachEditInfo = (props) => {
       profile_job: coachInfoFormValues.profile_job,
       userId: coachInfoFormValues.userId, // this user Id is in Coach details table
     };
-    CoachService.editCoachDetails(
-      coachInfoFormValues.userId,
-      updateCoachInfo
-    ).then((res) => {
-      props.func();
-    });
+    if(coachInfoFormValues.name==""){
+      alert("Please enter name")
+    }else if(re.test(coachInfoFormValues.email)){
+      CoachService.editCoachDetails(
+        coachInfoFormValues.userId,
+        updateCoachInfo
+      ).then((res) => {
+        props.func();
+      });
+    }else{
+      alert("Please enter email")
+    }
   };
   return (
     <div>

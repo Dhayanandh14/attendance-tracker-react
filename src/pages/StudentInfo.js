@@ -40,17 +40,16 @@ const StudentInfo = (props) => {
           {showButton && <StudentEditinfo id={id} func={fetch} />}
 
           <div className="student-info-view">
-            {studentInfo.map((user) => (
-              <React.Fragment key={user.user_id}>
-                <React.Fragment>
-                  <h1>{user.user_name}</h1>
-                  <h5 style={{ marginLeft: "6px" }}>{user.access_id}</h5>
-                  <h6 style={{ marginLeft: "6px" }}>{user.user_email}</h6>
-                </React.Fragment>
-                </React.Fragment>
-              ))}
-              <TabComponent info= {studentInfo} role="student"/>
-
+          {studentInfo.map((user) => (
+            <React.Fragment key={user.user_id}>
+            <React.Fragment>
+            <h1>{user.user_name}</h1>
+            <h5 style={{ marginLeft: "6px" }}>{user.access_id}</h5>
+            <h6 style={{ marginLeft: "6px" }}>{user.user_email}</h6>
+            </React.Fragment>
+            </React.Fragment>
+            ))}
+            <TabComponent info= {studentInfo} role="student"/>
           </div>
         </React.Fragment>
       )}

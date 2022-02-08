@@ -1,34 +1,34 @@
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
-import SideBarComponent from '../components/SidebarComponent';
-import ReportService from "../Services/ReportService";
+import ReportService from "../../Services/ReportService";
+
 let show = false;
-const Monthlyreport = () => {
+const StudentViewMonthlyReport = () => {
   const monthDateInputRef = useRef();
   const [allReport, setAllReport] = useState([]);
 
-const generate=() => {
-  if(monthDateInputRef.current.value ==""){
-    alert("Please select month")
-  }else{
-  let date = new Date();
-  let firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-  let lastDayDate;
-  let inputDate = new Date(monthDateInputRef.current.value).getMonth()+1;
-  if(new Date(monthDateInputRef.current.value).getMonth()+1 == 2)
-  lastDayDate =  monthDateInputRef.current.value+"-"+28;
-  else if(inputDate== 4 || inputDate==7 || inputDate==8 || inputDate==10)
-  lastDayDate =  monthDateInputRef.current.value+"-"+30;
-  else
-  lastDayDate =  monthDateInputRef.current.value+"-"+31;
-  let firstDayDate =  monthDateInputRef.current.value+"-"+""+firstDay.getDate();
-  ReportService.getReportByDateWise(firstDayDate, lastDayDate).then((res) => {
-    setAllReport(res.data);
-    console.log(res.data)
-  });
-  show= true;
+  const generate=() => {
+    if(monthDateInputRef.current.value ==""){
+      alert("Please select month")
+    }else{
+    let date = new Date();
+    let firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+    let lastDayDate;
+    let inputDate = new Date(monthDateInputRef.current.value).getMonth()+1;
+    if(new Date(monthDateInputRef.current.value).getMonth()+1 == 2)
+    lastDayDate =  monthDateInputRef.current.value+"-"+28;
+    else if(inputDate== 4 || inputDate==7 || inputDate==8 || inputDate==10)
+    lastDayDate =  monthDateInputRef.current.value+"-"+30;
+    else
+    lastDayDate =  monthDateInputRef.current.value+"-"+31;
+    let firstDayDate =  monthDateInputRef.current.value+"-"+""+firstDay.getDate();
+    ReportService.getReportByDateWise(firstDayDate, lastDayDate).then((res) => {
+      setAllReport(res.data);
+      console.log(res.data)
+    });
+    show= true;
+    }
   }
-}
 
   const reportDetails = () => {
     let head
@@ -73,10 +73,17 @@ const generate=() => {
       </React.Fragment>
     );
   };
+  const logoutHandler = () => {
+    window.location.replace("/signin");
+    localStorage.removeItem("role");
+  }
   return (
     <div>
-    <SideBarComponent />
-    <div style={{marginLeft: "90px" }}>
+    <button className="btn btn-danger float-end" style={{
+      "position": "relative",
+                "right": "20px","top": "-30px"
+  }}onClick={logoutHandler} >Logout</button>
+    <div style={{marginLeft: "10px",marginTop: "50px"}}>
     <div className="row">
       <div className="col-md-3">
         <label htmlFor="date-of-join" className="form-label">
@@ -104,4 +111,4 @@ const generate=() => {
   );
 }
 
-export default Monthlyreport;
+export default StudentViewMonthlyReport;

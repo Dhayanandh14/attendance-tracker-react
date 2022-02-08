@@ -4,10 +4,20 @@ import EditInfoOffCanvas from "../components/OffCanvas";
 import SideBarComponent from "../components/SidebarComponent";
 import CoachService from "../Services/CoachService";
 import UserService from "../Services/UserService";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import "./Coaches.css";
 const Coaches = () => {
-
+  const notify = () =>toast.error('Email already Exist', {
+    position: "top-center",
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    });
   const [coach_details, setCoach_details] = useState([]);
   const [loading, setLoading] = useState(true);
   const [coachFormValues, setCoachFormValues] = useState({
@@ -35,6 +45,7 @@ const Coaches = () => {
     });
   };
   const addCoach = () => {
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let coach = {
       user_name: coachFormValues.name,
       user_email: coachFormValues.email,
@@ -42,9 +53,27 @@ const Coaches = () => {
       access_id: coachFormValues.access_id,
       role: "coach",
     };
-    UserService.createUsers(coach,"yes").then((res) => {
-      addCoachDetails(res.data["user_id"]);
-    });
+    if(coachFormValues.name == ""){
+      alert("Please enter name")
+    }else if(re.test(coachFormValues.email)){
+      if(coachFormValues.password == ""){
+        alert("Please enter password")
+      }
+      UserService.getUserByEmail(coachFormValues.email).then((res) => {
+        if (res.data === "email exist") {
+          notify()
+        } else {
+          authentication(res.data);
+        }
+      });
+    }else{
+      alert("invalid email format")
+    }
+    function authentication(){
+      UserService.createUsers(coach,"yes").then((res) => {
+        addCoachDetails(res.data["user_id"]);
+      });
+    }
     const addCoachDetails = (id) => {
       let coach_details = {
         userId: id,
@@ -132,6 +161,17 @@ const Coaches = () => {
 
             </div>
           </div>
+          <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              />
         </React.Fragment>
       )}
       {loading && <h1 className="text-center">Loading...</h1>}

@@ -1,10 +1,10 @@
 import React, { useEffect, useState,useRef } from "react";
-import SideBarComponent from "../components/SidebarComponent";
-import ReportService from "../Services/ReportService";
-import "./Report.css";
-let demo = false;
+import ReportService from "../../Services/ReportService";
+
+import "../Report.css";
+
 let attendanceCount=[];
-const ReportByNameAndDateRange = () => {
+const StudentViewReportByNameAndDateRange = () => {
   const fromDateInputRef = useRef();
   const toDateInputRef = useRef();
   const [studentNames, setStudentNames] = useState([]);
@@ -44,12 +44,18 @@ const ReportByNameAndDateRange = () => {
     setShowName(true);
   }
   };
-
+  const logoutHandler = () => {
+    window.location.replace("/signin");
+    localStorage.removeItem("role");
+  }
   return (
     <div>
         <div>
-          <SideBarComponent />
-          <div style={{ marginLeft: "90px" }}>
+        <button className="btn btn-danger float-end" style={{
+          "position": "relative",
+                    "right": "20px","top": "-60px"
+      }} onClick={logoutHandler}>Logout</button>
+          <div style={{ marginLeft: "40px","marginTop":"90px" }}>
         <div className="row">
           <div className="col-md-3">
             <label htmlFor="date-of-join" className="form-label">
@@ -77,7 +83,7 @@ const ReportByNameAndDateRange = () => {
             <br/>
             <div className="row">
             <div className="col-md-4 mb-5">
-              <select
+              <select style={{"marginLeft":"10px"}}
                 className="form-select"
                 aria-label="Default select example"
                 onChange={nameChangeHandler}
@@ -144,4 +150,4 @@ const ReportByNameAndDateRange = () => {
   );
 }
 
-export default ReportByNameAndDateRange;
+export default StudentViewReportByNameAndDateRange;

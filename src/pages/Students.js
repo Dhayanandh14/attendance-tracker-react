@@ -5,12 +5,25 @@ import StudentService from "../Services/StudentService";
 import AllStudentListComponent from "../components/AllStudentListComponent";
 import SideBarComponent from "../components/SidebarComponent";
 import Formselectlist from "../components/FormSelectList";
-import Modal from "../components/Modal";
 import EditInfoOffCanvas from "../components/OffCanvas";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import e from "cors";
+
+
 
 let activeArray = [];
 let inactiveArray = [];
 const Students = (props) => {
+  const notify = () =>toast.error('Email already Exist', {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    });
   const [formValues, setFormValues] = useState({
     name: "",
     email: "",
@@ -57,6 +70,7 @@ const Students = (props) => {
   }, []);
 
   const addStudents = () => {
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let user = {
       user_name: formValues.name,
       user_email: formValues.email,
@@ -64,9 +78,30 @@ const Students = (props) => {
       access_id: formValues.access_id,
       role: "student",
     };
-    UserService.createUsers(user,"yes").then((res) => {
-      setUserId(res.data.user_id);
-    });
+    if( formValues.name ==""){
+      alert("Please enter name")
+    }
+    else if(re.test(formValues.email)){
+      if(formValues.password == ""){
+        alert("Please enter password")
+      }else{
+      UserService.getUserByEmail(formValues.email).then((res) => {
+        if (res.data === "email exist") {
+          notify()
+        } else {
+          authentication(res.data);
+        }
+      });
+    }
+    }else{
+      alert("Invaild Email Format")
+    }
+
+    function authentication(){
+      UserService.createUsers(user,"yes").then((res) => {
+        setUserId(res.data.user_id);
+      });
+    }
     function setUserId(userId) {
       let student_details = {
         squad_name: formValues.squadName,
@@ -168,6 +203,17 @@ const Students = (props) => {
               </table>
             </div>
             </div>
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              />
             </React.Fragment>
 
       )}

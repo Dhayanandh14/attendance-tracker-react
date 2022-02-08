@@ -5,7 +5,9 @@ import Formselectlist from './FormSelectList';
 import Label from './Label';
 const EditInfoOffCanvas = (props) => {
   const{infoFormValues} = props;
-
+  function submitHandler(){
+    console.log('test')
+  }
   const saveInfo=()=>{
     props.onclick()
   }
@@ -38,7 +40,7 @@ const EditInfoOffCanvas = (props) => {
 
               <div className="mb-3">
                 <Label htmlFor="exampleFormControlInput1" className="form-label" label="Email address"/>
-                <FormInput type="email" onChange={props.onChange} name="email" value={infoFormValues.email} placeholder="Enter Your Email"/>
+                <FormInput type="email" onChange={props.onChange} name="email" value={infoFormValues.email} placeholder="Enter Your Email" required/>
               </div>
 
               <div className="row ">
@@ -129,7 +131,7 @@ const EditInfoOffCanvas = (props) => {
 
               <div className="mb-3">
                 <Label htmlFor="aadhar-number" className="form-label" label="Aadhar Number"/>
-                <FormInput type="text" name="aadhar_number" onChange={props.onChange} id="aadhar_number" value={infoFormValues.aadhar_number} id="aadhar-number"/>
+                <FormInput type="number" name="aadhar_number" onChange={props.onChange} id="aadhar_number" value={infoFormValues.aadhar_number} id="aadhar-number"/>
               </div>
 
               <div className="mb-3">
@@ -196,7 +198,7 @@ const EditInfoOffCanvas = (props) => {
       {props.title =="Add Student"? "Add Student": props.title =="Add Coach"?"Add Coach":"Save" }
 
       </button>
-    </div>
+      </div>
       </div>
     </div>
   </div>

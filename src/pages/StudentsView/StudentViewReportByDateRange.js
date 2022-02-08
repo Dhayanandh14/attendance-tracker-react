@@ -1,9 +1,8 @@
 import React, { useRef } from "react";
 import { useState } from "react";
-import SideBarComponent from "../components/SidebarComponent";
-import ReportService from "../Services/ReportService";
+import ReportService from "../../Services/ReportService";
 let show = false
-const ReportByDateRange = () => {
+const StudentViewReportByDateRange = () => {
   const fromDateInputRef = useRef();
   const toDateInputRef = useRef();
   const [allReport, setAllReport] = useState([]);
@@ -64,12 +63,17 @@ const ReportByDateRange = () => {
       </React.Fragment>
     );
   };
-
+  const logoutHandler = () => {
+    window.location.replace("/signin");
+    localStorage.removeItem("role");
+  }
   return (
     <div className="all-reports">
-      <SideBarComponent />
-
-      <div className="row" style={{"marginLeft":"10px"}}>
+    <button className="btn btn-danger float-end" style={{
+      "position": "relative",
+                "right": "20px","top": "-40px"
+  }} onClick={logoutHandler} >Logout</button>
+    <div className="row" style={{"marginLeft":"10px","marginTop":"60px"}}>
         <div className="col-md-3">
           <label htmlFor="date-of-join" className="form-label">
             From Date
@@ -105,4 +109,4 @@ const ReportByDateRange = () => {
   );
 };
 
-export default ReportByDateRange;
+export default StudentViewReportByDateRange;

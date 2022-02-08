@@ -7,13 +7,15 @@ const AddUserComponent = (props) => {
   return (
     <div>
     <div className="mb-3">
+
     <Label className="form-label" htmlFor="coachNameFormControlInput" label ="Name"/>
     <FormInput type="text" name="name" onChange={props.onChange} id="coachNameFormControlInput" placeholder={props.title==="Add Student"?"Student name":"Coach name"} />
   </div>
 
   <div className="mb-3">
+
     <Label className="form-label" htmlFor="coachEmailFormControl" label = "Email"/>
-    <FormInput type="email" name="email" onChange={props.onChange} placeholder={props.title==="Add Student"?"Student email":"Coach email"} id="coachEmailFormControlInput"/>
+    <FormInput type="email" name="email" onChange={props.onChange} placeholder={props.title==="Add Student"?"Student email":"Coach email"} id="coachEmailFormControlInput" required/>
 
   </div>
     <div className="mb-3">
@@ -64,7 +66,6 @@ const AddUserComponent = (props) => {
         <FormInput type="text" name="profile_job" onChange={props.onChange}  placeholder="Enter profile job" id="coachProfileJobFormControlInput"/>
     </div>
      }
-
 
 
 

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import FormInput from "../components/FormInput";
 import UserService from "../Services/UserService";
 import "./SignInComponent.css";
 
 const SignInComponent = () => {
+  const history = useHistory();
   const [signInFormValues, setSigninFormValues] = useState({
     email: "",
     password: "",
@@ -17,23 +18,39 @@ const SignInComponent = () => {
   };
 
   const signIn = (event) => {
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     event.preventDefault();
-    UserService.getUserByEmailandPassword(
-      signInFormValues.email,
-      signInFormValues.password
-    ).then((res) => {
-      if (res.data) {
-        authentication(res.data);
-      } else {
-        alert("invalid Credentails");
-        return;
-      }
-    });
+    if(re.test(signInFormValues.email)){
+     if (signInFormValues.password==""){
+      alert("Please enter your password")
+    }else{
+      UserService.getUserByEmailandPassword(
+        signInFormValues.email,
+        signInFormValues.password
+      ).then((res) => {
+        if (res.data) {
+          authentication(res.data);
+        } else {
+          alert("invalid Credentails");
+          return;
+        }
+      });
+    }
+  }else{
+    alert("invalid email format");
+  }
 
     function authentication(user) {
-      if (user) {
-        alert("DONE");
-      } else {
+      if (user[0] == "admin" || user[0] == "coach") {
+        localStorage.setItem("role",user[0])
+        window.location.href = "/dashboard"
+        // history.push('/dashboard')
+      }else if(user[0] == "student" || user[0] == "guest"){
+        localStorage.setItem("role",user[0])
+        // history.push('/reports')
+        window.location.href = "/reports"
+      }
+      else {
         alert("invalid credentials");
       }
     }
@@ -52,6 +69,7 @@ const SignInComponent = () => {
         >
           SIGN IN
         </h1>
+
         <div className="mb-3 " style={{ marginTop: "13pc" }}>
           <label htmlFor="useremail" className="form-label">
             Email address
@@ -61,6 +79,7 @@ const SignInComponent = () => {
             id="useremail"
             name="email"
             onChange={formInputValuesHandler}
+
           />
         </div>
         <div className="mb-3 ">

@@ -146,8 +146,9 @@ header .image-text .profession{
 }
 
 .sidebar header .image img{
-    width: 40px;
+    width: 45px;
     border-radius: 6px;
+    background-color: white;
 }
 
 .sidebar header .toggle{

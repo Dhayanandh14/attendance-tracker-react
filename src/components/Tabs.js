@@ -10,10 +10,9 @@ const TabComponent = (props) => {
       <React.Fragment>
         <Tabs style={{ marginTop: "61px", marginBottom: "25px" }}>
           <TabList>
-            <Tab style={{ color: "#ffc107" }}>Offical Info</Tab>
-            <Tab style={{ color: "blue" }}>Personal Info</Tab>
-            <Tab style={{ color: "black" }}>Links</Tab>
-            <Tab style={{ color: "Red" }}>Emergency Info</Tab>
+            <Tab><strong> Offical Info</strong></Tab>
+            <Tab><strong>Personal Info</strong></Tab>
+            <Tab><strong>Emergency Info</strong></Tab>
           </TabList>
 
           <TabPanel>
@@ -29,9 +28,6 @@ const TabComponent = (props) => {
               check="false"
               role={props.role}
             />
-          </TabPanel>
-          <TabPanel>
-            <h2>Github and Netlify LINKS</h2>
           </TabPanel>
           <TabPanel>
             <Infotablecomponent info={props.info} check="emergency" />

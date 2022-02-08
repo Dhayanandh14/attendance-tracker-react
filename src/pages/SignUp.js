@@ -22,13 +22,24 @@ const SignUpComponent = () => {
     const useremail = signUpFormValues.email;
     const password = signUpFormValues.password;
     event.preventDefault();
-    UserService.getUserByEmail(useremail).then((res) => {
-      if (res.data === "email exist") {
-        alert("Email already exist");
-      } else {
-        authentication(res.data);
-      }
-    });
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if(username==""){
+      alert("Please enter username");
+    }
+    else if(re.test(useremail)){
+    if(password == ""){
+      alert("Please enter password")
+    }else{
+      UserService.getUserByEmail(useremail).then((res) => {
+        if (res.data === "email exist") {
+          alert("Email already exist");
+        } else {
+          authentication(res.data);
+        }
+      });
+    }}else{
+      alert("invalid email format")
+    }
     function authentication(user) {
       let usernameWithCapitalize =
         username[0].toUpperCase() + username.slice(1);
@@ -36,12 +47,22 @@ const SignUpComponent = () => {
         user_name: usernameWithCapitalize,
         user_email: useremail,
         password: password,
+        role:"guest"
       };
-      UserService.createUsers(users,"no").then((res) => {});
+      UserService.createUsers(users,"no").then((res) => {
+        if(res.data == "Success"){
+          localStorage.setItem("role","guest")
+          window.location.href = "/reports"
+        }
+        else{
+          alert("Something went wrong")
+        }
+      });
     }
   };
   return (
     <div className="container">
+
       <form className="form-group" id="signup-form" onSubmit={signUp}>
         <h1
           style={{
@@ -67,6 +88,7 @@ const SignUpComponent = () => {
             id="username"
             onChange={formInputValuesHandler}
             name="name"
+
           />
         </div>
 
@@ -108,6 +130,7 @@ const SignUpComponent = () => {
           <Link to="/signin">Login With Existing Account</Link>
         </span>
       </form>
+
     </div>
   );
 };
