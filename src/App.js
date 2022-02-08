@@ -21,6 +21,7 @@ import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import { useEffect, useState } from "react";
 
 function App() {
+  console.log("render test")
   // const [reRender, setreRender] = useState("");
   // console.log(localStorage.getItem("role"))
   // let role = localStorage.getItem("role");
@@ -37,6 +38,7 @@ function App() {
   // }
   return (
     <div>
+
       <Router>
         <Switch>
           {localStorage.getItem("role") == "admin"&& (
