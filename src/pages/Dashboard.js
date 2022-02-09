@@ -11,10 +11,8 @@ import PieChartComponent from "../components/PieChartComponent";
 export default function Dashboard() {
   const [studentCount,setStudentCount] = useState(0)
   const [coachCount,setCoachCount] = useState(0)
-  console.log(localStorage.getItem("role"))
   useEffect(() => {
     UserService.getStudentCount().then((res)=>{
-      console.log(res.data);
       setStudentCount(res.data)
     })
     CoachService.getCoachCount().then((res)=>{

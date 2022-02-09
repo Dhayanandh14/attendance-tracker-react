@@ -2,7 +2,6 @@ import React from "react";
 import TabComponent from "./Tabs";
 
 const Infotablecomponent = (props) => {
-  console.log(props.role);
   return (
     <div style={{"marginTop":"20px"}}>
       {props.info.map((user) => (

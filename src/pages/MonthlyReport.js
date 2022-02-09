@@ -24,7 +24,6 @@ const generate=() => {
   let firstDayDate =  monthDateInputRef.current.value+"-"+""+firstDay.getDate();
   ReportService.getReportByDateWise(firstDayDate, lastDayDate).then((res) => {
     setAllReport(res.data);
-    console.log(res.data)
   });
   show= true;
   }
@@ -40,7 +39,6 @@ const generate=() => {
       let dateArr = Object.keys(allReport[keys[0]]).sort(); // take date because date common ah elarukum irukum so i will choose keys[0]
       for (let i of dateArr) {
         let dt = new Date(i);
-        console.log(dt)
         head.push(<th className="table-light">{dt.getDate()}</th>);
       }
 

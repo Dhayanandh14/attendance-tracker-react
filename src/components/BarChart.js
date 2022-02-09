@@ -17,6 +17,7 @@ const attendanceCount=[]
 const totalCount=[]
 const percentage=[]
 const Barchart = (props) => {
+  console.log("props",props)
 useEffect(() => {
   AttendanceService.getAttendancePercentage().then((res)=>{
     for (let i=0; i<12; i++) attendanceCount.push(res.data[i])

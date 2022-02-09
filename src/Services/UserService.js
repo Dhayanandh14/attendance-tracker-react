@@ -13,7 +13,6 @@ class UserService{
     return axios.get(USERS_API_BASE_URL);
   }
   getUserByEmail(email){
-    console.log(email)
     return axios.get(USERS_API_BASE_URL+"/"+email);
   }
   getUserByEmailAndName(email){

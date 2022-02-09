@@ -6,7 +6,6 @@ import "./Attendance.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from "react-router-dom";
-import ToastComponent from "../components/ToastComponent";
 let eachStudentEntry = [];
 const date = new Date();
 const green = "#03a300";
@@ -362,23 +361,18 @@ const Attendance = () => {
                 <div className="reset-and-save-button" >
                 <p></p>
                 <ToastContainer />
-                  {!saveButtonLoading && (
+                  {!saveButtonLoading ?  (
                     <button
                       className="btn btn-warning"
                       onClick={() => saveAttendance()}
                     >
                       Save
                     </button>
-                  )}
-                  {saveButtonLoading && (
-                    <button
-                      className="btn btn-warning"
-                      onClick={() => saveAttendance()}
-                    >
-                      loading
-                    </button>
-                  )}
-                  {saveButtonLoading && window.location.reload()}
+                  ):
+                  <button className="btn btn-warning">Saving...</button>
+                }
+
+
                 </div>
               )}
             </div>

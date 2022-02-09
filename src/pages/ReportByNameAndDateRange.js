@@ -27,15 +27,22 @@ const ReportByNameAndDateRange = () => {
   };
 
   const getReport = () => {
-
-console.log(studentId);
-    let from = fromDateInputRef.current.value.split("-").join("");
+    if(fromDateInputRef.current.value == ""){
+      alert("Please select From date")
+    }else if(toDateInputRef.current.value == ""){
+      alert("Please select To date")
+    }
+    else if(perStudentName == undefined){
+      alert("Please select Student Name")
+    }
+    else{    let from = fromDateInputRef.current.value.split("-").join("");
     let to = toDateInputRef.current.value.split("-").join("");
     ReportService.getAllNamesByDate(studentId,from,to).then((res) => {
       setStudentReport(res.data);
-      console.log(res.data);
+
     });
     setShowName(true);
+  }
 
   };
 

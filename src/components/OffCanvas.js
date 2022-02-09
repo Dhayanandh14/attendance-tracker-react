@@ -5,9 +5,6 @@ import Formselectlist from './FormSelectList';
 import Label from './Label';
 const EditInfoOffCanvas = (props) => {
   const{infoFormValues} = props;
-  function submitHandler(){
-    console.log('test')
-  }
   const saveInfo=()=>{
     props.onclick()
   }
