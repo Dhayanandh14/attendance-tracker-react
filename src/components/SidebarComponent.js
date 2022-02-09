@@ -22,7 +22,7 @@ export default function SideBarComponent() {
         style={{ zIndex: "1" }}
       >
         <a className="btn border-0" id="menu-btn">
-          <i className="bx bx-menu"></i>
+
         </a>
         <img
           id="top-nav-profile-icon"
