@@ -40,7 +40,6 @@ useEffect(() => {
 
 AttendanceService.getEachDayAttendancePercentage(firstDay, lastDayDate).then((attendanceCount)=>{
   let endDate =  monthEndDateFinder()
-  console.log(attendanceCount.data[0]);
   data=[]
   for(let i=1; i<=endDate;i++){
     data.push({name:i,absent:localStorage.getItem("total")-attendanceCount.data[i-1],present:attendanceCount.data[i-1],amt:Math.floor(Math.random()*100)})
