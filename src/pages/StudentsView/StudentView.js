@@ -20,7 +20,7 @@ const StudentView = () => {
       "border-spacing": "126px 0"}}>
       <tr>
     <td>
-        <button className="btn btn-dark report-button"style={{"width": "369px"}}>
+        <button className="btn btn-dark report-button" disabled style={{"width": "369px"}}>
           <i class="fas fa-chart-bar report-icon"></i>Monthly Report
           <Link to={`reports/monthly_report`}>
             <button className="btn btn-light report-click-button">click</button>
