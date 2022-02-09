@@ -23,6 +23,5 @@ class ReportService {
   getAttendanceCountByNameAndDate(id,date,date2){
     return axios.get(GET_ATTENDANCE_COUNT_BY_NAME_AND_DATE_REPORT+"/"+id+"/"+date+"/"+date2)
   }
-
 }
 export default new ReportService();
