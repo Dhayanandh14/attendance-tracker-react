@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 export default function Profile() {
 
-
+  const [loading,setLoading] = useState(false);
   const notify = () => toast.success('Profile Saved', {
     position: "top-right",
     autoClose: 5000,
@@ -42,7 +42,7 @@ export default function Profile() {
   });
   useEffect(() => {
     UserService.getUserById(localStorage.getItem("id")).then((res) => {
-      console.log(res.data);
+      setLoading(true);
       setBio(res.data);
       setInformationToInput(res.data)
     });
@@ -76,7 +76,7 @@ export default function Profile() {
   };
 
   function saveProfile(){
-    UserService.updateUser(bio,bio.user_id).then((res) => {
+    UserService.updateUser(bio,Number(bio.user_id)).then((res) => {
       notify()
     })
   }
@@ -84,6 +84,8 @@ export default function Profile() {
   return (
     <div>
       <SideBarComponent />
+      {!loading && <h3 className="text-center" style={{"fontSize":"20px"}}>Loading...</h3>}
+      {loading && <>
       <div class="container rounded bg-white mt-5 mb-5">
         <div class="row">
           <div class="col-md-3 border-right">
@@ -150,7 +152,7 @@ export default function Profile() {
                 <div className="row mt-3">
                     <div className="col-md-8">
                     <Label htmlFor="phone_number" className="form-label" label="Phone Number"/>
-                    <FormInput type="text" id="phone_number" name="phone_number" value={bio.contact_number}
+                    <FormInput type="text" id="phone_number" name="phone_number" value={bio.phone_number}
                     onChange={formInputValuesHandler}/>
                     </div>
                     <div className="col-md-4">
@@ -206,6 +208,7 @@ export default function Profile() {
         </div>
       </div>
       <ToastContainer />
+      </>}
     </div>
   );
 }

@@ -130,7 +130,6 @@ const Students = (props) => {
     },
   ];
   const selectionStatusHandler = (event) => {
-    console.log(event.target.value);
     if (event.target.value == 1) {
       setDisplayStudentList("active");
     } else if (event.target.value == 2) {

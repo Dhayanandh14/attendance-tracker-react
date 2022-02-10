@@ -17,27 +17,12 @@ import ReportByNameAndDateRange from "./pages/ReportByNameAndDateRange";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 function App() {
-  console.log("render test");
-  // const [reRender, setreRender] = useState("");
-  // console.log(localStorage.getItem("role"))
-  // let role = localStorage.getItem("role");
-  // let isAdmin = false;
-  // if(role !=null && typeof role === "object"){
-  //   console.log(role);
-  //  let isExist = role.includes("admin");
-  //  console.log(isExist);
-  //  isAdmin = isExist;
-  // }
-
-  // if( role !=null && role=="admin"){
-  //   isAdmin = true;
-  // }
   return (
     <div>
       <Router>
         <Switch>
           {(localStorage.getItem("role") == "admin" ||
-            localStorage.getItem("role") == "student") && (
+            localStorage.getItem("role") == "student"  || localStorage.getItem("role") == "guest") && (
             <>
               <Route path="/" exact>
                 <Redirect to="/dashboard" />

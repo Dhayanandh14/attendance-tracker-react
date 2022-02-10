@@ -43,12 +43,14 @@ const SignInComponent = () => {
     function authentication(user) {
       if (user[0] == "admin" || user[0] == "coach") {
         localStorage.setItem("role",user[0])
+        localStorage.setItem("id",user[2])
         window.location.href = "/dashboard"
         // history.push('/dashboard')
       }else if(user[0] == "student" || user[0] == "guest"){
         localStorage.setItem("role",user[0])
+        localStorage.setItem("id",user[2])
         // history.push('/reports')
-        window.location.href = "/reports"
+        window.location.href = "/dashboard"
       }
       else {
         alert("invalid credentials");

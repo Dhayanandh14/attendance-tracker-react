@@ -50,9 +50,10 @@ const SignUpComponent = () => {
         role:"guest"
       };
       UserService.createUsers(users,"no").then((res) => {
-        if(res.data == "Success"){
+        if(res.data[0] == "success"){
           localStorage.setItem("role","guest")
-          window.location.href = "/reports"
+          localStorage.setItem("id",res.data[1]);
+          window.location.href = "/dashboard"
         }
         else{
           alert("Something went wrong")
