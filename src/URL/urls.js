@@ -1,5 +1,5 @@
-// const API_BASE_URL = "http://localhost:8080/api/v1/";
-const API_BASE_URL = "https://attendance-tracker-springboot.herokuapp.com/api/v1/";
+const API_BASE_URL = "http://localhost:8080/api/v1/";
+// const API_BASE_URL = "https://attendance-tracker-springboot.herokuapp.com/api/v1/";
 class URL {
   //USER SERVICE
   USERS_API_BASE_URL(){
@@ -17,7 +17,9 @@ class URL {
   COACH_COUNT(){
     return `${API_BASE_URL}coach_count`;
   }
-
+  UPDATE_USER(){
+    return `${API_BASE_URL}update_user`;
+  }
 
   //STUDENT SERVICE
   STUDENTS_API_BASE_URL() {

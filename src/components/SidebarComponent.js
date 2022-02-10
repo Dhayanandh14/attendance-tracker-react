@@ -22,12 +22,16 @@ export default function SideBarComponent() {
         style={{ zIndex: "1" }}
       >
         <a className="btn border-0" id="menu-btn">
-
         </a>
+        <Link to="/profile" style={{"textDecoration":"none"}}>
+        <div >
         <img
-          id="top-nav-profile-icon"
-          src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
+        id="top-nav-profile-icon"
+        src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
         />
+        <strong style={{"color": "#12344d"}} >{localStorage.getItem("role")[0].toUpperCase()+localStorage.getItem("role").slice(1) }</strong>
+        </div>
+        </Link>
       </nav>
 
       <div className="App">

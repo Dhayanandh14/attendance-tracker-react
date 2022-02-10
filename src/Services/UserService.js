@@ -6,6 +6,7 @@ const USERS_API_BASE_URL = URL.USERS_API_BASE_URL()
 const USERS_URL = URL.USERS_URL()
 const USER_ID_URL = URL.USER_ID_URL()
 const STUDENT_COUNT_URL = URL.STUDENT_COUNT_URL()
+const UPDATE_USER = URL.UPDATE_USER()
 
 
 class UserService{
@@ -18,8 +19,8 @@ class UserService{
   getUserByEmailAndName(email){
     return axios.get(USERS_API_BASE_URL+"/"+email);
   }
-  getUserById(email){
-    return axios.get(USER_ID_URL+"/"+email)
+  getUserById(id){
+    return axios.get(USER_ID_URL+"/"+id)
   }
   getUserByEmailandPassword(email,password){
     return axios.get(USERS_URL+"/"+email+"/"+password);
@@ -33,6 +34,10 @@ class UserService{
   // get students count
   getStudentCount(){
     return axios.get(STUDENT_COUNT_URL)
+  }
+
+  updateUser(user,id){
+    return axios.patch(UPDATE_USER+"/"+id,user)
   }
 
 
