@@ -130,6 +130,7 @@ const Students = (props) => {
     },
   ];
   const selectionStatusHandler = (event) => {
+    console.log(event.target.value);
     if (event.target.value == 1) {
       setDisplayStudentList("active");
     } else if (event.target.value == 2) {
@@ -154,11 +155,11 @@ const Students = (props) => {
                 options={studentStatusFilter}
               />
               </div>
-
+          {localStorage.getItem('role')!="student" &&
               <EditInfoOffCanvas  infoFormValues={""}
               onChange={formInputValuesHandler}
               onclick={addStudents}
-              title="Add Student" style={"-70px"}/>
+              title="Add Student" style={"-70px"}/>}
               </div>
               <div className="display-all-student-list">
             <div className="table-responsive">

@@ -36,8 +36,9 @@ const StudentInfo = (props) => {
       <SideBarComponent />
       {!loading && (
         <React.Fragment>
-
-          {showButton && <StudentEditinfo id={id} func={fetch} />}
+        {localStorage.getItem("role") != "student" &&
+          showButton && <StudentEditinfo id={id} func={fetch} />
+        }
 
           <div className="student-info-view">
           {studentInfo.map((user) => (

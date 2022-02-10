@@ -27,7 +27,7 @@ export default function Dashboard() {
       <div style={{ "marginLeft":"72px"}}>
           <div className="row bg-dark pt-4 pb-4" style={{"color": "white","marginRight":"0px"}}>
             <div className="col-md-9">
-              <span className="text-left" id="welcome-text"> Welcome Back, <strong>Admin</strong> </span>
+              <span className="text-left" id="welcome-text"> Welcome Back, <strong>{localStorage.getItem("role")}</strong> </span>
             </div>
             <div className="col-md-2">
 

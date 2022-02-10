@@ -41,7 +41,7 @@ function App() {
 
       <Router>
         <Switch>
-          {localStorage.getItem("role") == "admin"&& (
+          {((localStorage.getItem("role") == "admin") || (localStorage.getItem("role") == "student")) && (
             <>
               <Route path="/" exact>
                 <Redirect to="/dashboard" />
@@ -80,7 +80,9 @@ function App() {
                 path="/reports/student_reports"
                 component={ReportByNameAndDateRange}
               ></Route>
-
+              <Route path="*">
+                <NotFound/>
+              </Route>
             </>
           )}
           <Route path="/" exact>
@@ -89,29 +91,10 @@ function App() {
           <Route path="/signup" component={SignUp}></Route>
           <Route path="/signin" component={SignIn}></Route>
 
-          {(localStorage.getItem("role") == "student" || localStorage.getItem("role") == "guest") && (
-            <>
-            <Route path="/" exact>
-                <Redirect to="/reports" />
-              </Route>
-            <Route path="/reports" component={StudentView} exact></Route>
-            <Route
-                path="/reports/report_by_date/"
-                component={StudentViewReportByDateRange}
-              ></Route>
-              <Route
-                path="/reports/monthly_report/"
-                component={StudentViewMonthlyReport}
-              ></Route>
-              <Route
-                path="/reports/student_reports"
-                component={StudentViewReportByNameAndDateRange}
-              ></Route>
 
-            </>
-
-          )}
-          <Route path="*" component={NotFound}></Route>
+          <Route path="*">
+            <Redirect to="/signin"/>
+          </Route>
         </Switch>
       </Router>
     </div>

@@ -29,7 +29,8 @@ const CoachInfo = (props) => {
     <React.Fragment>
       <SideBarComponent />
       <div>
-        {!showButton && <CoachEditInfo id={id} func={fetch} />}
+      {localStorage.getItem("role") != "student" &&
+        !showButton && <CoachEditInfo id={id} func={fetch} />}
         {!showButton && (
           <div className="coach-info-view">
             {CoachInfo.map((user) => (

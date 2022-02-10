@@ -91,6 +91,8 @@ const Coaches = () => {
       {!loading && (
         <React.Fragment>
         <div >
+        {localStorage.getItem("role") != "student" &&
+        <>
           fds
           <EditInfoOffCanvas  infoFormValues={""}
             onChange={formInputValuesHandler}
@@ -98,6 +100,7 @@ const Coaches = () => {
             onclick={addCoach}
             title="Add Coach"
             style={"-50px"}/>
+            </>}
         </div>
           <div className="display-all-coach-list">
             <div className="table-responsive">

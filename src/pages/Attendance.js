@@ -11,6 +11,7 @@ const date = new Date();
 const green = "#03a300";
 const red = "red";
 const grey = "#f1f3f6";
+let disabled = false;
 let todayDate = date.toLocaleDateString("en-GB").split("/").reverse().join("-");
 const Attendance = () => {
   const notify = () => toast.success('Attendance Saved', {
@@ -47,7 +48,9 @@ const Attendance = () => {
     setAttendanceDate(event.target.value);
     // dateSubmit();
   };
-
+  if(localStorage.getItem("role")=="student"){
+    disabled = true;
+  }
   // submit button for date selection
   const dateSubmit = () => {
     setButtonLoading(true);
@@ -86,7 +89,7 @@ const Attendance = () => {
           style={{ backgroundColor: green, color: "white" }}
           onClick={() => {
             AttendanceStatusChangeHandler(attendanceId, id, 1);
-          }}
+          }} disabled={disabled}
           id={"pb-" + id}
         >
           Present
@@ -94,7 +97,7 @@ const Attendance = () => {
         <button
           className="absentButton"
           style={{ backgroundColor: "#f1f3f6" }}
-          id={"ab-" + id}
+          id={"ab-" + id} disabled={disabled}
           onClick={() => {
             AttendanceStatusChangeHandler(attendanceId, id, 0);
           }}
@@ -109,7 +112,7 @@ const Attendance = () => {
           style={{ backgroundColor: "#f1f3f6", color: "black" }}
           onClick={() => {
             AttendanceStatusChangeHandler(attendanceId, id, 1);
-          }}
+          }} disabled={disabled}
           id={"pb-" + id}
         >
           Present
@@ -117,7 +120,7 @@ const Attendance = () => {
         <button
           className=" absentButton"
           style={{ backgroundColor: "red", color: "white" }}
-          id={"ab-" + id}
+          id={"ab-" + id} disabled={disabled}
           onClick={() => {
             AttendanceStatusChangeHandler(attendanceId, id, 0);
           }}
@@ -200,7 +203,7 @@ const Attendance = () => {
         <button
           style={{ backgroundColor: grey }}
           id={"pb-" + id}
-          className="presentButton "
+          className="presentButton " disabled
           onClick={() => {
             AttendanceStatusChangeHandler(attendanceId, id, 1);
           }}
@@ -216,7 +219,7 @@ const Attendance = () => {
           className="absentButton"
           onClick={() => {
             AttendanceStatusChangeHandler(attendanceId, id, 0);
-          }}
+          }} disabled = {disabled}
         >
           Absent
         </button>
@@ -281,7 +284,8 @@ const Attendance = () => {
                 <button className="btn btn-dark">Loading...</button>
               )}
             </div>
-
+            {localStorage.getItem("role")!="student" &&
+            <>
             <div className="dropdown">
               <a
                 className="btn btn-dark dropdown-toggle"
@@ -305,8 +309,8 @@ const Attendance = () => {
                 </li>
               </ul>
             </div>
-          </div>
-
+              </>}
+            </div>
           <div className="display-all-attendance-list">
             <div className="table-responsive">
               <table className="table display-all-attendance-details-list-table">
@@ -357,6 +361,7 @@ const Attendance = () => {
                   ))}
                 </tbody>
               </table>
+              {localStorage.getItem("role")!="student" && <>
               {showButton && (
                 <div className="reset-and-save-button" >
                 <p></p>
@@ -375,6 +380,7 @@ const Attendance = () => {
 
                 </div>
               )}
+              </>}
             </div>
           </div>
         </div>
