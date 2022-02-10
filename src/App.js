@@ -80,9 +80,6 @@ function App() {
                 path="/reports/student_reports"
                 component={ReportByNameAndDateRange}
               ></Route>
-              <Route path="*">
-                <NotFound/>
-              </Route>
             </>
           )}
           <Route path="/" exact>
