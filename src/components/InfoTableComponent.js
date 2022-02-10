@@ -175,6 +175,21 @@ const Infotablecomponent = (props) => {
                   </td>
                   </>}
                 </tr>
+              <tr>
+              {props.role=="coach" &&
+                <th
+                    className="right-side-student-info-table info-title"
+                    scope="row"
+                  >
+                    Profile Job
+                  </th>}
+                  {props.role=="coach" &&
+                  <td className="right-side-student-info-table info-output">
+
+                    {user.profile_job}
+                  </td>}
+
+                </tr>
 
 
 

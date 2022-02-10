@@ -4,6 +4,7 @@ import "react-tabs/style/react-tabs.css";
 import Infotablecomponent from "./InfoTableComponent";
 
 const TabComponent = (props) => {
+  console.log(props.info);
   return (
     <div>
       <React.Fragment>

@@ -63,7 +63,14 @@ const AddUserComponent = (props) => {
 
     <div className="mb-3">
         <Label forHtml="coachProfileJobFormControlInput" className="form-label" label="Profile job"/>
-        <FormInput type="text" name="profile_job" onChange={props.onChange}  placeholder="Enter profile job" id="coachProfileJobFormControlInput"/>
+        <Formselectlist name="profile_job" onChange={props.onChange} id="coachProfileJobFormControlInput"
+                options={
+                [
+                  {value:"DEFAULT",label:"Select Profile Job"},
+                  {value:"Tech coach",label:"Tech Coach"},
+                  {value:"ELS",label:"ELS"},
+                ]
+                }/>
     </div>
      }
 

@@ -34,7 +34,7 @@ const StudentView = () => {
           <Link to={`reports/report_by_date`}>
           <button className="btn btn-light report-click-button">click</button>
           </Link>
-          </button>
+        </button>
     </td>
 
     <td>
