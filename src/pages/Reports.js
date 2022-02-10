@@ -23,7 +23,7 @@ const Reports = () => {
     </td>
 
     <td>
-        <button className="btn btn-dark report-button"style={{"width": "369px"}}><i class="fas fa-chart-bar report-icon"></i>
+        <button className="btn btn-dark report-button" disabled style={{"width": "369px"}}><i class="fas fa-chart-bar report-icon"></i>
          All Reports By Date Range
           <Link to={`reports/report_by_date`}>
           <button className="btn btn-light report-click-button">click</button>
