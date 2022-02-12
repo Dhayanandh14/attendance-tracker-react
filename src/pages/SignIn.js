@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import FormInput from "../components/FormInput";
 import UserService from "../Services/UserService";
 import "./SignInComponent.css";
-
+import SecureLocalStorage from '../components/SecureLocalStorage';
 const SignInComponent = () => {
   const history = useHistory();
   const [signInFormValues, setSigninFormValues] = useState({
@@ -42,13 +42,13 @@ const SignInComponent = () => {
 
     function authentication(user) {
       if (user[0] == "admin" || user[0] == "coach") {
-        localStorage.setItem("role",user[0])
-        localStorage.setItem("id",user[2])
+        SecureLocalStorage.setLocalItem("role",user[0]);
+        SecureLocalStorage.setLocalItem("id",user[2]);
         window.location.href = "/dashboard"
         // history.push('/dashboard')
       }else if(user[0] == "student" || user[0] == "guest"){
-        localStorage.setItem("role",user[0])
-        localStorage.setItem("id",user[2])
+        SecureLocalStorage.setLocalItem("role",user[0]);
+        SecureLocalStorage.setLocalItem("id",user[2]);
         // history.push('/reports')
         window.location.href = "/dashboard"
       }

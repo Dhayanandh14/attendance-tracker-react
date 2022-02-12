@@ -7,6 +7,7 @@ import SideBarComponent from "../components/SidebarComponent";
 import UserService from "../Services/UserService";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import SecureLocalStorage from "../components/SecureLocalStorage";
 export default function Profile() {
 
   const [loading,setLoading] = useState(false);
@@ -41,7 +42,7 @@ export default function Profile() {
 
   });
   useEffect(() => {
-    UserService.getUserById(localStorage.getItem("id")).then((res) => {
+    UserService.getUserById(SecureLocalStorage.getLocalItem("id")).then((res) => {
       setLoading(true);
       setBio(res.data);
       setInformationToInput(res.data)

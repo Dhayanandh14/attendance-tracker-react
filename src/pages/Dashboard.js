@@ -7,7 +7,7 @@ import CoachService from "../Services/CoachService";
 import ChartLogicComponent from "../components/ChartLogicComponent";
 import Doublechartbar2 from "../components/DoubleChartBar2";
 import PieChartComponent from "../components/PieChartComponent";
-
+import SecureLocalStorage from '../components/SecureLocalStorage';
 export default function Dashboard() {
   const [studentCount,setStudentCount] = useState(0)
   const [coachCount,setCoachCount] = useState(0)
@@ -27,7 +27,7 @@ export default function Dashboard() {
       <div style={{ "marginLeft":"72px"}}>
           <div className="row bg-dark pt-4 pb-4" style={{"color": "white","marginRight":"0px"}}>
             <div className="col-md-9">
-              <span className="text-left" id="welcome-text"> Welcome Back, <strong>{localStorage.getItem("role")}</strong> </span>
+              <span className="text-left" id="welcome-text"> Welcome Back, <strong>{SecureLocalStorage.getLocalItem("role")}</strong> </span>
             </div>
             <div className="col-md-2">
 

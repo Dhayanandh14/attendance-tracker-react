@@ -6,6 +6,7 @@ import "./Attendance.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from "react-router-dom";
+import SecureLocalStorage from '../components/SecureLocalStorage';
 let eachStudentEntry = [];
 const date = new Date();
 const green = "#03a300";
@@ -48,7 +49,7 @@ const Attendance = () => {
     setAttendanceDate(event.target.value);
     // dateSubmit();
   };
-  if(localStorage.getItem("role")=="student"){
+  if(SecureLocalStorage.getLocalItem("role")=="student"){
     disabled = true;
   }
   // submit button for date selection
@@ -203,7 +204,7 @@ const Attendance = () => {
         <button
           style={{ backgroundColor: grey }}
           id={"pb-" + id}
-          className="presentButton " disabled
+          className="presentButton " disabled={disabled}
           onClick={() => {
             AttendanceStatusChangeHandler(attendanceId, id, 1);
           }}
@@ -284,7 +285,7 @@ const Attendance = () => {
                 <button className="btn btn-dark">Loading...</button>
               )}
             </div>
-            {localStorage.getItem("role")!="student" &&
+            {SecureLocalStorage.getLocalItem("role")!="student" &&
             <>
             <div className="dropdown">
               <a
@@ -361,7 +362,7 @@ const Attendance = () => {
                   ))}
                 </tbody>
               </table>
-              {localStorage.getItem("role")!="student" && <>
+              {SecureLocalStorage.getLocalItem("role")!="student" && <>
               {showButton && (
                 <div className="reset-and-save-button" >
                 <p></p>

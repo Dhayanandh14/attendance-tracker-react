@@ -9,6 +9,7 @@ import EditInfoOffCanvas from "../components/OffCanvas";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import e from "cors";
+import SecureLocalStorage from '../components/SecureLocalStorage';
 
 
 
@@ -154,7 +155,7 @@ const Students = (props) => {
                 options={studentStatusFilter}
               />
               </div>
-          {localStorage.getItem('role')!="student" &&
+          {SecureLocalStorage.getLocalItem('role')!="student" &&
               <EditInfoOffCanvas  infoFormValues={""}
               onChange={formInputValuesHandler}
               onclick={addStudents}

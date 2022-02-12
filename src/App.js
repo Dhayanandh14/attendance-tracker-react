@@ -15,14 +15,16 @@ import Profile from "./pages/Profile";
 import Monthlyreport from "./pages/MonthlyReport";
 import ReportByNameAndDateRange from "./pages/ReportByNameAndDateRange";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import SecureLocalStorage from "./components/SecureLocalStorage";
 
 function App() {
+  console.log("render test");
   return (
     <div>
       <Router>
         <Switch>
-          {(localStorage.getItem("role") == "admin" ||
-            localStorage.getItem("role") == "student"  || localStorage.getItem("role") == "guest") && (
+          {(SecureLocalStorage.getLocalItem("role") == "admin" ||
+          SecureLocalStorage.getLocalItem("role") == "student"  || SecureLocalStorage.getLocalItem("role") == "guest") && (
             <>
               <Route path="/" exact>
                 <Redirect to="/dashboard" />

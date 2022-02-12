@@ -6,7 +6,7 @@ import CoachService from "../Services/CoachService";
 import UserService from "../Services/UserService";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import SecureLocalStorage from '../components/SecureLocalStorage';
 import "./Coaches.css";
 const Coaches = () => {
   const notify = () =>toast.error('Email already Exist', {
@@ -91,7 +91,7 @@ const Coaches = () => {
       {!loading && (
         <React.Fragment>
         <div >
-        {localStorage.getItem("role") != "student" &&
+        {SecureLocalStorage.getLocalItem("role") != "student" &&
         <>
           fds
           <EditInfoOffCanvas  infoFormValues={""}

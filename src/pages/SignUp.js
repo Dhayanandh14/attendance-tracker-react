@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import FormInput from "../components/FormInput";
+import SecureLocalStorage from "../components/SecureLocalStorage";
 import UserService from "../Services/UserService";
 import "./SignUpComponent.css";
+
 
 const SignUpComponent = () => {
   const [signUpFormValues, setSignUpFormValues] = useState({
@@ -51,8 +53,8 @@ const SignUpComponent = () => {
       };
       UserService.createUsers(users,"no").then((res) => {
         if(res.data[0] == "success"){
-          localStorage.setItem("role","guest")
-          localStorage.setItem("id",res.data[1]);
+          SecureLocalStorage.setLocalItem("role", "guest");
+          SecureLocalStorage.setLocalItem("id",res.data[1]);
           window.location.href = "/dashboard"
         }
         else{

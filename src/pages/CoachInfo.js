@@ -5,6 +5,7 @@ import "./CoachInfo.css";
 import CoachEditInfo from "./CoachEditInfo";
 import { useParams } from "react-router-dom";
 import TabComponent from "../components/Tabs";
+import SecureLocalStorage from '../components/SecureLocalStorage';
 const CoachInfo = (props) => {
   const { id } = useParams();
   const [CoachInfo, setCoachInfo] = useState([]);
@@ -29,7 +30,7 @@ const CoachInfo = (props) => {
     <React.Fragment>
       <SideBarComponent />
       <div>
-      {localStorage.getItem("role") != "student" &&
+      {SecureLocalStorage.getLocalItem("role") != "student" &&
         !showButton && <CoachEditInfo id={id} func={fetch} />}
         {!showButton && (
           <div className="coach-info-view">

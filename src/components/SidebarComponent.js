@@ -5,13 +5,15 @@ import "./NavBar.css";
 import "boxicons";
 import ReactTooltip from "react-tooltip";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import SecureLocalStorage from "./SecureLocalStorage";
 export default function SideBarComponent() {
   const history = useHistory();
   const logoutHandler = () => {
     // document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     window.location.replace("/signin");
-    localStorage.removeItem("role");
-    localStorage.removeItem("id");
+    SecureLocalStorage.removeLocalItem("role");
+    SecureLocalStorage.removeLocalItem("total");
+    SecureLocalStorage.removeLocalItem("id");
     // history.push("/signin");
 
   };
@@ -30,7 +32,7 @@ export default function SideBarComponent() {
         id="top-nav-profile-icon"
         src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
         />
-        <strong style={{"color": "#12344d"}} >{localStorage.getItem("role")[0].toUpperCase()+localStorage.getItem("role").slice(1) }</strong>
+        <strong style={{"color": "#12344d"}} >{SecureLocalStorage.getLocalItem("role")[0].toUpperCase()+SecureLocalStorage.getLocalItem("role").slice(1) }</strong>
         </div>
         </Link>
       </nav>

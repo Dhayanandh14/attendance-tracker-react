@@ -4,11 +4,10 @@ import StudentEditinfo from "./StudentEditInfo";
 import SideBarComponent from "../components/SidebarComponent";
 import StudentService from "../Services/StudentService";
 import "./StudentInfo.css";
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { useParams } from "react-router-dom";
-import Infotablecomponent from "../components/InfoTableComponent";
 import TabComponent from "../components/Tabs";
+import SecureLocalStorage from '../components/SecureLocalStorage';
 const StudentInfo = (props) => {
   let { id } = useParams();
   const [studentInfo, setStudentInfo] = useState([]);
@@ -36,7 +35,7 @@ const StudentInfo = (props) => {
       <SideBarComponent />
       {!loading && (
         <React.Fragment>
-        {localStorage.getItem("role") != "student" &&
+        {SecureLocalStorage.getLocalItem("role") != "student" &&
           showButton && <StudentEditinfo id={id} func={fetch} />
         }
 

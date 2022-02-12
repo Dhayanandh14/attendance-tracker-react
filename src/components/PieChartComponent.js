@@ -70,6 +70,7 @@ componentDidMount(){
   let currentDate = date.getFullYear()+"-"+Number(date.getMonth()+1)+"-"+date.getDate()
   AttendanceService.getEveryDayAttendancePresentCount(currentDate).then((res)=>{
     this.setState({presentCount:(res.data)})
+    console.log(res.data);
   })
   AttendanceService.getEveryDayAttendanceAbsentCount(currentDate).then((res)=>{
     this.setState({absentCount:(res.data)})
@@ -78,25 +79,32 @@ componentDidMount(){
 
 render() {
   return (
-      <ResponsiveContainer width="100%" height="90%">
-        <PieChart width={400} height={400}>
+    <ResponsiveContainer width="100%" height="90%">
+    {
+      (this.state.presentCount == 0 || this.state.absentCount ==0)? <h3 style={{"marginBottom":"300px",    "position": "relative",
+      "left": "150px",
+      "top": "93px"}}>No Attendance</h3>
+       :
+      <React.Fragment>
+      <PieChart width={700} height={400}>
           <Pie
             activeIndex={this.state.activeIndex}
             activeShape={renderActiveShape}
             data={[
-              {name: 'Present', value: this.state.presentCount },
-              { name: 'Absent', value: this.state.absentCount }]
+              {name: 'Present', value: this.state.presentCount},
+              { name: 'Absent', value: this.state.absentCount}]
             }
             cx="40%"
-            cy="50%"
-            innerRadius={60}
-            outerRadius={80}
+            cy="43%"
+            innerRadius={90}
+            outerRadius={110}
             fill="#ff6c36"
 
             dataKey="value"
             onMouseEnter={this.onPieEnter}
           />
         </PieChart>
+        </React.Fragment>}
       </ResponsiveContainer>
     );
   }
