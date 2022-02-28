@@ -81,7 +81,7 @@ render() {
   return (
     <ResponsiveContainer width="100%" height="90%">
     {
-      (this.state.presentCount == 0 || this.state.absentCount ==0)? <h3 style={{"marginBottom":"300px",    "position": "relative",
+      (this.state.presentCount == 0 && this.state.absentCount ==0)? <h3 style={{"marginBottom":"300px",    "position": "relative",
       "left": "150px",
       "top": "93px"}}>No Attendance</h3>
        :

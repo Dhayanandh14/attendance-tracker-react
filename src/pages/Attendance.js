@@ -13,6 +13,8 @@ const green = "#03a300";
 const red = "red";
 const grey = "#f1f3f6";
 let disabled = false;
+let day = 0;
+let month=0;
 let todayDate = date.toLocaleDateString("en-GB").split("/").reverse().join("-");
 const Attendance = () => {
   const notify = () => toast.success('Attendance Saved', {
@@ -31,8 +33,20 @@ const Attendance = () => {
   const [loading, setLoading] = useState(true);
   const [buttonLoading, setButtonLoading] = useState(false);
   const [saveButtonLoading, setSaveButtonLoading] = useState(false);
-  const [currentDate,setCurrentDate] = useState(0);
+  const [currentDate,setCurrentDate] = useState();
   // fetch all students from database
+
+  if(Number(date.getMonth()+1)==10 || Number(date.getMonth()+1)==11 || Number(date.getMonth()+1)==12){
+    month = Number(date.getMonth()+1)
+  }else{
+    month = 0+""+Number(date.getMonth()+1)
+  }
+  if( (Number(date.getDate()>0)) &&(Number(date.getDate()<10)) ){
+    day = "0"+date.getDate()
+  }else{
+    day = date.getDate()
+  }
+  console.log(new Date().getFullYear()+"-"+month+"-"+day);
   const history = useHistory();
   useEffect(() => {
     setAttendanceDate(todayDate);
@@ -41,7 +55,7 @@ const Attendance = () => {
       setShowButon(true);
       setLoading(false);
     });
-    setCurrentDate(new Date().getFullYear()+"-"+"0"+Number(date.getMonth()+1)+"-"+"0"+Number(date.getDate()))
+    setCurrentDate(new Date().getFullYear()+"-"+month+"-"+day)
   }, []);
 
   // select the date
@@ -49,7 +63,7 @@ const Attendance = () => {
     setAttendanceDate(event.target.value);
     // dateSubmit();
   };
-  if(SecureLocalStorage.getLocalItem("role")=="student"){
+  if(SecureLocalStorage.getLocalItem("role")=="student" || SecureLocalStorage.getLocalItem("role")=="guest"){
     disabled = true;
   }
   // submit button for date selection
@@ -285,7 +299,7 @@ const Attendance = () => {
                 <button className="btn btn-dark">Loading...</button>
               )}
             </div>
-            {SecureLocalStorage.getLocalItem("role")!="student" &&
+            {!((SecureLocalStorage.getLocalItem("role")=="student") || (SecureLocalStorage.getLocalItem("role")=="guest")) &&
             <>
             <div className="dropdown">
               <a
@@ -362,7 +376,7 @@ const Attendance = () => {
                   ))}
                 </tbody>
               </table>
-              {SecureLocalStorage.getLocalItem("role")!="student" && <>
+              {!((SecureLocalStorage.getLocalItem("role")=="student") || (SecureLocalStorage.getLocalItem("role")=="guest"))  && <>
               {showButton && (
                 <div className="reset-and-save-button" >
                 <p></p>

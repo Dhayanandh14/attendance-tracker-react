@@ -91,7 +91,7 @@ const Coaches = () => {
       {!loading && (
         <React.Fragment>
         <div >
-        {SecureLocalStorage.getLocalItem("role") != "student" &&
+        {!((SecureLocalStorage.getLocalItem("role")=="student") || (SecureLocalStorage.getLocalItem("role")=="guest"))&&
         <>
           fds
           <EditInfoOffCanvas  infoFormValues={""}

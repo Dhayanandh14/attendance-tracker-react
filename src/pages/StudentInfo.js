@@ -35,7 +35,7 @@ const StudentInfo = (props) => {
       <SideBarComponent />
       {!loading && (
         <React.Fragment>
-        {SecureLocalStorage.getLocalItem("role") != "student" &&
+        {!((SecureLocalStorage.getLocalItem("role")=="student") || (SecureLocalStorage.getLocalItem("role")=="guest")) &&
           showButton && <StudentEditinfo id={id} func={fetch} />
         }
 

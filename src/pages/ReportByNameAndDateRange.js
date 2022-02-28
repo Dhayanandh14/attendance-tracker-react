@@ -12,7 +12,7 @@ const ReportByNameAndDateRange = () => {
   const [studentReport, setStudentReport] = useState([]);
   const [perStudentName, setPerStudentName] = useState();
   const [showName, setShowName] = useState(false);
-
+  const [showResults, setShowResults] = useState(false)
   useEffect(() => {
     ReportService.getAllNamesAndId().then((res) => {
       setStudentNames(res.data);
@@ -27,6 +27,7 @@ const ReportByNameAndDateRange = () => {
   };
 
   const getReport = () => {
+    setShowResults(true);
     if(fromDateInputRef.current.value == ""){
       alert("Please select From date")
     }else if(toDateInputRef.current.value == ""){
@@ -39,9 +40,9 @@ const ReportByNameAndDateRange = () => {
     let to = toDateInputRef.current.value.split("-").join("");
     ReportService.getAllNamesByDate(studentId,from,to).then((res) => {
       setStudentReport(res.data);
-
+      setShowResults(false);
+      setShowName(true);
     });
-    setShowName(true);
   }
 
   };
@@ -94,6 +95,7 @@ const ReportByNameAndDateRange = () => {
               </div>
             </div>
 
+            {showResults && <h3>Loading...</h3> }
             {showName && (
               <React.Fragment>
                 <h2>Student Name: {showName ? perStudentName : ""}</h2>

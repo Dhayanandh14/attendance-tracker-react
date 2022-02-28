@@ -24,7 +24,8 @@ function App() {
       <Router>
         <Switch>
           {(SecureLocalStorage.getLocalItem("role") == "admin" ||
-          SecureLocalStorage.getLocalItem("role") == "student"  || SecureLocalStorage.getLocalItem("role") == "guest") && (
+          SecureLocalStorage.getLocalItem("role") == "student"  ||
+          SecureLocalStorage.getLocalItem("role") == "guest" || SecureLocalStorage.getLocalItem("role") == "coach") && (
             <>
               <Route path="/" exact>
                 <Redirect to="/dashboard" />

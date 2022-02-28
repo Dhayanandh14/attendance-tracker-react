@@ -155,7 +155,7 @@ const Students = (props) => {
                 options={studentStatusFilter}
               />
               </div>
-          {SecureLocalStorage.getLocalItem('role')!="student" &&
+          {!((SecureLocalStorage.getLocalItem("role")=="student") || (SecureLocalStorage.getLocalItem("role")=="guest")) &&
               <EditInfoOffCanvas  infoFormValues={""}
               onChange={formInputValuesHandler}
               onclick={addStudents}

@@ -30,7 +30,7 @@ const CoachInfo = (props) => {
     <React.Fragment>
       <SideBarComponent />
       <div>
-      {SecureLocalStorage.getLocalItem("role") != "student" &&
+      {!((SecureLocalStorage.getLocalItem("role")=="student") || (SecureLocalStorage.getLocalItem("role")=="guest")) &&
         !showButton && <CoachEditInfo id={id} func={fetch} />}
         {!showButton && (
           <div className="coach-info-view">
